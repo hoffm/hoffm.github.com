@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://hoffm.github.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://code-worrier.com
+title: Code Worrier
+subtitle:
+author: Michael Hoffman
 simple_search: http://google.com/search
 description:
 
