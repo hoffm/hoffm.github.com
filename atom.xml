@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="code-worrier.com/atom.xml" rel="self"/>
   <link href="code-worrier.com/"/>
-  <updated>2012-08-12T22:48:01-04:00</updated>
+  <updated>2012-08-12T22:51:07-04:00</updated>
   <id>code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -202,7 +202,7 @@ Add Method
 </code></pre>
 
 <p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
-In my <a href="ttp://code-worrier.com/blog/passing-symbols">next post</a>, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
+In my <a href="http://code-worrier.com/blog/passing-symbols">next post</a>, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
 ]]></content>
   </entry>
   
