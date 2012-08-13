@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: m@hof.fm
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -89,7 +89,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: hoffm
+disqus_short_name: codeworrier
 disqus_show_comment_count: true
 
 # Google Analytics
