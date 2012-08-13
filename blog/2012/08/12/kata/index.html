@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Michael Hoffman</title>
+  <title>Code Kata and the Kata Gem - Michael Hoffman</title>
   <meta name="author" content="Michael Hoffman">
 
   
@@ -19,7 +19,7 @@ Kata have solutions in the sense that they set our &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="code-worrier.com/">
+  <link rel="canonical" href="code-worrier.com/blog/2012/08/12/kata/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,15 +63,12 @@ Kata have solutions in the sense that they set our &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/08/12/kata/">Code Kata and the Kata Gem</a></h1>
+      <h1 class="entry-title">Code Kata and the Kata Gem</h1>
     
     
       <p class="meta">
@@ -94,30 +91,97 @@ Kata have solutions in the sense that they set our &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
+<div class="entry-content"><p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
 Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
 However, it is the process of thinking through the kata—and perhaps implementing it multimple times in different ways—that is intended to provoke learning.</p>
 
 <p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
 Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
 
+<!-- more -->
+
+
+<p>I learned about the gem from a lightening talk Bailey delivered at the innaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
+(Incidentally, this was my first tech conference, and it was fantastic.
+My experience there inspired this blog.)</p>
+
+<p>The kata gem reduces the friction between you and actually sitting down to do kata.
+It accomplishes this by presenting the kata requirements in bitsized pieces on the command line.
+The process of working through a kata via the gem resembles the workflow of test-driven development.
+(To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
+This is no accident;
+Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is moddled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
+
+<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calcualtor</code> class, instances of which are initialized with strings of numbers:</p>
+
+<pre><code>Create a calculator that is initialized with a string expression
+- detail: The expression is of the form digits separated by commas: "1,2"
+- detail: The expression is accessed by a method named expr
+- detail: The expression can be reset for evaluation at any time without re-initializing
+- example: Calculator.new "1,2"
+
+Add Method
+  Create an add method that sums the string expression
+  - detail: The method will return the sum of the digits
+  - detail: The expression can contain 0, 1 or 2 numbers
+  - detail: Then empty string will return 0
+  - example: "" computes to 0
+  - example: "1" computes to 1
+  - example: "1,2" computes to 3
+</code></pre>
+
+<p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
+In my next post, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/12/kata/">Read on &rarr;</a>
-    </footer>
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Hoffman</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2012-08-12T18:01:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="code-worrier.com/blog/2012/08/12/kata/" data-via="hoffm" data-counturl="code-worrier.com/blog/2012/08/12/kata/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -135,7 +199,7 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -154,6 +218,7 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
 
   
 </aside>
+
 
     </div>
   </div>

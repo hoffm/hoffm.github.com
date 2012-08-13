@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="code-worrier.com/atom.xml" rel="self"/>
   <link href="code-worrier.com/"/>
-  <updated>2012-08-12T21:31:14-04:00</updated>
+  <updated>2012-08-12T21:34:37-04:00</updated>
   <id>code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,5 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
+    <link href="code-worrier.com/blog/2012/08/12/kata/"/>
+    <updated>2012-08-12T18:01:00-04:00</updated>
+    <id>code-worrier.com/blog/2012/08/12/kata</id>
+    <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
+Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
+However, it is the process of thinking through the kata—and perhaps implementing it multimple times in different ways—that is intended to provoke learning.</p>
+
+<p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
+Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
+
+<!-- more -->
+
+
+<p>I learned about the gem from a lightening talk Bailey delivered at the innaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
+(Incidentally, this was my first tech conference, and it was fantastic.
+My experience there inspired this blog.)</p>
+
+<p>The kata gem reduces the friction between you and actually sitting down to do kata.
+It accomplishes this by presenting the kata requirements in bitsized pieces on the command line.
+The process of working through a kata via the gem resembles the workflow of test-driven development.
+(To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
+This is no accident;
+Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is moddled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
+
+<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calcualtor</code> class, instances of which are initialized with strings of numbers:</p>
+
+<pre><code>Create a calculator that is initialized with a string expression
+- detail: The expression is of the form digits separated by commas: "1,2"
+- detail: The expression is accessed by a method named expr
+- detail: The expression can be reset for evaluation at any time without re-initializing
+- example: Calculator.new "1,2"
+
+Add Method
+  Create an add method that sums the string expression
+  - detail: The method will return the sum of the digits
+  - detail: The expression can contain 0, 1 or 2 numbers
+  - detail: Then empty string will return 0
+  - example: "" computes to 0
+  - example: "1" computes to 1
+  - example: "1,2" computes to 3
+</code></pre>
+
+<p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
+In my next post, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
+]]></content>
+  </entry>
   
 </feed>
