@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="code-worrier.com/atom.xml" rel="self"/>
   <link href="code-worrier.com/"/>
-  <updated>2012-08-12T21:34:37-04:00</updated>
+  <updated>2012-08-12T21:35:56-04:00</updated>
   <id>code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
-    <link href="code-worrier.com/blog/2012/08/12/kata/"/>
+    <link href="code-worrier.com/blog/kata/"/>
     <updated>2012-08-12T18:01:00-04:00</updated>
-    <id>code-worrier.com/blog/2012/08/12/kata</id>
+    <id>code-worrier.com/blog/kata</id>
     <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
 Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
 However, it is the process of thinking through the kata—and perhaps implementing it multimple times in different ways—that is intended to provoke learning.</p>
