@@ -43,4 +43,4 @@ Here are the first two steps of the calculator kata, which asks the coder to cre
       - example: "1,2" computes to 3
 
 ...and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
-In my next post, I'll relate something I learned by experimenting with the calculator kata.
+In my [next post](ttp://code-worrier.com/blog/passing-symbols), I'll relate something I learned by experimenting with the calculator kata.
