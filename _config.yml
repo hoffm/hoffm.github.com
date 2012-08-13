@@ -72,13 +72,13 @@ twitter_show_follower_count: false
 twitter_tweet_button: true
 
 # Google +1
-google_plus_one: false
-google_plus_one_size: medium
+google_plus_one:
+google_plus_one_size: 
 
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
 googleplus_user: 102665968874172140116
-googleplus_hidden: false
+googleplus_hidden: true
 
 # Pinboard
 pinboard_user:
