@@ -3,7 +3,7 @@ layout: post
 title: "Code Kata and the Kata Gem"
 date: 2012-08-12 18:01
 comments: true
-published: false
+published: true
 categories: 
 ---
 
@@ -13,6 +13,7 @@ However, it is the process of thinking through the kata—and perhaps implementi
 
 Of course, you can't learn anything form a kata unless you *do* the kata.
 Enter the [kata gem](https://github.com/wbailey/kata) by [Wes Bailey](http://exposinggotchas.blogspot.com/).
+<!-- more -->
 I learned about the gem from a lightening talk Bailey delivered at the innaugural [Steel City Ruby Conference](http://steelcityrubyconf.org/) in Pittsburgh.
 (Incidentally, this was my first tech conference, and it was fantastic.
 My experience there inspired this blog.)
