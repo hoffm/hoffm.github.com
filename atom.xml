@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="code-worrier.com/atom.xml" rel="self"/>
   <link href="code-worrier.com/"/>
-  <updated>2012-08-12T21:47:39-04:00</updated>
+  <updated>2012-08-12T22:01:46-04:00</updated>
   <id>code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -20,7 +20,7 @@
     <id>code-worrier.com/blog/kata</id>
     <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
 Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
-However, it is the process of thinking through the kata—and perhaps implementing it multimple times in different ways—that is intended to provoke learning.</p>
+However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
 
 <p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
 Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
@@ -28,18 +28,18 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
 <!-- more -->
 
 
-<p>I learned about the gem from a lightening talk Bailey delivered at the innaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
-(Incidentally, this was my first tech conference, and it was fantastic.
+<p>I learned about the gem from a lightning talk Bailey delivered at the inaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
+(Incidentally, SCRC was my first programming conference, and it was fantastic.
 My experience there inspired this blog.)</p>
 
 <p>The kata gem reduces the friction between you and actually sitting down to do kata.
-It accomplishes this by presenting the kata requirements in bitsized pieces on the command line.
-The process of working through a kata via the gem resembles the workflow of test-driven development.
+It accomplishes this by presenting the kata requirements in bite-sized pieces on the command line.
+The process of working through a kata via the gem resembles the work flow of test-driven development.
 (To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
 This is no accident;
-Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is moddled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
+Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is modeled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
 
-<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calcualtor</code> class, instances of which are initialized with strings of numbers:</p>
+<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calculator</code> class, instances of which are initialized with strings of numbers:</p>
 
 <pre><code>Create a calculator that is initialized with a string expression
 - detail: The expression is of the form digits separated by commas: "1,2"
