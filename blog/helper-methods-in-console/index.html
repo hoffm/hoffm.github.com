@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Michael Hoffman: Code Worrier</title>
+  <title>Helper methods in the Rails console? There's a helper for that. - Michael Hoffman: Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Blog Archive 2012 Helper methods in the Rails console? There&#8217;s a helper for that.
-Aug 14 2012 Passing Symbols, a Kata Lesson
-Aug 12 2012 Code &hellip;">
+  <meta name="description" content="So you want to mess around with a helper method in the console?
+It&#8217;s super simple, as I just learned here from kch.
+Basically, Rails gets a bit &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Aug 12 2012 Code &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="code-worrier.com/blog/archives/">
+  <link rel="canonical" href="code-worrier.com/blog/helper-methods-in-console/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,52 +78,138 @@ Aug 12 2012 Code &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Helper Methods in the Rails Console? There's a Helper for That.</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T11:53:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
+
+
+<div class="entry-content"><p>So you want to mess around with a helper method in the console?
+It&#8217;s super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
+Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called &#8220;helper&#8221;.</p>
+
+<p>Here&#8217;s an example. Suppose you have a helper module like the following:</p>
+
+<!-- more -->
 
 
 
-  
-  <h2>2012</h2>
 
-<article>
-  
-<h1><a href="/blog/helper-methods-in-console/">Helper methods in the Rails console? There&#8217;s a helper for that.</a></h1>
-<time datetime="2012-08-14T11:53:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>14</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/passing-symbols/">Passing Symbols, a Kata Lesson</a></h1>
-<time datetime="2012-08-12T22:02:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>12</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/kata/">Code Kata and the Kata Gem</a></h1>
-<time datetime="2012-08-12T18:01:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>12</span> <span class='year'>2012</span></time>
+<figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">put_a_car_in</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; include RecipesHelper
+</span><span class='line'>=&gt; Object
+</span><span class='line'>
+</span><span class='line'>&gt;&gt; helper.put_a_car_in("your car")
+</span><span class='line'>So you can drive while you drive!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I hope this has been helpful. (Sorry, can&#8217;t help myself.)</p>
+
+<p>Ok, I&#8217;m done.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Hoffman</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T11:53:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="code-worrier.com/blog/helper-methods-in-console/" data-via="hoffm" data-counturl="code-worrier.com/blog/helper-methods-in-console/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/passing-symbols/" title="Previous Post: Passing Symbols, a Kata Lesson">&laquo; Passing Symbols, a Kata Lesson</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -196,7 +282,10 @@ Aug 12 2012 Code &hellip;">
       var disqus_shortname = 'codeworrier';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'code-worrier.com/blog/helper-methods-in-console/';
+        var disqus_url = 'code-worrier.com/blog/helper-methods-in-console/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
