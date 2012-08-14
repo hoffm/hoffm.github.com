@@ -12,6 +12,8 @@ Basically, Rails gets a bit [yo dawg](http://nextlol.com/images/37181-yo-dawg-ho
 
 Here's an example. Suppose you have a helper module like the following:
 
+<!-- more -->
+
 {% codeblock cars_helper.rb lang:ruby %}
 module CarHelper
 
