@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>code-worrier.com/blog/kata/</loc>
+        <loc>http://code-worrier.com/blog/kata/</loc>
         <lastmod>2012-08-12T22:49:23-04:00</lastmod>
     </url>
     <url>
-        <loc>code-worrier.com/blog/passing-symbols/</loc>
+        <loc>http://code-worrier.com/blog/passing-symbols/</loc>
         <lastmod>2012-08-12T22:44:50-04:00</lastmod>
     </url>
     <url>
-        <loc>code-worrier.com/blog/helper-methods-in-console/</loc>
+        <loc>http://code-worrier.com/blog/helper-methods-in-console/</loc>
         <lastmod>2012-08-14T12:35:57-04:00</lastmod>
     </url>
     <url>
-        <loc>code-worrier.com/about/</loc>
+        <loc>http://code-worrier.com/about/</loc>
         <lastmod>2012-08-12T21:57:14-04:00</lastmod>
     </url>
     <url>
-        <loc>code-worrier.com/blog/archives/</loc>
+        <loc>http://code-worrier.com/blog/archives/</loc>
         <lastmod>2012-08-14T12:35:57-04:00</lastmod>
     </url>
     <url>
-        <loc>code-worrier.com/</loc>
+        <loc>http://code-worrier.com/</loc>
         <lastmod>2012-08-14T12:35:57-04:00</lastmod>
     </url>
 </urlset>

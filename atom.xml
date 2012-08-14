@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Michael Hoffman]]></title>
-  <link href="code-worrier.com/atom.xml" rel="self"/>
-  <link href="code-worrier.com/"/>
-  <updated>2012-08-14T13:01:30-04:00</updated>
-  <id>code-worrier.com/</id>
+  <link href="http://code-worrier.com/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-08-14T14:06:36-04:00</updated>
+  <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
     <email><![CDATA[m@hof.fm]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
-    <link href="code-worrier.com/blog/helper-methods-in-console/"/>
+    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
     <updated>2012-08-14T11:53:00-04:00</updated>
-    <id>code-worrier.com/blog/helper-methods-in-console</id>
+    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
     <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
 It&#8217;s super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
 Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called &#8220;helper&#8221;.</p>
@@ -73,9 +73,9 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
   
   <entry>
     <title type="html"><![CDATA[Passing Symbols, a Kata Lesson]]></title>
-    <link href="code-worrier.com/blog/passing-symbols/"/>
+    <link href="http://code-worrier.com/blog/passing-symbols/"/>
     <updated>2012-08-12T22:02:00-04:00</updated>
-    <id>code-worrier.com/blog/passing-symbols</id>
+    <id>http://code-worrier.com/blog/passing-symbols</id>
     <content type="html"><![CDATA[<p>In <a href="http://code-worrier.com/blog/kata/">my post</a> about the <a href="https://github.com/wbailey/kata">kata gem</a>, I promised to share something I learned from the <a href="https://github.com/wbailey/code_katas/blob/master/calculator.rb">calculator kata</a>.
 Here goes.</p>
 
@@ -217,9 +217,9 @@ More on that in a later post.</p>
   
   <entry>
     <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
-    <link href="code-worrier.com/blog/kata/"/>
+    <link href="http://code-worrier.com/blog/kata/"/>
     <updated>2012-08-12T18:01:00-04:00</updated>
-    <id>code-worrier.com/blog/kata</id>
+    <id>http://code-worrier.com/blog/kata</id>
     <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
 Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
 However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
