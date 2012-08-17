@@ -8,6 +8,8 @@ categories:
 
 They're real!
 
+In Ruby, an array can contain itself:
+
 ```ruby
 >> a = []
 => []
@@ -18,4 +20,4 @@ They're real!
 ```
 <!-- more -->
 
-But [why](http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for)?
+But [why would you want to go and do that?](http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for)?
