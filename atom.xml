@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-14T14:06:36-04:00</updated>
+  <updated>2012-08-16T22:39:22-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recursive Arrays in Ruby]]></title>
+    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
+    <updated>2012-08-16T22:30:00-04:00</updated>
+    <id>http://code-worrier.com/blog/recursive-arrays</id>
+    <content type="html"><![CDATA[<p>They&#8217;re real!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why</a>?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
