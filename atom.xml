@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-27T17:44:23-04:00</updated>
+  <updated>2012-08-27T19:34:40-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[All your undefined vars are evaluate to nil.]]></title>
+    <link href="http://code-worrier.com/blog/all-your-vars/"/>
+    <updated>2012-08-27T18:14:00-04:00</updated>
+    <id>http://code-worrier.com/blog/all-your-vars</id>
+    <content type="html"><![CDATA[<p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
+
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, where as undefined local variables can&#8217;t be evaluated at all.</p>
+
+<!-- more -->
+
+
+<p>A little experimentation in irb seems to confirm this hypothesis.
+Uninitialize local variables raise a <code>NameError</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; local_variables
+</span><span class='line'>=&gt; []
+</span><span class='line'>&gt;&gt; local_var
+</span><span class='line'>NameError: undefined local variable or method `local_var' for main:Object</span></code></pre></td></tr></table></div></figure>
+
+
+<p>whereas instance variables evaluate to <code>nil</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; instance_variables
+</span><span class='line'>=&gt; []
+</span><span class='line'>&gt;&gt; @instance_var
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(Global variables behave the same way in this respect as instance varables.)</p>
+
+<p>So, again, it seems as if the correct answer to our question is, &#8220;It depends.&#8221;
+But that&#8217;s wrong.
+In fact, the question has a single, simple correct answer:
+<em>All types of uninitialized variables evaluate to nil.</em></p>
+
+<p>Here&#8217;s proof:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; local_var = "something or other" if false
+</span><span class='line'>=&gt; nil
+</span><span class='line'>&gt;&gt; local_var
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
+Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
+Why?</p>
+
+<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
+In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
+The error message we got didn&#8217;t do a great job of explaining this, but it did hint at it with the phrase &#8220;variable or method&#8221;.
+Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
+And, as I&#8217;ve claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
+
+<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
+Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
+if we don&#8217;t explicitly identify a reciever, the message is passed to the current object.
+However, this flexibilty comes at the price of ambiguity;
+absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Recursive Arrays in Ruby]]></title>

@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Helper methods in the Rails console? There's a helper for that. - Michael Hoffman: Code Worrier</title>
+  <title>All your undefined vars are evaluate to nil. - Michael Hoffman: Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="So you want to mess around with a helper method in the console?
-It&#8217;s super simple, as I just learned here from kch.
-Basically, Rails gets a bit &hellip;">
+  <meta name="description" content="(NB: I learned much of what I discuss here from this post.) What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ Basically, Rails gets a bit &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/helper-methods-in-console/">
+  <link rel="canonical" href="http://code-worrier.com/blog/all-your-vars/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +81,7 @@ Basically, Rails gets a bit &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Helper Methods in the Rails Console? There's a Helper for That.</h1>
+      <h1 class="entry-title">All Your Undefined Vars Are Evaluate to Nil.</h1>
     
     
       <p class="meta">
@@ -98,7 +97,7 @@ Basically, Rails gets a bit &hellip;">
   
 
 
-<time datetime="2012-08-14T11:53:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-27T18:14:00-04:00" pubdate data-updated="true">Aug 27<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,56 +106,74 @@ Basically, Rails gets a bit &hellip;">
   </header>
 
 
-<div class="entry-content"><p>So you want to mess around with a helper method in the console?
-It&#8217;s super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
-Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called &#8220;helper&#8221;.</p>
+<div class="entry-content"><p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
 
-<p>Here&#8217;s an example. Suppose you have a helper module like the following:</p>
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, where as undefined local variables can&#8217;t be evaluated at all.</p>
 
 <!-- more -->
 
 
-
-
-<figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">put_a_car_in</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
-</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
+<p>A little experimentation in irb seems to confirm this hypothesis.
+Uninitialize local variables raise a <code>NameError</code>:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; include RecipesHelper
-</span><span class='line'>=&gt; Object
-</span><span class='line'>
-</span><span class='line'>&gt;&gt; helper.put_a_car_in("your car")
-</span><span class='line'>So you can drive while you drive!</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; local_variables
+</span><span class='line'>=&gt; []
+</span><span class='line'>&gt;&gt; local_var
+</span><span class='line'>NameError: undefined local variable or method `local_var' for main:Object</span></code></pre></td></tr></table></div></figure>
 
 
-<p>I hope this has been helpful. (Sorry, can&#8217;t help myself.)</p>
+<p>whereas instance variables evaluate to <code>nil</code>:</p>
 
-<p>Ok, I&#8217;m done.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; instance_variables
+</span><span class='line'>=&gt; []
+</span><span class='line'>&gt;&gt; @instance_var
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(Global variables behave the same way in this respect as instance varables.)</p>
+
+<p>So, again, it seems as if the correct answer to our question is, &#8220;It depends.&#8221;
+But that&#8217;s wrong.
+In fact, the question has a single, simple correct answer:
+<em>All types of uninitialized variables evaluate to nil.</em></p>
+
+<p>Here&#8217;s proof:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; local_var = "something or other" if false
+</span><span class='line'>=&gt; nil
+</span><span class='line'>&gt;&gt; local_var
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
+Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
+Why?</p>
+
+<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
+In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
+The error message we got didn&#8217;t do a great job of explaining this, but it did hint at it with the phrase &#8220;variable or method&#8221;.
+Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
+And, as I&#8217;ve claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
+
+<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
+Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
+if we don&#8217;t explicitly identify a reciever, the message is passed to the current object.
+However, this flexibilty comes at the price of ambiguity;
+absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
 </div>
 
 
@@ -179,7 +196,7 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
   
 
 
-<time datetime="2012-08-14T11:53:00-04:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-27T18:14:00-04:00" pubdate data-updated="true">Aug 27<span>th</span>, 2012</time>
       
 
 
@@ -187,7 +204,7 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/helper-methods-in-console/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/helper-methods-in-console/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/all-your-vars/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/all-your-vars/" >Tweet</a>
   
   
   
@@ -198,10 +215,8 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/passing-symbols/" title="Previous Post: Passing Symbols, a Kata Lesson">&laquo; Passing Symbols, a Kata Lesson</a>
+        <a class="basic-alignment left" href="/blog/recursive-arrays/" title="Previous Post: Recursive Arrays in Ruby">&laquo; Recursive Arrays in Ruby</a>
       
-      
-        <a class="basic-alignment right" href="/blog/recursive-arrays/" title="Next Post: Recursive Arrays in Ruby">Recursive Arrays in Ruby &raquo;</a>
       
     </p>
   </footer>
@@ -293,8 +308,8 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/helper-methods-in-console/';
-        var disqus_url = 'http://code-worrier.com/blog/helper-methods-in-console/';
+        var disqus_identifier = 'http://code-worrier.com/blog/all-your-vars/';
+        var disqus_url = 'http://code-worrier.com/blog/all-your-vars/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -9,17 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="They&#8217;re real! In Ruby, an array can contain itself: 1
-2
-3
-4
-5
-6
-&gt;&gt; a = []
-=&gt; []
-&gt;&gt; a &lt;&lt; a
-=&gt; [[...]]
-&gt;&gt; a.first. &hellip;">
+  <meta name="description" content="(NB: I learned much of what I discuss here from this post.) What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +78,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/all-your-vars/">All Your Undefined Vars Are Evaluate to Nil.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-27T18:14:00-04:00" pubdate data-updated="true">Aug 27<span>th</span>, 2012</time>
+        
+         | <a href="/blog/all-your-vars/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
+
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, where as undefined local variables can&#8217;t be evaluated at all.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/all-your-vars/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -303,6 +341,10 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/all-your-vars/">All your undefined vars are evaluate to nil.</a>
+      </li>
     
       <li class="post">
         <a href="/blog/recursive-arrays/">Recursive Arrays in Ruby</a>
