@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-27T19:34:40-04:00</updated>
+  <updated>2012-08-27T20:24:35-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -22,7 +22,7 @@
 
 <p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
 Perhaps it seems that the correct answer is: it depends what kind of variable.
-Undefined instance variables, for example, evaluate to <code>nil</code>, where as undefined local variables can&#8217;t be evaluated at all.</p>
+Undefined instance variables, for example, evaluate to <code>nil</code>, whereas undefined local variables can&#8217;t be evaluated at all.</p>
 
 <!-- more -->
 
