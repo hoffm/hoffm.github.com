@@ -10,7 +10,7 @@ categories:
 
 What does a brand new, never-before-mentioned variable evaluate to in Ruby?
 Perhaps it seems that the correct answer is: it depends what kind of variable.
-Undefined instance variables, for example, evaluate to `nil`, where as undefined local variables can't be evaluated at all.
+Undefined instance variables, for example, evaluate to `nil`, whereas undefined local variables can't be evaluated at all.
 
 <!-- more -->
 
