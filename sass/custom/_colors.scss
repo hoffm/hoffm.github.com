@@ -23,7 +23,7 @@ $nav-link-color-visited: darken($main-color, 20);
 //This controls the sidebar
 $sidebar-bg: desaturate(lighten($main-color, 70), 8);
 $sidebar-color: darken($main-color, 100);
-$sidebar-link-color: saturate($main-color, 100);
+$sidebar-link-color: darken($main-color, 23);
 $sidebar-link-color-hover:  darken($main-color, 100);
 
 //How links appear overall
