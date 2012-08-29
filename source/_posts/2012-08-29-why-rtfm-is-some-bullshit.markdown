@@ -29,7 +29,7 @@ Whether or not they say it explicitly, the authors of these responses are expres
 And RTFM is bullshit.
 
 I'm not the first person to say this, of course.
-But as a programmer who is still very much in touch with what it's like to know nothing, I hope I am in a postiion fortify the empathy of my more seasoned colleagues.
+But as a programmer who is still very much in touch with what it's like to know nothing, I hope I am in a position fortify the empathy of my more seasoned colleagues.
 
 No one feels Meno's Paradox as viscerally as the Googling noob.
 > And how will you inquire into a thing when you are wholly ignorant of what it is?
