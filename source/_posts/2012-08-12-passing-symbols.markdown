@@ -3,7 +3,7 @@ layout: post
 title: "Passing Symbols, a Kata Lesson"
 date: 2012-08-12 22:02
 comments: true
-categories: 
+categories: ruby, kata
 ---
 
 In [my post](http://code-worrier.com/blog/kata/) about the [kata gem](https://github.com/wbailey/kata), I promised to share something I learned from the [calculator kata](https://github.com/wbailey/code_katas/blob/master/calculator.rb).
