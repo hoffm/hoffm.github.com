@@ -3,7 +3,7 @@ layout: post
 title: "Helper methods in the Rails console? There's a helper for that."
 date: 2012-08-14 11:53
 comments: true
-categories: ruby, rails, tips
+categories: ruby rails tips
 ---
 
 So you want to mess around with a helper method in the console?

@@ -4,7 +4,7 @@ title: "Code Kata and the Kata Gem"
 date: 2012-08-12 18:01
 comments: true
 published: true
-categories: ruby, kata
+categories: ruby kata
 ---
 
 A [code kata](http://codekata.pragprog.com/) is a small programming challenge on which a developer can practice her craft.
