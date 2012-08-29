@@ -2,6 +2,7 @@
 layout: post
 title: "Why RTFM is Some Bullshit"
 date: 2012-08-29 10:48
+published: true
 comments: true
 categories: learning
 ---
