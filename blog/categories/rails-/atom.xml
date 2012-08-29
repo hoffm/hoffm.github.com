@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails, | Michael Hoffman]]></title>
+  <link href="http://code-worrier.com/blog/categories/rails-/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-08-29T12:06:52-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
+    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
+    <updated>2012-08-14T11:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
+    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
+It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
+Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
+
+<p>Here's an example. Suppose you have a helper module like the following:</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>include RecipesHelper
+=> Object</p>
+
+<p>helper.put_a_car_in("your car")
+So you can drive while you drive!
+```</p></blockquote></blockquote>
+
+<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
+
+<p>Ok, I'm done.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tips | Michael Hoffman]]></title>
+  <link href="http://code-worrier.com/blog/categories/tips/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-08-29T12:06:52-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[All your undefined vars are evaluate to nil.]]></title>
+    <link href="http://code-worrier.com/blog/all-your-vars/"/>
+    <updated>2012-08-27T18:14:00-04:00</updated>
+    <id>http://code-worrier.com/blog/all-your-vars</id>
+    <content type="html"><![CDATA[<p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
+
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, whereas undefined local variables can't be evaluated at all.</p>
+
+<!-- more -->
+
+
+<p>A little experimentation in irb seems to confirm this hypothesis.
+Uninitialize local variables raise a <code>NameError</code>:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_variables
+=> []
+local_var
+NameError: undefined local variable or method <code>local_var' for main:Object
+```
+whereas instance variables evaluate to</code>nil`:</p></blockquote></blockquote>
+
+<p>```</p>
+
+<blockquote><blockquote><p>instance_variables
+=> []
+@instance_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>(Global variables behave the same way in this respect as instance varables.)</p>
+
+<p>So, again, it seems as if the correct answer to our question is, "It depends."
+But that's wrong.
+In fact, the question has a single, simple correct answer:
+<em>All types of uninitialized variables evaluate to nil.</em></p>
+
+<p>Here's proof:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_var = "something or other" if false
+=> nil
+local_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
+Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
+Why?</p>
+
+<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
+In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
+The error message we got didn't do a great job of explaining this, but it did hint at it with the phrase "variable or method".
+Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
+And, as I've claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
+
+<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
+Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
+if we don't explicitly identify a reciever, the message is passed to the current object.
+However, this flexibilty comes at the price of ambiguity;
+absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Recursive Arrays in Ruby]]></title>
+    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
+    <updated>2012-08-16T22:30:00-04:00</updated>
+    <id>http://code-worrier.com/blog/recursive-arrays</id>
+    <content type="html"><![CDATA[<p>They're real!</p>
+
+<p>In Ruby, an array can contain itself:</p>
+
+<p>```ruby</p>
+
+<blockquote><blockquote><p>a = []
+=> []
+a &lt;&lt; a
+=> [[...]]
+a.first.equal? a
+=> true
+```</p></blockquote></blockquote>
+
+<!-- more -->
+
+
+<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
+    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
+    <updated>2012-08-14T11:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
+    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
+It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
+Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
+
+<p>Here's an example. Suppose you have a helper module like the following:</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>include RecipesHelper
+=> Object</p>
+
+<p>helper.put_a_car_in("your car")
+So you can drive while you drive!
+```</p></blockquote></blockquote>
+
+<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
+
+<p>Ok, I'm done.</p>
+]]></content>
+  </entry>
+  
+</feed>

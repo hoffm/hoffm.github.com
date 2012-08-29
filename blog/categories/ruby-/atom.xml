@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby, | Michael Hoffman]]></title>
+  <link href="http://code-worrier.com/blog/categories/ruby-/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-08-29T12:06:52-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[All your undefined vars are evaluate to nil.]]></title>
+    <link href="http://code-worrier.com/blog/all-your-vars/"/>
+    <updated>2012-08-27T18:14:00-04:00</updated>
+    <id>http://code-worrier.com/blog/all-your-vars</id>
+    <content type="html"><![CDATA[<p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
+
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, whereas undefined local variables can't be evaluated at all.</p>
+
+<!-- more -->
+
+
+<p>A little experimentation in irb seems to confirm this hypothesis.
+Uninitialize local variables raise a <code>NameError</code>:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_variables
+=> []
+local_var
+NameError: undefined local variable or method <code>local_var' for main:Object
+```
+whereas instance variables evaluate to</code>nil`:</p></blockquote></blockquote>
+
+<p>```</p>
+
+<blockquote><blockquote><p>instance_variables
+=> []
+@instance_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>(Global variables behave the same way in this respect as instance varables.)</p>
+
+<p>So, again, it seems as if the correct answer to our question is, "It depends."
+But that's wrong.
+In fact, the question has a single, simple correct answer:
+<em>All types of uninitialized variables evaluate to nil.</em></p>
+
+<p>Here's proof:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_var = "something or other" if false
+=> nil
+local_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
+Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
+Why?</p>
+
+<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
+In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
+The error message we got didn't do a great job of explaining this, but it did hint at it with the phrase "variable or method".
+Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
+And, as I've claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
+
+<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
+Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
+if we don't explicitly identify a reciever, the message is passed to the current object.
+However, this flexibilty comes at the price of ambiguity;
+absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Recursive Arrays in Ruby]]></title>
+    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
+    <updated>2012-08-16T22:30:00-04:00</updated>
+    <id>http://code-worrier.com/blog/recursive-arrays</id>
+    <content type="html"><![CDATA[<p>They're real!</p>
+
+<p>In Ruby, an array can contain itself:</p>
+
+<p>```ruby</p>
+
+<blockquote><blockquote><p>a = []
+=> []
+a &lt;&lt; a
+=> [[...]]
+a.first.equal? a
+=> true
+```</p></blockquote></blockquote>
+
+<!-- more -->
+
+
+<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
+    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
+    <updated>2012-08-14T11:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
+    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
+It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
+Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
+
+<p>Here's an example. Suppose you have a helper module like the following:</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>include RecipesHelper
+=> Object</p>
+
+<p>helper.put_a_car_in("your car")
+So you can drive while you drive!
+```</p></blockquote></blockquote>
+
+<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
+
+<p>Ok, I'm done.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Passing Symbols, a Kata Lesson]]></title>
+    <link href="http://code-worrier.com/blog/passing-symbols/"/>
+    <updated>2012-08-12T22:02:00-04:00</updated>
+    <id>http://code-worrier.com/blog/passing-symbols</id>
+    <content type="html"><![CDATA[<p>In <a href="http://code-worrier.com/blog/kata/">my post</a> about the <a href="https://github.com/wbailey/kata">kata gem</a>, I promised to share something I learned from the <a href="https://github.com/wbailey/code_katas/blob/master/calculator.rb">calculator kata</a>.
+Here goes.</p>
+
+<p>The calculator kata asks you to construct a <code>Calculator</code> class the instances of which are initialized with comma-delimited strings of integers.
+Next you are asked, one by one, to create a series of instance methods—<code>#sum</code>, <code>#prod</code>, <code>#div</code>, <code>#diff</code>—for the class that perform arithmetic operations on the stored integers.</p>
+
+<p>Starting with <code>#sum</code> only, I wrote the class, obviously enough, like this:</p>
+
+<!-- more -->
+
+
+<p>```ruby
+  class Calculator</p>
+
+<pre><code>def initialize expr
+  @expr = expr
+end
+
+def sum
+  @expr.split(/\,/).map(&amp;:to_i).inject(&amp;:+) || 0
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>After adding in another instance method, it made sense to move to conversion from string to array into the initialization method:</p>
+
+<p>```ruby
+  class Calculator</p>
+
+<pre><code>def initialize expr
+  @expr_array = expr.split(/\,/).map(&amp;:to_i)
+end
+
+def sum
+  @expr_array.inject(&amp;:+) || 0
+end
+
+def prod
+  @expr_array.inject(&amp;:*)
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>I went on to add analogous subtraction and division methods, and then I started to get an itch:
+Could I avoid writing "inject" four times?
+More importantly, could I find a way that to write this class that reflected the underlying similarity in function shared by these four methods?</p>
+
+<p>On a kata-fuelled lark, I decided to write the code I <em>wished</em> would work, even though I had no reason to think it would.
+I passed the arithmetic operation symbols into the methods as arguments, and then into the inject blocks:</p>
+
+<p>```ruby
+  class Calculator</p>
+
+<pre><code>def initialize expr
+  @expr_array = expr.split(/\,/).map(&amp;:to_i)
+end
+
+def sum
+  inject_op(:+) || 0
+end
+
+def prod
+  inject_op(:*)
+end
+
+# etc.
+
+private
+
+def inject_op op
+  @expr_array.inject(&amp; op)
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>To my surprise <em>this actually does work</em>!!</p>
+
+<p>My initial reaction was: Go Ruby!
+And then: Thank you, kata.</p>
+
+<p>But, finally, in the spirit of the aphorism that "magic is code you don't understand yet," I thought: How do these <code>&amp;</code> blocks work, anyway?
+More on that in a later post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
+    <link href="http://code-worrier.com/blog/kata/"/>
+    <updated>2012-08-12T18:01:00-04:00</updated>
+    <id>http://code-worrier.com/blog/kata</id>
+    <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
+Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
+However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
+
+<p>Of course, you can't learn anything form a kata unless you <em>do</em> the kata.
+Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
+
+<!-- more -->
+
+
+<p>I learned about the gem from a lightning talk Bailey delivered at the inaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
+(Incidentally, SCRC was my first programming conference, and it was fantastic.
+My experience there inspired this blog.)</p>
+
+<p>The kata gem reduces the friction between you and actually sitting down to do kata.
+It accomplishes this by presenting the kata requirements in bite-sized pieces on the command line.
+The process of working through a kata via the gem resembles the work flow of test-driven development.
+(To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
+This is no accident;
+Bailey's <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is modeled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
+
+<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calculator</code> class, instances of which are initialized with strings of numbers:</p>
+
+<pre><code>Create a calculator that is initialized with a string expression
+- detail: The expression is of the form digits separated by commas: "1,2"
+- detail: The expression is accessed by a method named expr
+- detail: The expression can be reset for evaluation at any time without re-initializing
+- example: Calculator.new "1,2"
+
+Add Method
+  Create an add method that sums the string expression
+  - detail: The method will return the sum of the digits
+  - detail: The expression can contain 0, 1 or 2 numbers
+  - detail: Then empty string will return 0
+  - example: "" computes to 0
+  - example: "1" computes to 1
+  - example: "1,2" computes to 3
+</code></pre>
+
+<p>...and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
+In my <a href="http://code-worrier.com/blog/passing-symbols">next post</a>, I'll relate something I learned by experimenting with the calculator kata.</p>
+]]></content>
+  </entry>
+  
+</feed>
