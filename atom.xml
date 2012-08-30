@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-30T14:14:24-04:00</updated>
+  <updated>2012-08-30T15:44:29-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: More Legible Output with 'Kernel#y']]></title>
+    <link href="http://code-worrier.com/blog/more-legible-output-with-y/"/>
+    <updated>2012-08-30T14:24:00-04:00</updated>
+    <id>http://code-worrier.com/blog/more-legible-output-with-y</id>
+    <content type="html"><![CDATA[<p>Ever tried to get a sense of an ActiveRecord object by squinting though output like this?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; User.find_by_login("Michael Hoffman").recipes.last
+</span><span class='line'>=&gt; #&lt;Recipe id: 18891, title: "Pasta with Lemon-Parmesan Butte
+</span><span class='line'>r", created_at: "2012-08-29 00:03:55", updated_at: "2012-08-29
+</span><span class='line'>16:20:58", description: "I was walking by a little pizzeria in
+</span><span class='line'>the East Vill...", recipe_category_id: 36, serving_size: "4 as
+</span><span class='line'>a pasta course, 2 as a main", user_id: 784, editors_pick: fals
+</span><span class='line'>e, editors_comments: "", label: "pasta_with_lemonparmesan_butt
+</span><span class='line'>er", flag_inappropriate: false, wine_id: nil, recipe_style: "a
+</span><span class='line'>b", varietal_id: nil, rating_average: 0, makes_serves: "Serves
+</span><span class='line'>", flag_inappropriate_comments: nil, sommelier_comments: nil, 
+</span><span class='line'>comments_count: 1, is_winner: false, interest: 1, is_finalist:
+</span><span class='line'>nil, new_categories_added: nil, admin_categorization_note: nil
+</span><span class='line'>&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yuck.</p>
+
+<!-- more -->
+
+
+<p>Luckily, there&#8217;s a super simple way to get some nicer formatting.
+The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anyting else) as YAML.
+Check it out:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; y User.find_by_login("Michael Hoffman").recipes.last
+</span><span class='line'>--- !ruby/ActiveRecord:Recipe 
+</span><span class='line'>attributes: 
+</span><span class='line'>  sommelier_comments: 
+</span><span class='line'>  recipe_style: ab
+</span><span class='line'>  updated_at: 2012-08-29 16:20:58
+</span><span class='line'>  admin_categorization_note: 
+</span><span class='line'>  is_finalist: 
+</span><span class='line'>  is_winner: "0"
+</span><span class='line'>  editors_comments: ""
+</span><span class='line'>  serving_size: 4 as a pasta course, 2 as a main
+</span><span class='line'>  title: Pasta with Lemon-Parmesan Butter
+</span><span class='line'>  interest: "1"
+</span><span class='line'>  editors_pick: "0"
+</span><span class='line'>  recipe_category_id: "36"
+</span><span class='line'>  rating_average: "0"
+</span><span class='line'>  id: "18891"
+</span><span class='line'>  new_categories_added: 
+</span><span class='line'>  flag_inappropriate_comments: 
+</span><span class='line'>  wine_id: 
+</span><span class='line'>  description: "I was walking by a little pizzeria in the East 
+</span><span class='line'>    Village - one I've never been to and may never go to - and
+</span><span class='line'>    I slowed my gait to glance at the menu. My eyes happened t
+</span><span class='line'>    o land on a pasta dish. I don't remember exactly what it w
+</span><span class='line'>    as called, but it involved lemon and parmesan, and not muc
+</span><span class='line'>    h else. Lemon! So obvious. Why had I never thought of that
+</span><span class='line'>    ? The next night I made this for dinner."
+</span><span class='line'>  comments_count: "1"
+</span><span class='line'>  makes_serves: Serves
+</span><span class='line'>  varietal_id: 
+</span><span class='line'>  user_id: "784"
+</span><span class='line'>  label: pasta_with_lemonparmesan_butter
+</span><span class='line'>  flag_inappropriate: "0"
+</span><span class='line'>  created_at: 2012-08-29 00:03:55
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.</p>
+
+<p>Another great use case for this method is visualizing nested hashes and arrays.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; a = {:animals =&gt; {:mammals =&gt; [:dog, :cat, :narwhal], :fish =&gt; [:tuna, :shark] }, :fruits =&gt; [:plum, :peach, :banana]}
+</span><span class='line'>=&gt; {:fruits=&gt;[:plum, :peach, :banana], :animals=&gt;{:mammals=&gt;[:dog, :cat, :narwhal], :fish=&gt;[:tuna, :shark]}}
+</span><span class='line'>&gt;&gt; y a
+</span><span class='line'>--- 
+</span><span class='line'>:fruits: 
+</span><span class='line'>- :plum
+</span><span class='line'>- :peach
+</span><span class='line'>- :banana
+</span><span class='line'>:animals: 
+</span><span class='line'>  :mammals: 
+</span><span class='line'>  - :dog
+</span><span class='line'>  - :cat
+</span><span class='line'>  - :narwhal
+</span><span class='line'>  :fish: 
+</span><span class='line'>  - :tuna
+</span><span class='line'>  - :shark
+</span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nice huh?</p>
+
+<p>One caveat:
+<a href="http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045">Apparently</a> this method relies on the <a href="http://stackoverflow.com/a/11572045">Syck YAML parser</a>.
+For this reason, it won&#8217;t immediately work out of the box with Ruby 1.9.3, which uses the <a href="https://github.com/tenderlove/psych/">Psych parser</a> by default.
+If you&#8217;re using 1.9.3 and you want to play around with <code>Kernel#y</code>, run <code>YAML::ENGINE.yamler = 'syck'</code> to change parsers.</p>
+
+<p>And a question: I&#8217;d like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
+
+<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> detailed in the object above.)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why RTFM is Some Bullshit]]></title>
