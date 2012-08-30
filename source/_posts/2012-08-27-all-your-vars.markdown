@@ -3,7 +3,7 @@ layout: post
 title: "All your undefined vars are evaluate to nil."
 date: 2012-08-27 18:14
 comments: true
-categories: ruby tips
+categories: ruby variables nil
 ---
 
 *(NB: I learned much of what I discuss here from this [post](http://stackoverflow.com/a/4023224/882025).)*
