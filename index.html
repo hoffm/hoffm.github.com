@@ -418,16 +418,7 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
 
 
 <section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("hoffm", 3, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
   
     <a href="http://twitter.com/hoffm" class="twitter-follow-button" data-show-count="false">Follow @hoffm</a>
   
@@ -484,6 +475,14 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
 }(document, 'script', 'facebook-jssdk'));</script>
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
