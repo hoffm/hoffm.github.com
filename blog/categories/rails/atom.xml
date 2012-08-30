@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Michael Hoffman]]></title>
   <link href="http://code-worrier.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-30T09:47:27-04:00</updated>
+  <updated>2012-08-30T14:14:24-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Helper methods in the Rails console? There's a helper for that.]]></title>
+    <title type="html"><![CDATA[Quick Tip: Helper methods in the Rails console?]]></title>
     <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
     <updated>2012-08-14T11:53:00-04:00</updated>
     <id>http://code-worrier.com/blog/helper-methods-in-console</id>

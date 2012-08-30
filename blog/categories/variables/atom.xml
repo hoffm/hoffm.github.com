@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: variables | Michael Hoffman]]></title>
+  <link href="http://code-worrier.com/blog/categories/variables/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-08-30T14:14:24-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[All your undefined vars are evaluate to nil.]]></title>
+    <link href="http://code-worrier.com/blog/all-your-vars/"/>
+    <updated>2012-08-27T18:14:00-04:00</updated>
+    <id>http://code-worrier.com/blog/all-your-vars</id>
+    <content type="html"><![CDATA[<p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
+
+<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
+Perhaps it seems that the correct answer is: it depends what kind of variable.
+Undefined instance variables, for example, evaluate to <code>nil</code>, whereas undefined local variables can't be evaluated at all.</p>
+
+<!-- more -->
+
+
+<p>A little experimentation in irb seems to confirm this hypothesis.
+Uninitialize local variables raise a <code>NameError</code>:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_variables
+=> []
+local_var
+NameError: undefined local variable or method <code>local_var' for main:Object
+```
+whereas instance variables evaluate to</code>nil`:</p></blockquote></blockquote>
+
+<p>```</p>
+
+<blockquote><blockquote><p>instance_variables
+=> []
+@instance_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>(Global variables behave the same way in this respect as instance varables.)</p>
+
+<p>So, again, it seems as if the correct answer to our question is, "It depends."
+But that's wrong.
+In fact, the question has a single, simple correct answer:
+<em>All types of uninitialized variables evaluate to nil.</em></p>
+
+<p>Here's proof:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>local_var = "something or other" if false
+=> nil
+local_var
+=> nil
+```</p></blockquote></blockquote>
+
+<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
+Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
+Why?</p>
+
+<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
+In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
+The error message we got didn't do a great job of explaining this, but it did hint at it with the phrase "variable or method".
+Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
+And, as I've claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
+
+<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
+Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
+if we don't explicitly identify a reciever, the message is passed to the current object.
+However, this flexibilty comes at the price of ambiguity;
+absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
+]]></content>
+  </entry>
+  
+</feed>
