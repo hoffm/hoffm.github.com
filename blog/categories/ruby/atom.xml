@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Michael Hoffman]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-08-30T15:44:29-04:00</updated>
+  <updated>2012-09-04T13:59:08-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -42,7 +42,7 @@ Yuck.</p></blockquote>
 
 
 <p>Luckily, there's a super simple way to get some nicer formatting.
-The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anyting else) as YAML.
+The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anything else) as YAML.
 Check it out:</p>
 
 <p>```</p>
@@ -87,9 +87,8 @@ h else. Lemon! So obvious. Why had I never thought of that
 => nil
 ```</p></blockquote></blockquote>
 
-<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.</p>
-
-<p>Another great use case for this method is visualizing nested hashes and arrays.</p>
+<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.
+Another great use case for this method is visualizing nested hashes and arrays.</p>
 
 <p>```</p>
 
@@ -113,7 +112,7 @@ h else. Lemon! So obvious. Why had I never thought of that
 => nil
 ```</p></blockquote></blockquote>
 
-<p>Nice huh?</p>
+<p>Nice, huh?</p>
 
 <p>One caveat:
 <a href="http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045">Apparently</a> this method relies on the <a href="http://stackoverflow.com/a/11572045">Syck YAML parser</a>.
@@ -122,7 +121,7 @@ If you're using 1.9.3 and you want to play around with <code>Kernel#y</code>, ru
 
 <p>And a question: I'd like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
 
-<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> detailed in the object above.)</p>
+<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
 ]]></content>
   </entry>
   
@@ -248,7 +247,7 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarsHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
 </span><span class='line'>
@@ -266,7 +265,7 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
 
 <p>```</p>
 
-<blockquote><blockquote><p>include RecipesHelper
+<blockquote><blockquote><p>include CarsHelper
 => Object</p>
 
 <p>helper.put_a_car_in("your car")

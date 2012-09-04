@@ -154,7 +154,7 @@
 
 
 <p>Luckily, there&#8217;s a super simple way to get some nicer formatting.
-The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anyting else) as YAML.
+The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anything else) as YAML.
 Check it out:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -229,9 +229,8 @@ Check it out:</p>
 </span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.</p>
-
-<p>Another great use case for this method is visualizing nested hashes and arrays.</p>
+<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.
+Another great use case for this method is visualizing nested hashes and arrays.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -269,7 +268,7 @@ Check it out:</p>
 </span><span class='line'>=&gt; nil</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Nice huh?</p>
+<p>Nice, huh?</p>
 
 <p>One caveat:
 <a href="http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045">Apparently</a> this method relies on the <a href="http://stackoverflow.com/a/11572045">Syck YAML parser</a>.
@@ -278,7 +277,7 @@ If you&#8217;re using 1.9.3 and you want to play around with <code>Kernel#y</cod
 
 <p>And a question: I&#8217;d like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
 
-<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> detailed in the object above.)</p>
+<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
 </div>
 
 
