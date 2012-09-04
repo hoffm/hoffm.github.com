@@ -15,7 +15,7 @@ Here's an example. Suppose you have a helper module like the following:
 <!-- more -->
 
 {% codeblock cars_helper.rb lang:ruby %}
-module CarHelper
+module CarsHelper
 
   def put_a_car_in(location)
     if location == "your car"
@@ -29,7 +29,7 @@ end
 Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:
 
 ```
->> include RecipesHelper
+>> include CarsHelper
 => Object
 
 >> helper.put_a_car_in("your car")

@@ -6,7 +6,7 @@ comments: true
 categories: QuickTip Ruby Rails YAML
 ---
 
-Every tried to get a sense of an ActiveRecord object by squinting though output like this?
+Ever tried to get a sense of an ActiveRecord object by squinting though output like this?
 
 ```
 >> User.find_by_login("Michael Hoffman").recipes.last
@@ -28,7 +28,7 @@ Yuck.
 <!-- more -->
 
 Luckily, there's a super simple way to get some nicer formatting.
-`Kernel` has a private instance method `#y` which will print out an active record object (or anyting else) as YAML.
+The `Kernel` module has a private instance method `#y` which will print out an active record object (or anything else) as YAML.
 Check it out:
 
 ```
@@ -70,7 +70,7 @@ attributes:
 ```
 
 Notice that, in addition to producing more legible formatting, `#y` does not truncate values, so we get to see the whole description of the recipe.
-This method is especially useful for visualizing nested hashes and arrays.
+Another great use case for this method is visualizing nested hashes and arrays.
 
 ```
 >> a = {:animals => {:mammals => [:dog, :cat, :narwhal], :fish => [:tuna, :shark] }, :fruits => [:plum, :peach, :banana]}
@@ -92,7 +92,13 @@ This method is especially useful for visualizing nested hashes and arrays.
 => nil
 ```
 
-One warning:
+Nice, huh?
+
+One caveat:
 [Apparently](http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045) this method relies on the [Syck YAML parser](http://stackoverflow.com/a/11572045).
 For this reason, it won't immediately work out of the box with Ruby 1.9.3, which uses the [Psych parser](https://github.com/tenderlove/psych/) by default.
 If you're using 1.9.3 and you want to play around with `Kernel#y`, run `YAML::ENGINE.yamler = 'syck'` to change parsers.
+
+And a question: I'd like to know how to get `#y` to print out ActiveRecord attributes in the same order as they are normally displayed.
+
+(By the way, I highly recommend trying out [the recipe](http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter) mentioned above.)
