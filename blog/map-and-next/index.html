@@ -5,21 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Quick Tip: Recursive Arrays in Ruby - Michael Hoffman: Code Worrier</title>
+  <title>What does Ruby's 'next' keyword return? - Michael Hoffman: Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="They&#8217;re real! In Ruby, an array can contain itself: 1
-2
-3
-4
-5
-6
-&gt;&gt; a = []
-=&gt; []
-&gt;&gt; a &lt;&lt; a
-=&gt; [[...]]
-&gt;&gt; a.first. &hellip;">
+  <meta name="description" content="Pop quiz, hotshot:
+What does the following Ruby expression return? 1
+[1,2,3].map{ |n| next if n.even? ; 2*n } It turns out I&#8217;m not much of a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -28,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/recursive-arrays/">
+  <link rel="canonical" href="http://code-worrier.com/blog/map-and-next/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Quick Tip: Recursive Arrays in Ruby</h1>
+      <h1 class="entry-title">What Does Ruby's 'next' Keyword Return?</h1>
     
     
       <p class="meta">
@@ -106,7 +98,7 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2012-09-04T19:55:00-04:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,29 +107,79 @@
   </header>
 
 
-<div class="entry-content"><p>They&#8217;re real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
+<div class="entry-content"><p>Pop quiz, hotshot:
+<strong>What does the following Ruby expression return?</strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <!-- more -->
 
 
-<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+<p>It turns out I&#8217;m not much of a hotshot, because this how I reasoned through this question while at work today:</p>
+
+<ol>
+<li><code>Array#map</code> evaluates the block for each member of the array and returns a new array of the returned values, in order.</li>
+<li>When <code>n == 1</code> or <code>n == 3</code>, the block evaluates to <code>2*n</code>.</li>
+<li>However, when <code>n == 2</code> we hit the <code>next</code> keyword and nothing gets evaluated.</li>
+<li>Therefore this expression returns <code>[2,6]</code>.</li>
+</ol>
+
+
+<p>Reinforcing this line of reasoning, a very similar expression,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="nb">puts</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gives the analog of this result:
+it prints &#8220;2&#8221; and then &#8220;6&#8221; and then return.
+The iteration that hits <code>next</code> just gets skipped.
+Analogously, the version with <code>map</code> should return <code>[2,6]</code></p>
+
+<p><strong>Wrong!</strong></p>
+
+<p>In fact, the answer to the quiz is&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="mi">6</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The error in the reasoning above is contained in premise (3).
+It turns out that <strong>when <code>next</code> is evaluated, it returns <code>nil</code></strong>.</p>
+
+<p>Similarly,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>returns the same array, <code>[2, nil, 6]</code>, because <code>... if false</code> returns nil no matter what (syntactically valid) expression <code>...</code> is.</p>
+
+<p>So, if you&#8217;re using <code>map</code>, and you want to skip some elements, you can&#8217;t just use <code>next</code> or <code>if</code>.
+You also need to deal with the <code>nil</code>s when you&#8217;re done, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span><span class="o">.</span><span class="n">compact</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alternatively—although it&#8217;s probably more expensive—you could select the elements you want before proceeding with the operations you want to perform on them:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">reject</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let me know in the comments if you can think of a generalizable implementation that&#8217;s more elegant than either of these.
+In the meantime, may you never make the same mistake I made!</p>
 </div>
 
 
@@ -160,12 +202,12 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2012-09-04T19:55:00-04:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/quicktip/'>QuickTip</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/quicktip/'>Quicktip</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -174,7 +216,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/recursive-arrays/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/recursive-arrays/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/map-and-next/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/map-and-next/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -187,10 +229,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/helper-methods-in-console/" title="Previous Post: Quick Tip: Helper methods in the Rails console?">&laquo; Quick Tip: Helper methods in the Rails console?</a>
+        <a class="basic-alignment left" href="/blog/more-legible-output-with-y/" title="Previous Post: Quick Tip: More Legible Output with 'Kernel#y'">&laquo; Quick Tip: More Legible Output with 'Kernel#y'</a>
       
-      
-        <a class="basic-alignment right" href="/blog/all-your-vars/" title="Next Post: All your undefined vars are evaluate to nil.">All your undefined vars are evaluate to nil. &raquo;</a>
       
     </p>
   </footer>
@@ -273,8 +313,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/recursive-arrays/';
-        var disqus_url = 'http://code-worrier.com/blog/recursive-arrays/';
+        var disqus_identifier = 'http://code-worrier.com/blog/map-and-next/';
+        var disqus_url = 'http://code-worrier.com/blog/map-and-next/';
         var disqus_script = 'embed.js';
       
     (function () {

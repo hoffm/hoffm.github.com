@@ -9,20 +9,9 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Ever tried to get a sense of an ActiveRecord object by squinting though output like this? 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&gt;&gt; User.find_by_login(" &hellip;">
+  <meta name="description" content="Pop quiz, hotshot:
+What does the following Ruby expression return? 1
+[1,2,3].map{ |n| next if n.even? ; 2*n } ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +79,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/map-and-next/">What Does Ruby&#8217;s &#8216;next&#8217; Keyword Return?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-04T19:55:00-04:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+        
+         | <a href="/blog/map-and-next/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pop quiz, hotshot:
+<strong>What does the following Ruby expression return?</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/map-and-next/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -479,6 +519,10 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/map-and-next/">What does Ruby&#8217;s &#8216;next&#8217; keyword return?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/more-legible-output-with-y/">Quick Tip: More Legible Output with &#8216;Kernel#y&#8217;</a>
       </li>
     
@@ -492,10 +536,6 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
     
       <li class="post">
         <a href="/blog/recursive-arrays/">Quick Tip: Recursive Arrays in Ruby</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/helper-methods-in-console/">Quick Tip: Helper methods in the Rails console?</a>
       </li>
     
   </ul>

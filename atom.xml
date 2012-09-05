@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Hoffman]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-04T13:59:08-04:00</updated>
+  <updated>2012-09-04T23:04:46-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What does Ruby's 'next' keyword return?]]></title>
+    <link href="http://code-worrier.com/blog/map-and-next/"/>
+    <updated>2012-09-04T19:55:00-04:00</updated>
+    <id>http://code-worrier.com/blog/map-and-next</id>
+    <content type="html"><![CDATA[<p>Pop quiz, hotshot:
+<strong>What does the following Ruby expression return?</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>It turns out I&#8217;m not much of a hotshot, because this how I reasoned through this question while at work today:</p>
+
+<ol>
+<li><code>Array#map</code> evaluates the block for each member of the array and returns a new array of the returned values, in order.</li>
+<li>When <code>n == 1</code> or <code>n == 3</code>, the block evaluates to <code>2*n</code>.</li>
+<li>However, when <code>n == 2</code> we hit the <code>next</code> keyword and nothing gets evaluated.</li>
+<li>Therefore this expression returns <code>[2,6]</code>.</li>
+</ol>
+
+
+<p>Reinforcing this line of reasoning, a very similar expression,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="nb">puts</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gives the analog of this result:
+it prints &#8220;2&#8221; and then &#8220;6&#8221; and then return.
+The iteration that hits <code>next</code> just gets skipped.
+Analogously, the version with <code>map</code> should return <code>[2,6]</code></p>
+
+<p><strong>Wrong!</strong></p>
+
+<p>In fact, the answer to the quiz is&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="mi">6</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The error in the reasoning above is contained in premise (3).
+It turns out that <strong>when <code>next</code> is evaluated, it returns <code>nil</code></strong>.</p>
+
+<p>Similarly,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>returns the same array, <code>[2, nil, 6]</code>, because <code>... if false</code> returns nil no matter what (syntactically valid) expression <code>...</code> is.</p>
+
+<p>So, if you&#8217;re using <code>map</code>, and you want to skip some elements, you can&#8217;t just use <code>next</code> or <code>if</code>.
+You also need to deal with the <code>nil</code>s when you&#8217;re done, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span><span class="o">.</span><span class="n">compact</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alternatively—although it&#8217;s probably more expensive—you could select the elements you want before proceeding with the operations you want to perform on them:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">reject</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let me know in the comments if you can think of a generalizable implementation that&#8217;s more elegant than either of these.
+In the meantime, may you never make the same mistake I made!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: More Legible Output with 'Kernel#y']]></title>

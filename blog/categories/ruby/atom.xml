@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Michael Hoffman]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-04T13:59:08-04:00</updated>
+  <updated>2012-09-04T23:04:46-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What does Ruby's 'next' keyword return?]]></title>
+    <link href="http://code-worrier.com/blog/map-and-next/"/>
+    <updated>2012-09-04T19:55:00-04:00</updated>
+    <id>http://code-worrier.com/blog/map-and-next</id>
+    <content type="html"><![CDATA[<p>Pop quiz, hotshot:
+<strong>What does the following Ruby expression return?</strong></p>
+
+<p><code>ruby
+[1,2,3].map{ |n| next if n.even? ; 2*n }
+</code></p>
+
+<!-- more -->
+
+
+<p>It turns out I'm not much of a hotshot, because this how I reasoned through this question while at work today:</p>
+
+<ol>
+<li><code>Array#map</code> evaluates the block for each member of the array and returns a new array of the returned values, in order.</li>
+<li>When <code>n == 1</code> or <code>n == 3</code>, the block evaluates to <code>2*n</code>.</li>
+<li>However, when <code>n == 2</code> we hit the <code>next</code> keyword and nothing gets evaluated.</li>
+<li>Therefore this expression returns <code>[2,6]</code>.</li>
+</ol>
+
+
+<p>Reinforcing this line of reasoning, a very similar expression,</p>
+
+<p><code>ruby
+[1,2,3].each{ |n| next if n.even? ; puts 2*n }
+</code></p>
+
+<p>gives the analog of this result:
+it prints "2" and then "6" and then return.
+The iteration that hits <code>next</code> just gets skipped.
+Analogously, the version with <code>map</code> should return <code>[2,6]</code></p>
+
+<p><strong>Wrong!</strong></p>
+
+<p>In fact, the answer to the quiz is...</p>
+
+<p><code>ruby
+[2, nil, 6]
+</code></p>
+
+<p>The error in the reasoning above is contained in premise (3).
+It turns out that <strong>when <code>next</code> is evaluated, it returns <code>nil</code></strong>.</p>
+
+<p>Similarly,</p>
+
+<p><code>ruby
+[1,2,3].map{ |n| 2*n if n.odd? }
+</code></p>
+
+<p>returns the same array, <code>[2, nil, 6]</code>, because <code>... if false</code> returns nil no matter what (syntactically valid) expression <code>...</code> is.</p>
+
+<p>So, if you're using <code>map</code>, and you want to skip some elements, you can't just use <code>next</code> or <code>if</code>.
+You also need to deal with the <code>nil</code>s when you're done, like this:</p>
+
+<p><code>ruby
+1,2,3].map{ |n| next if n.even? ; 2*n }.compact
+</code></p>
+
+<p>Alternatively—although it's probably more expensive—you could select the elements you want before proceeding with the operations you want to perform on them:</p>
+
+<p><code>ruby
+[1,2,3].reject{ |n| n.even? }.map{ |n| 2*n }
+</code></p>
+
+<p>Let me know in the comments if you can think of a generalizable implementation that's more elegant than either of these.
+In the meantime, may you never make the same mistake I made!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: More Legible Output with 'Kernel#y']]></title>
@@ -275,102 +348,6 @@ So you can drive while you drive!
 <p>I hope this has been helpful. (Sorry, can't help myself.)</p>
 
 <p>Ok, I'm done.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Passing Symbols, a Kata Lesson]]></title>
-    <link href="http://code-worrier.com/blog/passing-symbols/"/>
-    <updated>2012-08-12T22:02:00-04:00</updated>
-    <id>http://code-worrier.com/blog/passing-symbols</id>
-    <content type="html"><![CDATA[<p>In <a href="http://code-worrier.com/blog/kata/">my post</a> about the <a href="https://github.com/wbailey/kata">kata gem</a>, I promised to share something I learned from the <a href="https://github.com/wbailey/code_katas/blob/master/calculator.rb">calculator kata</a>.
-Here goes.</p>
-
-<p>The calculator kata asks you to construct a <code>Calculator</code> class the instances of which are initialized with comma-delimited strings of integers.
-Next you are asked, one by one, to create a series of instance methods—<code>#sum</code>, <code>#prod</code>, <code>#div</code>, <code>#diff</code>—for the class that perform arithmetic operations on the stored integers.</p>
-
-<p>Starting with <code>#sum</code> only, I wrote the class, obviously enough, like this:</p>
-
-<!-- more -->
-
-
-<p>```ruby
-  class Calculator</p>
-
-<pre><code>def initialize expr
-  @expr = expr
-end
-
-def sum
-  @expr.split(/\,/).map(&amp;:to_i).inject(&amp;:+) || 0
-end
-</code></pre>
-
-<p>  end
-```</p>
-
-<p>After adding in another instance method, it made sense to move to conversion from string to array into the initialization method:</p>
-
-<p>```ruby
-  class Calculator</p>
-
-<pre><code>def initialize expr
-  @expr_array = expr.split(/\,/).map(&amp;:to_i)
-end
-
-def sum
-  @expr_array.inject(&amp;:+) || 0
-end
-
-def prod
-  @expr_array.inject(&amp;:*)
-end
-</code></pre>
-
-<p>  end
-```</p>
-
-<p>I went on to add analogous subtraction and division methods, and then I started to get an itch:
-Could I avoid writing "inject" four times?
-More importantly, could I find a way that to write this class that reflected the underlying similarity in function shared by these four methods?</p>
-
-<p>On a kata-fuelled lark, I decided to write the code I <em>wished</em> would work, even though I had no reason to think it would.
-I passed the arithmetic operation symbols into the methods as arguments, and then into the inject blocks:</p>
-
-<p>```ruby
-  class Calculator</p>
-
-<pre><code>def initialize expr
-  @expr_array = expr.split(/\,/).map(&amp;:to_i)
-end
-
-def sum
-  inject_op(:+) || 0
-end
-
-def prod
-  inject_op(:*)
-end
-
-# etc.
-
-private
-
-def inject_op op
-  @expr_array.inject(&amp; op)
-end
-</code></pre>
-
-<p>  end
-```</p>
-
-<p>To my surprise <em>this actually does work</em>!!</p>
-
-<p>My initial reaction was: Go Ruby!
-And then: Thank you, kata.</p>
-
-<p>But, finally, in the spirit of the aphorism that "magic is code you don't understand yet," I thought: How do these <code>&amp;</code> blocks work, anyway?
-More on that in a later post.</p>
 ]]></content>
   </entry>
   
