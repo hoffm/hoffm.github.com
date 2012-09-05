@@ -1,12 +1,16 @@
 class String
   def titlecase
-    small_words = %w(a an and as at but by en for if in of on or the to v v. via vs vs.)
+    small_words = %w(a an and as at but by en for if in of on or the to v v. via vs vs. next)
 
     x = split(" ").map do |word|
       # note: word could contain non-word characters!
       # downcase all small_words, capitalize the rest
-      small_words.include?(word.gsub(/\W/, "").downcase) ? word.downcase! : word.smart_capitalize!
-      word
+      if (word[0] == "'" && word[-1] == "'")
+        word
+      else
+        small_words.include?(word.gsub(/\W/, "").downcase) ? word.downcase! : word.smart_capitalize!
+        word
+      end
     end
     # capitalize first and last words
     x.first.to_s.smart_capitalize!
