@@ -3,11 +3,14 @@
 # ----------------------- #
 
 url: http://code-worrier.com
-title: Michael Hoffman
-subtitle: Code Worrier
+title: Code Worrier
+subtitle: Sweat the details.
 author: Michael Hoffman
 simple_search: http://google.com/search
-description: A blog about computer programming by Michael Hoffman.
+description: Michael Hoffman's blog about ruby, rails, and learing to code.
+
+category_title_prefix: "Category: "
+category_meta_description_prefix: "Code Worrier blog posts:"
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
