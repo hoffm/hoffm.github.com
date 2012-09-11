@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-09T23:25:48-04:00</updated>
+  <updated>2012-09-10T23:54:51-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[technorati verification]]></title>
+    <link href="http://code-worrier.com/blog/technorati-verification/"/>
+    <updated>2012-09-10T23:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/technorati-verification</id>
+    <content type="html"><![CDATA[<p>S5SUFEWQ6QA9</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>
