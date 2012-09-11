@@ -3,7 +3,7 @@ layout: post
 title: "What does Ruby's 'next' keyword return?"
 date: 2012-09-04 19:55
 comments: true
-categories: Quicktip Ruby Rails
+categories: QuickTip Ruby Rails
 ---
 
 Pop quiz, hotshot:
