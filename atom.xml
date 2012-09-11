@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-10T23:54:51-04:00</updated>
+  <updated>2012-09-10T23:56:37-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[technorati verification]]></title>
-    <link href="http://code-worrier.com/blog/technorati-verification/"/>
-    <updated>2012-09-10T23:53:00-04:00</updated>
-    <id>http://code-worrier.com/blog/technorati-verification</id>
-    <content type="html"><![CDATA[<p>S5SUFEWQ6QA9</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>
@@ -778,6 +769,15 @@ Add Method
 
 <p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
 In my <a href="http://code-worrier.com/blog/passing-symbols">next post</a>, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[technorati verification]]></title>
+    <link href="http://code-worrier.com/blog/technorati-verification/"/>
+    <updated>2011-09-10T23:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/technorati-verification</id>
+    <content type="html"><![CDATA[<p>S5SUFEWQ6QA9</p>
 ]]></content>
   </entry>
   
