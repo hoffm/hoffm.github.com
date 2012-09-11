@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Quicktip | Code Worrier]]></title>
+  <title><![CDATA[Category: QuickTip | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/quicktip/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-10T23:56:37-04:00</updated>
+  <updated>2012-09-10T23:58:29-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>
+    <link href="http://code-worrier.com/blog/autocomplete-git/"/>
+    <updated>2012-09-09T21:44:00-04:00</updated>
+    <id>http://code-worrier.com/blog/autocomplete-git</id>
+    <content type="html"><![CDATA[<p>In bash in Mac OS X, you can use [TAB] to autocomplete file paths.
+Wouldn't if be nice if you could do the same with git commands and branch names?</p>
+
+<p>You can.
+Here's how.</p>
+
+<!-- more -->
+
+
+<p>First get the <code>git-completion.bash</code> script (view it <a href="https://github.com/git/git/blob/master/contrib/completion/git-completion.bash">here</a>) and put it in your home directory:</p>
+
+<p><code>
+curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+</code></p>
+
+<p>Next, add the following lines to your <code>.bash_profile</code>.
+This tells bash to execute the git autocomplete script if it exists.</p>
+
+<p><code>
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+</code></p>
+
+<p>Now open a new shell, <code>cd</code> into a git repo, and start typing a git command.
+You should find that [TAB] now autocompletes git commands and git branch names.</p>
+
+<p>For example, if you type <code>git</code> then add a space and hit [TAB], you'll get a readout like this, which lists all available git commands:</p>
+
+<p><code>
+add                 filter-branch       reflog
+am                  format-patch        relink
+annotate            fsck                remote
+apply               gc                  repack
+archive             get-tar-commit-id   replace
+bisect              grep                request-pull
+blame               gui                 reset
+branch              help                revert
+bundle              imap-send           rm
+checkout            init                send-email
+cherry              instaweb            shortlog
+cherry-pick         log                 show
+citool              merge               show-branch
+clean               mergetool           stage
+clone               mv                  stash
+commit              name-rev            status
+config              notes               submodule
+describe            p4                  svn
+diff                pull                tag
+difftool            push                whatchanged
+fetch               rebase
+</code></p>
+
+<p>Now to learn what some of these more exotic git commands do!
+What's your favorite git command?</p>
+
+<p>(I learned this way of installing <code>git-completion.bash</code> <a href="http://apple.stackexchange.com/questions/55875/how-can-i-get-git-to-autocomplete-e-g-branches-at-the-command-line/55886#55886">here</a>.)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What does Ruby's 'next' keyword return?]]></title>
@@ -83,6 +148,202 @@ You also need to deal with the <code>nil</code>s when you're done, like this:</p
 
 <p>Let me know in the comments if you can think of a generalizable implementation that's more elegant than either of these.
 In the meantime, may you never make the same mistake I made!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: More Legible Output with 'Kernel#y']]></title>
+    <link href="http://code-worrier.com/blog/more-legible-output-with-y/"/>
+    <updated>2012-08-30T14:24:00-04:00</updated>
+    <id>http://code-worrier.com/blog/more-legible-output-with-y</id>
+    <content type="html"><![CDATA[<p>Ever tried to get a sense of an ActiveRecord object by squinting though output like this?</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>User.find_by_login("Michael Hoffman").recipes.last
+=> #&lt;Recipe id: 18891, title: "Pasta with Lemon-Parmesan Butte
+r", created_at: "2012-08-29 00:03:55", updated_at: "2012-08-29
+16:20:58", description: "I was walking by a little pizzeria in
+the East Vill...", recipe_category_id: 36, serving_size: "4 as
+a pasta course, 2 as a main", user_id: 784, editors_pick: fals
+e, editors_comments: "", label: "pasta_with_lemonparmesan_butt
+er", flag_inappropriate: false, wine_id: nil, recipe_style: "a
+b", varietal_id: nil, rating_average: 0, makes_serves: "Serves
+", flag_inappropriate_comments: nil, sommelier_comments: nil,
+comments_count: 1, is_winner: false, interest: 1, is_finalist:
+nil, new_categories_added: nil, admin_categorization_note: nil</p></blockquote>
+
+<p>```
+Yuck.</p></blockquote>
+
+<!-- more -->
+
+
+<p>Luckily, there's a super simple way to get some nicer formatting.
+The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anything else) as YAML.
+Check it out:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>y User.find_by_login("Michael Hoffman").recipes.last
+--- !ruby/ActiveRecord:Recipe
+attributes:
+  sommelier_comments:
+  recipe_style: ab
+  updated_at: 2012-08-29 16:20:58
+  admin_categorization_note:
+  is_finalist:
+  is_winner: "0"
+  editors_comments: ""
+  serving_size: 4 as a pasta course, 2 as a main
+  title: Pasta with Lemon-Parmesan Butter
+  interest: "1"
+  editors_pick: "0"
+  recipe_category_id: "36"
+  rating_average: "0"
+  id: "18891"
+  new_categories_added:
+  flag_inappropriate_comments:
+  wine_id:
+  description: "I was walking by a little pizzeria in the East</p>
+
+<pre><code>Village - one I've never been to and may never go to - and
+I slowed my gait to glance at the menu. My eyes happened t
+o land on a pasta dish. I don't remember exactly what it w
+as called, but it involved lemon and parmesan, and not muc
+h else. Lemon! So obvious. Why had I never thought of that
+? The next night I made this for dinner."
+</code></pre>
+
+<p>  comments_count: "1"
+  makes_serves: Serves
+  varietal_id:
+  user_id: "784"
+  label: pasta_with_lemonparmesan_butter
+  flag_inappropriate: "0"
+  created_at: 2012-08-29 00:03:55
+=> nil
+```</p></blockquote></blockquote>
+
+<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.
+Another great use case for this method is visualizing nested hashes and arrays.</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>a = {:animals => {:mammals => [:dog, :cat, :narwhal], :fish => [:tuna, :shark] }, :fruits => [:plum, :peach, :banana]}
+=> {:fruits=>[:plum, :peach, :banana], :animals=>{:mammals=>[:dog, :cat, :narwhal], :fish=>[:tuna, :shark]}}</p>
+
+<h2>y a</h2>
+
+<p>:fruits:
+- :plum
+- :peach
+- :banana
+:animals:
+  :mammals:
+  - :dog
+  - :cat
+  - :narwhal
+  :fish:
+  - :tuna
+  - :shark
+=> nil
+```</p></blockquote></blockquote>
+
+<p>Nice, huh?</p>
+
+<p>One caveat:
+<a href="http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045">Apparently</a> this method relies on the <a href="http://stackoverflow.com/a/11572045">Syck YAML parser</a>.
+For this reason, it won't immediately work out of the box with Ruby 1.9.3, which uses the <a href="https://github.com/tenderlove/psych/">Psych parser</a> by default.
+If you're using 1.9.3 and you want to play around with <code>Kernel#y</code>, run <code>YAML::ENGINE.yamler = 'syck'</code> to change parsers.</p>
+
+<p>And a question: I'd like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
+
+<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Recursive Arrays in Ruby]]></title>
+    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
+    <updated>2012-08-16T22:30:00-04:00</updated>
+    <id>http://code-worrier.com/blog/recursive-arrays</id>
+    <content type="html"><![CDATA[<p>They're real!</p>
+
+<p>In Ruby, an array can contain itself:</p>
+
+<p>```ruby</p>
+
+<blockquote><blockquote><p>a = []
+=> []
+a &lt;&lt; a
+=> [[...]]
+a.first.equal? a
+=> true
+```</p></blockquote></blockquote>
+
+<!-- more -->
+
+
+<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Helper methods in the Rails console?]]></title>
+    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
+    <updated>2012-08-14T11:53:00-04:00</updated>
+    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
+    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
+It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
+Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
+
+<p>Here's an example. Suppose you have a helper module like the following:</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarsHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
+
+<p>```</p>
+
+<blockquote><blockquote><p>include CarsHelper
+=> Object</p>
+
+<p>helper.put_a_car_in("your car")
+So you can drive while you drive!
+```</p></blockquote></blockquote>
+
+<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
+
+<p>Ok, I'm done.</p>
 ]]></content>
   </entry>
   
