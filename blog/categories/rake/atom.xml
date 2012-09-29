@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rake | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/rake/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-09-29T11:26:16-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Invoke a Rake Task from Another Task]]></title>
+    <link href="http://code-worrier.com/blog/embedded-rake-tasks/"/>
+    <updated>2012-09-25T17:02:00-04:00</updated>
+    <id>http://code-worrier.com/blog/embedded-rake-tasks</id>
+    <content type="html"><![CDATA[<p>You can invoke a rake task from another rake task.
+Here's how:</p>
+
+<p>```ruby examples.rake
+namespace :examples do</p>
+
+<p>  desc "Inner task."
+  task :inner_task => :environment do</p>
+
+<pre><code># Some code that accomplishes a task.
+</code></pre>
+
+<p>  end</p>
+
+<p>  desc "Outer task."
+  task :outer_task do</p>
+
+<pre><code># Some code.
+Rake::Task['examples:inner_task'].execute #Execute innter task.
+# Some other code.
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<!-- more -->
+
+
+<p>Now when you execute <code>rake examples:outer_task</code>, you will execute the inner task in whatever context you placed it.
+Using this contruction allows you to break down unweildy tasks into smaller ones, which perhaps you'll want to reuse in different contexts elsewhere.</p>
+
+<p>Here's a toy examples that actually works:</p>
+
+<p>```ruby toys.rake
+namespace :toys do</p>
+
+<p>  desc "Inner task: Square the value."
+  task :square do</p>
+
+<pre><code>@value *= @value
+</code></pre>
+
+<p>  end</p>
+
+<p>  desc "Outer task: Initialize the value and square thrice."
+  task :square_three_times do</p>
+
+<pre><code>@value = 2
+3.times{Rake::Task['toys:square'].execute}
+puts "The value is #{@value}."
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>Running this in the shell, we get:</p>
+
+<p><code>bash
+$ rake toys:square_three_times --trace
+** Invoke toys:square_three_times (first_time)
+** Execute toys:square_three_times
+** Execute toys:square
+** Execute toys:square
+** Execute toys:square
+The value is 256.
+</code></p>
+
+<p>And yes, I know you're thinking it now: rake tasks can call themselves quite happily.</p>
+
+<p>You can also invoke rake tasks from within ActiveRecord migrations.
+This can come in handy when you want to initialize a bunch of data immeidately after altering the database schema.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-11T08:17:23-04:00</updated>
+  <updated>2012-09-29T11:26:16-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Invoke a Rake Task from Another Task]]></title>
+    <link href="http://code-worrier.com/blog/embedded-rake-tasks/"/>
+    <updated>2012-09-25T17:02:00-04:00</updated>
+    <id>http://code-worrier.com/blog/embedded-rake-tasks</id>
+    <content type="html"><![CDATA[<p>You can invoke a rake task from another rake task.
+Here&#8217;s how:</p>
+
+<figure class='code'><figcaption><span>examples.rake</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:examples</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Inner task.&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:inner_task</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1"># Some code that accomplishes a task.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Outer task.&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:outer_task</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1"># Some code.</span>
+</span><span class='line'>    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="o">[</span><span class="s1">&#39;examples:inner_task&#39;</span><span class="o">].</span><span class="n">execute</span> <span class="c1">#Execute innter task.</span>
+</span><span class='line'>    <span class="c1"># Some other code.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>Now when you execute <code>rake examples:outer_task</code>, you will execute the inner task in whatever context you placed it.
+Using this contruction allows you to break down unweildy tasks into smaller ones, which perhaps you&#8217;ll want to reuse in different contexts elsewhere.</p>
+
+<p>Here&#8217;s a toy examples that actually works:</p>
+
+<figure class='code'><figcaption><span>toys.rake</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:toys</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Inner task: Square the value.&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:square</span> <span class="k">do</span>
+</span><span class='line'>    <span class="vi">@value</span> <span class="o">*=</span> <span class="vi">@value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Outer task: Initialize the value and square thrice.&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:square_three_times</span> <span class="k">do</span>
+</span><span class='line'>    <span class="vi">@value</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="mi">3</span><span class="o">.</span><span class="n">times</span><span class="p">{</span><span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="o">[</span><span class="s1">&#39;toys:square&#39;</span><span class="o">].</span><span class="n">execute</span><span class="p">}</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;The value is </span><span class="si">#{</span><span class="vi">@value</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running this in the shell, we get:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake toys:square_three_times --trace
+</span><span class='line'>** Invoke toys:square_three_times <span class="o">(</span>first_time<span class="o">)</span>
+</span><span class='line'>** Execute toys:square_three_times
+</span><span class='line'>** Execute toys:square
+</span><span class='line'>** Execute toys:square
+</span><span class='line'>** Execute toys:square
+</span><span class='line'>The value is 256.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And yes, I know you&#8217;re thinking it now: rake tasks can call themselves quite happily.</p>
+
+<p>You can also invoke rake tasks from within ActiveRecord migrations.
+This can come in handy when you want to initialize a bunch of data immeidately after altering the database schema.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>

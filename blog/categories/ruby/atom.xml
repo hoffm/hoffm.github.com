@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-11T08:17:23-04:00</updated>
+  <updated>2012-09-29T11:26:16-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Invoke a Rake Task from Another Task]]></title>
+    <link href="http://code-worrier.com/blog/embedded-rake-tasks/"/>
+    <updated>2012-09-25T17:02:00-04:00</updated>
+    <id>http://code-worrier.com/blog/embedded-rake-tasks</id>
+    <content type="html"><![CDATA[<p>You can invoke a rake task from another rake task.
+Here's how:</p>
+
+<p>```ruby examples.rake
+namespace :examples do</p>
+
+<p>  desc "Inner task."
+  task :inner_task => :environment do</p>
+
+<pre><code># Some code that accomplishes a task.
+</code></pre>
+
+<p>  end</p>
+
+<p>  desc "Outer task."
+  task :outer_task do</p>
+
+<pre><code># Some code.
+Rake::Task['examples:inner_task'].execute #Execute innter task.
+# Some other code.
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<!-- more -->
+
+
+<p>Now when you execute <code>rake examples:outer_task</code>, you will execute the inner task in whatever context you placed it.
+Using this contruction allows you to break down unweildy tasks into smaller ones, which perhaps you'll want to reuse in different contexts elsewhere.</p>
+
+<p>Here's a toy examples that actually works:</p>
+
+<p>```ruby toys.rake
+namespace :toys do</p>
+
+<p>  desc "Inner task: Square the value."
+  task :square do</p>
+
+<pre><code>@value *= @value
+</code></pre>
+
+<p>  end</p>
+
+<p>  desc "Outer task: Initialize the value and square thrice."
+  task :square_three_times do</p>
+
+<pre><code>@value = 2
+3.times{Rake::Task['toys:square'].execute}
+puts "The value is #{@value}."
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>Running this in the shell, we get:</p>
+
+<p><code>bash
+$ rake toys:square_three_times --trace
+** Invoke toys:square_three_times (first_time)
+** Execute toys:square_three_times
+** Execute toys:square
+** Execute toys:square
+** Execute toys:square
+The value is 256.
+</code></p>
+
+<p>And yes, I know you're thinking it now: rake tasks can call themselves quite happily.</p>
+
+<p>You can also invoke rake tasks from within ActiveRecord migrations.
+This can come in handy when you want to initialize a bunch of data immeidately after altering the database schema.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What does Ruby's 'next' keyword return?]]></title>
@@ -290,64 +373,6 @@ a.first.equal? a
 
 
 <p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick Tip: Helper methods in the Rails console?]]></title>
-    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
-    <updated>2012-08-14T11:53:00-04:00</updated>
-    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
-    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
-It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
-Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
-
-<p>Here's an example. Suppose you have a helper module like the following:</p>
-
-<!-- more -->
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarsHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>include CarsHelper
-=> Object</p>
-
-<p>helper.put_a_car_in("your car")
-So you can drive while you drive!
-```</p></blockquote></blockquote>
-
-<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
-
-<p>Ok, I'm done.</p>
 ]]></content>
   </entry>
   
