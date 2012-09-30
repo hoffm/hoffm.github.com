@@ -5,12 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Quick Tip: Autocomplete Git Commands and Branch Names in Bash - Code Worrier</title>
+  <title>A tiny benchmarking utility - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="In bash in Mac OS X, you can use [TAB] to autocomplete file paths.
-Wouldn&#8217;t if be nice if you could do the same with git commands and branch &hellip;">
+  <meta name="description" content="While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+Here it is: tiny_timer.rb1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +27,7 @@ Wouldn&#8217;t if be nice if you could do the same with git commands and branch 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/autocomplete-git/">
+  <link rel="canonical" href="http://code-worrier.com/blog/tiny-benchmarking/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +89,7 @@ Wouldn&#8217;t if be nice if you could do the same with git commands and branch 
   
   <header>
     
-      <h1 class="entry-title">Quick Tip: Autocomplete Git Commands and Branch Names in Bash</h1>
+      <h1 class="entry-title">A Tiny Benchmarking Utility</h1>
     
     
       <p class="meta">
@@ -97,7 +105,7 @@ Wouldn&#8217;t if be nice if you could do the same with git commands and branch 
   
 
 
-<time datetime="2012-09-09T21:44:00-04:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
+<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,38 +114,10 @@ Wouldn&#8217;t if be nice if you could do the same with git commands and branch 
   </header>
 
 
-<div class="entry-content"><p>In bash in Mac OS X, you can use [TAB] to autocomplete file paths.
-Wouldn&#8217;t if be nice if you could do the same with git commands and branch names?</p>
+<div class="entry-content"><p>While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+Here it is:</p>
 
-<p>You can.
-Here&#8217;s how.</p>
-
-<!-- more -->
-
-
-<p>First get the <code>git-completion.bash</code> script (view it <a href="https://github.com/git/git/blob/master/contrib/completion/git-completion.bash">here</a>) and put it in your home directory:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, add the following lines to your <code>.bash_profile</code>.
-This tells bash to execute the git autocomplete script if it exists.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if [ -f ~/.git-completion.bash ]; then
-</span><span class='line'>  . ~/.git-completion.bash
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now open a new shell, <code>cd</code> into a git repo, and start typing a git command.
-You should find that [TAB] now autocompletes git commands and git branch names.</p>
-
-<p>For example, if you type <code>git</code> then add a space and hit [TAB], you&#8217;ll get a readout like this, which lists all available git commands:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -152,39 +132,46 @@ You should find that [TAB] now autocompletes git commands and git branch names.<
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>add                 filter-branch       reflog 
-</span><span class='line'>am                  format-patch        relink 
-</span><span class='line'>annotate            fsck                remote 
-</span><span class='line'>apply               gc                  repack 
-</span><span class='line'>archive             get-tar-commit-id   replace 
-</span><span class='line'>bisect              grep                request-pull 
-</span><span class='line'>blame               gui                 reset 
-</span><span class='line'>branch              help                revert 
-</span><span class='line'>bundle              imap-send           rm 
-</span><span class='line'>checkout            init                send-email 
-</span><span class='line'>cherry              instaweb            shortlog 
-</span><span class='line'>cherry-pick         log                 show 
-</span><span class='line'>citool              merge               show-branch 
-</span><span class='line'>clean               mergetool           stage 
-</span><span class='line'>clone               mv                  stash 
-</span><span class='line'>commit              name-rev            status 
-</span><span class='line'>config              notes               submodule 
-</span><span class='line'>describe            p4                  svn 
-</span><span class='line'>diff                pull                tag 
-</span><span class='line'>difftool            push                whatchanged 
-</span><span class='line'>fetch               rebase </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>      <span class="k">yield</span>
+</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now to learn what some of these more exotic git commands do!
-What&#8217;s your favorite git command?</p>
 
-<p>(I learned this way of installing <code>git-completion.bash</code> <a href="http://apple.stackexchange.com/questions/55875/how-can-i-get-git-to-autocomplete-e-g-branches-at-the-command-line/55886#55886">here</a>.)</p>
+
+<!-- more -->
+
+
+<p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
+Usage examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt; require <span class="s1">&#39;tiny_timer&#39;</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
+</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">{</span> <span class="o">(</span>0..100000<span class="o">)</span>.map<span class="o">{</span>rand<span class="o">(</span>10<span class="o">)}</span>.sort <span class="o">}</span>
+</span><span class='line'><span class="o">=</span>&gt; 0.0670641
+</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">(</span>100<span class="o">){</span> 2**1000000 <span class="o">}</span>
+</span><span class='line'><span class="o">=</span>&gt; 0.00841815
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -207,12 +194,12 @@ What&#8217;s your favorite git command?</p>
   
 
 
-<time datetime="2012-09-09T21:44:00-04:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
+<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/quicktip/'>QuickTip</a>, <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/git/'>git</a>
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -221,7 +208,7 @@ What&#8217;s your favorite git command?</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/autocomplete-git/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/autocomplete-git/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/tiny-benchmarking/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/tiny-benchmarking/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -234,10 +221,8 @@ What&#8217;s your favorite git command?</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/map-and-next/" title="Previous Post: What does Ruby's 'next' keyword return?">&laquo; What does Ruby's 'next' keyword return?</a>
+        <a class="basic-alignment left" href="/blog/embedded-rake-tasks/" title="Previous Post: Invoke a Rake Task from Another Task">&laquo; Invoke a Rake Task from Another Task</a>
       
-      
-        <a class="basic-alignment right" href="/blog/embedded-rake-tasks/" title="Next Post: Invoke a Rake Task from Another Task">Invoke a Rake Task from Another Task &raquo;</a>
       
     </p>
   </footer>
@@ -311,8 +296,8 @@ What&#8217;s your favorite git command?</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/autocomplete-git/';
-        var disqus_url = 'http://code-worrier.com/blog/autocomplete-git/';
+        var disqus_identifier = 'http://code-worrier.com/blog/tiny-benchmarking/';
+        var disqus_url = 'http://code-worrier.com/blog/tiny-benchmarking/';
         var disqus_script = 'embed.js';
       
     (function () {

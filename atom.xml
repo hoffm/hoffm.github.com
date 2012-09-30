@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-29T11:26:16-04:00</updated>
+  <updated>2012-09-30T15:24:23-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A tiny benchmarking utility]]></title>
+    <link href="http://code-worrier.com/blog/tiny-benchmarking/"/>
+    <updated>2012-09-30T14:54:00-04:00</updated>
+    <id>http://code-worrier.com/blog/tiny-benchmarking</id>
+    <content type="html"><![CDATA[<p>While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+Here it is:</p>
+
+<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>      <span class="k">yield</span>
+</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
+Usage examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt; require <span class="s1">&#39;tiny_timer&#39;</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
+</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">{</span> <span class="o">(</span>0..100000<span class="o">)</span>.map<span class="o">{</span>rand<span class="o">(</span>10<span class="o">)}</span>.sort <span class="o">}</span>
+</span><span class='line'><span class="o">=</span>&gt; 0.0670641
+</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">(</span>100<span class="o">){</span> 2**1000000 <span class="o">}</span>
+</span><span class='line'><span class="o">=</span>&gt; 0.00841815
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Invoke a Rake Task from Another Task]]></title>

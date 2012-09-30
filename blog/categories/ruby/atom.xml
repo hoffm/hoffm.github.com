@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-29T11:26:16-04:00</updated>
+  <updated>2012-09-30T15:24:23-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A tiny benchmarking utility]]></title>
+    <link href="http://code-worrier.com/blog/tiny-benchmarking/"/>
+    <updated>2012-09-30T14:54:00-04:00</updated>
+    <id>http://code-worrier.com/blog/tiny-benchmarking</id>
+    <content type="html"><![CDATA[<p>While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+Here it is:</p>
+
+<p>```ruby tiny_timer.rb
+module TinyTimer
+  def self.benchmark(samples=10)</p>
+
+<pre><code>times = []
+
+samples.times do
+  start = Time.now
+  yield
+  times &lt;&lt; (Time.now - start)
+end
+
+times.sum / samples.to_f
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<!-- more -->
+
+
+<p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
+Usage examples:</p>
+
+<p>```bash</p>
+
+<blockquote><blockquote><p>require 'tiny_timer'
+=> ["TinyTimer"]
+TinyTimer.benchmark{ (0..100000).map{rand(10)}.sort }
+=> 0.0670641
+TinyTimer.benchmark(100){ 2**1000000 }
+=> 0.00841815
+```</p></blockquote></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Invoke a Rake Task from Another Task]]></title>
@@ -347,32 +392,6 @@ Ruby gives us the flexibility to leave the receiver to which we pass a method im
 if we don't explicitly identify a reciever, the message is passed to the current object.
 However, this flexibilty comes at the price of ambiguity;
 absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick Tip: Recursive Arrays in Ruby]]></title>
-    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
-    <updated>2012-08-16T22:30:00-04:00</updated>
-    <id>http://code-worrier.com/blog/recursive-arrays</id>
-    <content type="html"><![CDATA[<p>They're real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
-
-<p>```ruby</p>
-
-<blockquote><blockquote><p>a = []
-=> []
-a &lt;&lt; a
-=> [[...]]
-a.first.equal? a
-=> true
-```</p></blockquote></blockquote>
-
-<!-- more -->
-
-
-<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
 ]]></content>
   </entry>
   
