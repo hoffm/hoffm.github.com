@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-09-30T15:24:23-04:00</updated>
+  <updated>2012-10-01T22:27:31-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -18,7 +18,7 @@
     <link href="http://code-worrier.com/blog/tiny-benchmarking/"/>
     <updated>2012-09-30T14:54:00-04:00</updated>
     <id>http://code-worrier.com/blog/tiny-benchmarking</id>
-    <content type="html"><![CDATA[<p>While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+    <content type="html"><![CDATA[<p>While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
 Here it is:</p>
 
 <figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
