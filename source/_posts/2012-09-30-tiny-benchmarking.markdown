@@ -6,7 +6,7 @@ comments: true
 categories: Ruby
 ---
 
-While working on a longer (forthcoming) post, I wrote a little benchmakring utility that I want to share.
+While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
 Here it is:
 
 ```ruby tiny_timer.rb
