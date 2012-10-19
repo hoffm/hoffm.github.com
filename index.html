@@ -125,14 +125,12 @@ For instance, here&#8217;s a mailer that we use to notify folks when someone ask
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-<span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HotlineMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s2">&quot;notifications@mywebapp.com&quot;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">notify_urgent_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
 </span><span class='line'>    <span class="vi">@question</span> <span class="o">=</span> <span class="n">question</span>
-</span><span class='line'>    <span class="n">sendgrid_category</span> <span class="s2">&quot;Hotline - Urgent Question&quot;</span>
 </span><span class='line'>    <span class="nb">send</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;urgent@mywebapp.com&quot;</span><span class="p">,</span>
 </span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Urgent: </span><span class="si">#{</span><span class="n">question</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span class='line'>  <span class="k">end</span>
