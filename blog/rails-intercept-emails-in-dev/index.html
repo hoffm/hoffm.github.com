@@ -5,20 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A tiny benchmarking utility - Code Worrier</title>
+  <title>How do you prevent ActionMailer from spamming people in development? - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is: tiny_timer.rb1
-2
-3
-4
-5
-6
-7
-8
-9 &hellip;">
+  <meta name="description" content="I&#8217;ve been working on a Rails app that contains lots of mailers with hard-coded recipients.
+For instance, here&#8217;s a mailer that we use to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +19,7 @@ Here it is: tiny_timer.rb1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/tiny-benchmarking/">
+  <link rel="canonical" href="http://code-worrier.com/blog/rails-intercept-emails-in-dev/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -89,7 +81,7 @@ Here it is: tiny_timer.rb1
   
   <header>
     
-      <h1 class="entry-title">A Tiny Benchmarking Utility</h1>
+      <h1 class="entry-title">How Do You Prevent ActionMailer From Spamming People in Development?</h1>
     
     
       <p class="meta">
@@ -105,7 +97,7 @@ Here it is: tiny_timer.rb1
   
 
 
-<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2012-10-18T19:09:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -114,10 +106,10 @@ Here it is: tiny_timer.rb1
   </header>
 
 
-<div class="entry-content"><p>While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is:</p>
+<div class="entry-content"><p>I&#8217;ve been working on a Rails app that contains lots of mailers with hard-coded recipients.
+For instance, here&#8217;s a mailer that we use to notify folks when someone asks an urgent question on our hotline:</p>
 
-<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>hotline_mailer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -131,47 +123,103 @@ Here it is:</p>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HotlineMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s2">&quot;notifications@mywebapp.com&quot;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>      <span class="k">yield</span>
-</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
-</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">notify_urgent_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@question</span> <span class="o">=</span> <span class="n">question</span>
+</span><span class='line'>    <span class="n">sendgrid_category</span> <span class="s2">&quot;Hotline - Urgent Question&quot;</span>
+</span><span class='line'>    <span class="nb">send</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;urgent@mywebapp.com&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Urgent: </span><span class="si">#{</span><span class="n">question</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Other mailer methods...</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The email address &#8220;urgent@mywebapp.com&#8221; generates emails to many people.
+We handle membership in Google apps.</p>
+
+<p>Left to its own devices, this mailer will trigger an email to that list of people every time you hit the controller action that calls for it to be delivered.</p>
+
+<p>That&#8217;s bad news if you&#8217;re just testing out the action in your development environment.
+You have a group of people who are getting annoying emails for no reason, and you may not even be getting the emails yourself!</p>
+
+<!-- more -->
+
+
+<p>We might consider using a constant in place of the email address, and initializing this constant differently in different environments.
+However, this approach has two shortcomings:</p>
+
+<ol>
+<li>If we have more than one person working on the project, it&#8217;s hard to choose which email address to use as the default for development.</li>
+<li>We&#8217;ll all have to remember to make a new constant every time we have a new email address that needs to be masked.</li>
+</ol>
+
+
+<p>Luckily, ActionMailer makes a better solution possible. Here&#8217;s what you need to do:</p>
+
+<figure class='code'><figcaption><span>lib/development_mail_interceptor.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">DevelopmentMailInterceptor</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">delivering_email</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">message</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">defined?</span><span class="p">(</span><span class="no">PERSONAL_EMAIL</span><span class="p">)</span> <span class="p">?</span> <span class="no">PERSONAL_EMAIL</span> <span class="p">:</span> <span class="s2">&quot;default@mywebapp.com&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<!-- more -->
-
-
-<p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
-Usage examples:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>config/initializers/mailer_config.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt; require <span class="s1">&#39;tiny_timer&#39;</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">{</span> <span class="o">(</span>0..100000<span class="o">)</span>.map<span class="o">{</span>rand<span class="o">(</span>10<span class="o">)}</span>.sort <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.0670641
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">(</span>100<span class="o">){</span> 2**1000000 <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.00841815
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;development_mail_interceptor&#39;</span>
+</span><span class='line'><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">register_interceptor</span><span class="p">(</span><span class="no">DevelopmentMailInterceptor</span><span class="p">)</span> <span class="k">if</span>  <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+
+
+<figure class='code'><figcaption><span>config/initializers/personal_email.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">PERSONAL_EMAIL</span> <span class="o">=</span> <span class="s2">&quot;personal@mywebapp.com&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lastly, you want to git ignore <code>config/initializers/personal_email.rb</code>, and tell your collaborators to create their own local version of the file.
+(You want to git ignore it so that it can be customized per dev box.)</p>
+
+<p>What does this all do?
+When you call <code>#deliver</code> on an message, if the environment is development, the <code>to</code> option on the mailer is overridden with your personal address.
+(In this example, it&#8217;s &#8220;personal@mywebapp.com&#8221;).
+That&#8217;s it!
+We set up the default in the interceptor in case one of our collaborators doesn&#8217;t get the message about creating <code>personal_email.rb</code>.
+In that case, that person&#8217;s dev mailer emails will be sent to the default you set in the interceptor class.
+(In this example it&#8217;s &#8220;default@mywebapp.com&#8221;)</p>
+
+<p>When I first struck upon this solution, I was worried that the interceptor would prevent me from seeing who would actually receive a given email if the code were running in production.
+I needn&#8217;t have worried.
+The interceptor only affects the behavior of the <code>#deliver</code> method; the message object remains intact.
+So, if you call</p>
+
+<blockquote><p><code>HotlineMailer.notify_urgent_question(question)</code></p></blockquote>
+
+<p>you&#8217;ll find that object returned has the attribute <code>&lt;To: urgent@mywebapp.com&gt;</code>.
+That&#8217;s the address this email would go to if the interceptor did not interfere.
+However, if you call</p>
+
+<blockquote><p><code>HotlineMailer.notify_urgent_question(question).deliver</code>,</p></blockquote>
+
+<p>the object returned has the attribute <code>&lt;To: personal@mywebapp.com&gt;</code> and sends the email to that address.</p>
 </div>
 
 
@@ -194,12 +242,12 @@ Usage examples:</p>
   
 
 
-<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2012-10-18T19:09:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/actionmailer/'>ActionMailer</a>, <a class='category' href='/blog/categories/rails-/'>Rails,</a>
   
 </span>
 
@@ -208,7 +256,7 @@ Usage examples:</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/tiny-benchmarking/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/tiny-benchmarking/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/rails-intercept-emails-in-dev/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/rails-intercept-emails-in-dev/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -221,10 +269,8 @@ Usage examples:</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/embedded-rake-tasks/" title="Previous Post: Invoke a Rake Task from Another Task">&laquo; Invoke a Rake Task from Another Task</a>
+        <a class="basic-alignment left" href="/blog/tiny-benchmarking/" title="Previous Post: A tiny benchmarking utility">&laquo; A tiny benchmarking utility</a>
       
-      
-        <a class="basic-alignment right" href="/blog/rails-intercept-emails-in-dev/" title="Next Post: How do you prevent ActionMailer from spamming people in development?">How do you prevent ActionMailer from spamming people in development? &raquo;</a>
       
     </p>
   </footer>
@@ -298,8 +344,8 @@ Usage examples:</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/tiny-benchmarking/';
-        var disqus_url = 'http://code-worrier.com/blog/tiny-benchmarking/';
+        var disqus_identifier = 'http://code-worrier.com/blog/rails-intercept-emails-in-dev/';
+        var disqus_url = 'http://code-worrier.com/blog/rails-intercept-emails-in-dev/';
         var disqus_script = 'embed.js';
       
     (function () {

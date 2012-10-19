@@ -9,16 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is: tiny_timer.rb1
-2
-3
-4
-5
-6
-7
-8
-9 &hellip;">
+  <meta name="description" content="I&#8217;ve been working on a Rails app that contains lots of mailers with hard-coded recipients.
+For instance, here&#8217;s a mailer that we use to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +78,89 @@ Here it is: tiny_timer.rb1
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/rails-intercept-emails-in-dev/">How Do You Prevent ActionMailer From Spamming People in Development?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-18T19:09:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/rails-intercept-emails-in-dev/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been working on a Rails app that contains lots of mailers with hard-coded recipients.
+For instance, here&#8217;s a mailer that we use to notify folks when someone asks an urgent question on our hotline:</p>
+
+<figure class='code'><figcaption><span>hotline_mailer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HotlineMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s2">&quot;notifications@mywebapp.com&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">notify_urgent_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@question</span> <span class="o">=</span> <span class="n">question</span>
+</span><span class='line'>    <span class="n">sendgrid_category</span> <span class="s2">&quot;Hotline - Urgent Question&quot;</span>
+</span><span class='line'>    <span class="nb">send</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;urgent@mywebapp.com&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Urgent: </span><span class="si">#{</span><span class="n">question</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Other mailer methods...</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The email address &#8220;urgent@mywebapp.com&#8221; generates emails to many people.
+We handle membership in Google apps.</p>
+
+<p>Left to its own devices, this mailer will trigger an email to that list of people every time you hit the controller action that calls for it to be delivered.</p>
+
+<p>That&#8217;s bad news if you&#8217;re just testing out the action in your development environment.
+You have a group of people who are getting annoying emails for no reason, and you may not even be getting the emails yourself!</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/rails-intercept-emails-in-dev/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -621,55 +696,6 @@ Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hot
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/passing-symbols/">Passing Symbols, a Kata Lesson</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-12T22:02:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/passing-symbols/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In <a href="http://code-worrier.com/blog/kata/">my post</a> about the <a href="https://github.com/wbailey/kata">kata gem</a>, I promised to share something I learned from the <a href="https://github.com/wbailey/code_katas/blob/master/calculator.rb">calculator kata</a>.
-Here goes.</p>
-
-<p>The calculator kata asks you to construct a <code>Calculator</code> class the instances of which are initialized with comma-delimited strings of integers.
-Next you are asked, one by one, to create a series of instance methods—<code>#sum</code>, <code>#prod</code>, <code>#div</code>, <code>#diff</code>—for the class that perform arithmetic operations on the stored integers.</p>
-
-<p>Starting with <code>#sum</code> only, I wrote the class, obviously enough, like this:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/passing-symbols/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -697,6 +723,10 @@ Next you are asked, one by one, to create a series of instance methods—<code>#
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/rails-intercept-emails-in-dev/">How do you prevent ActionMailer from spamming people in development?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/tiny-benchmarking/">A tiny benchmarking utility</a>
       </li>
     
@@ -710,10 +740,6 @@ Next you are asked, one by one, to create a series of instance methods—<code>#
     
       <li class="post">
         <a href="/blog/map-and-next/">What does Ruby&#8217;s &#8216;next&#8217; keyword return?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/more-legible-output-with-y/">Quick Tip: More Legible Output with &#8216;Kernel#y&#8217;</a>
       </li>
     
   </ul>

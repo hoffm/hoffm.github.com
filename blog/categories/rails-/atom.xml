@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails, | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/rails-/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2012-10-18T20:04:04-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How do you prevent ActionMailer from spamming people in development?]]></title>
+    <link href="http://code-worrier.com/blog/rails-intercept-emails-in-dev/"/>
+    <updated>2012-10-18T19:09:00-04:00</updated>
+    <id>http://code-worrier.com/blog/rails-intercept-emails-in-dev</id>
+    <content type="html"><![CDATA[<p>I've been working on a Rails app that contains lots of mailers with hard-coded recipients.
+For instance, here's a mailer that we use to notify folks when someone asks an urgent question on our hotline:</p>
+
+<p>```ruby hotline_mailer.rb
+class HotlineMailer &lt; ActionMailer::Base</p>
+
+<p>  default :from => "notifications@mywebapp.com"</p>
+
+<p>  def notify_urgent_question(question)</p>
+
+<pre><code>@question = question
+sendgrid_category "Hotline - Urgent Question"
+send( :to =&gt; "urgent@mywebapp.com", 
+      :subject =&gt; "Urgent: #{question.title}")
+</code></pre>
+
+<p>  end</p>
+
+<p>  # Other mailer methods...</p>
+
+<p>end
+```</p>
+
+<p>The email address "urgent@mywebapp.com" generates emails to many people.
+We handle membership in Google apps.</p>
+
+<p>Left to its own devices, this mailer will trigger an email to that list of people every time you hit the controller action that calls for it to be delivered.</p>
+
+<p>That's bad news if you're just testing out the action in your development environment.
+You have a group of people who are getting annoying emails for no reason, and you may not even be getting the emails yourself!</p>
+
+<!-- more -->
+
+
+<p>We might consider using a constant in place of the email address, and initializing this constant differently in different environments.
+However, this approach has two shortcomings:</p>
+
+<ol>
+<li>If we have more than one person working on the project, it's hard to choose which email address to use as the default for development.</li>
+<li>We'll all have to remember to make a new constant every time we have a new email address that needs to be masked.</li>
+</ol>
+
+
+<p>Luckily, ActionMailer makes a better solution possible. Here's what you need to do:</p>
+
+<p>```ruby lib/development_mail_interceptor.rb
+class DevelopmentMailInterceptor</p>
+
+<p>  def self.delivering_email(message)</p>
+
+<pre><code>message.to = defined?(PERSONAL_EMAIL) ? PERSONAL_EMAIL : "default@mywebapp.com"
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p><code>ruby config/initializers/mailer_config.rb
+require 'development_mail_interceptor'
+ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if  Rails.env.development?
+</code></p>
+
+<p><code>ruby config/initializers/personal_email.rb
+PERSONAL_EMAIL = "personal@mywebapp.com"
+</code></p>
+
+<p>Lastly, you want to git ignore <code>config/initializers/personal_email.rb</code>, and tell your collaborators to create their own local version of the file.
+(You want to git ignore it so that it can be customized per dev box.)</p>
+
+<p>What does this all do?
+When you call <code>#deliver</code> on an message, if the environment is development, the <code>to</code> option on the mailer is overridden with your personal address.
+(In this example, it's "personal@mywebapp.com").
+That's it!
+We set up the default in the interceptor in case one of our collaborators doesn't get the message about creating <code>personal_email.rb</code>.
+In that case, that person's dev mailer emails will be sent to the default you set in the interceptor class.
+(In this example it's "default@mywebapp.com")</p>
+
+<p>When I first struck upon this solution, I was worried that the interceptor would prevent me from seeing who would actually receive a given email if the code were running in production.
+I needn't have worried.
+The interceptor only affects the behavior of the <code>#deliver</code> method; the message object remains intact.
+So, if you call</p>
+
+<blockquote><p><code>HotlineMailer.notify_urgent_question(question)</code></p></blockquote>
+
+<p>you'll find that object returned has the attribute <code>&lt;To: urgent@mywebapp.com&gt;</code>.
+That's the address this email would go to if the interceptor did not interfere.
+However, if you call</p>
+
+<blockquote><p><code>HotlineMailer.notify_urgent_question(question).deliver</code>,</p></blockquote>
+
+<p>the object returned has the attribute <code>&lt;To: personal@mywebapp.com&gt;</code> and sends the email to that address.</p>
+]]></content>
+  </entry>
+  
+</feed>
