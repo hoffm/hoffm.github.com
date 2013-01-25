@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-01-25T10:12:46-05:00</updated>
+  <updated>2013-01-25T11:26:19-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -54,12 +54,14 @@ If you want to get all fancy, you can make it a pretty color.
 My declaration looks like this:</p>
 
 <p><code>bash
-PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]\[\033[33;3m\]\w\[\033[m\]\$(__git_ps1)\$ "
+PS1="\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u\[$YELLOW\]\[$YELLOW\]\w\[\033[m\]\[$MAGENTA\]\$(__git_ps1)\[$WHITE\]\$ "
 </code></p>
+
+<p>(See <a href="https://wiki.archlinux.org/index.php/Color_Bash_Prompt">here</a> for color definitions.)</p>
 
 <p>This declaration results in a prompt looks like this when I'm in the directory <code>~/src/food52</code> and on the branch <code>develop</code>:</p>
 
-<p><img src="http://f.cl.ly/items/0V2V0N0P2I0F2O101x18/Screen%20Shot%202013-01-24%20at%2010.17.52%20PM.png" alt="" /></p>
+<p><img src="http://f.cl.ly/items/0b3e1Q2R1I3b2T2a1q03/Screen%20Shot%202013-01-25%20at%2010.31.45%20AM.png" alt="" /></p>
 
 <p>That's it. Never git lost again!</p>
 ]]></content>

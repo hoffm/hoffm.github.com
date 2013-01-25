@@ -143,13 +143,15 @@ If you want to get all fancy, you can make it a pretty color.
 My declaration looks like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]\[\033[33;3m\]\w\[\033[m\]\$(__git_ps1)\$ &quot;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u\[$YELLOW\]\[$YELLOW\]\w\[\033[m\]\[$MAGENTA\]\$(__git_ps1)\[$WHITE\]\$ &quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>(See <a href="https://wiki.archlinux.org/index.php/Color_Bash_Prompt">here</a> for color definitions.)</p>
+
 <p>This declaration results in a prompt looks like this when I&#8217;m in the directory <code>~/src/food52</code> and on the branch <code>develop</code>:</p>
 
-<p><img src="http://f.cl.ly/items/0V2V0N0P2I0F2O101x18/Screen%20Shot%202013-01-24%20at%2010.17.52%20PM.png" alt="" /></p>
+<p><img src="http://f.cl.ly/items/0b3e1Q2R1I3b2T2a1q03/Screen%20Shot%202013-01-25%20at%2010.31.45%20AM.png" alt="" /></p>
 
 <p>That&#8217;s it. Never git lost again!</p>
 </div>
