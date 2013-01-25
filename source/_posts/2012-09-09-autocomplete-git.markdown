@@ -16,14 +16,14 @@ Here's how.
 
 First get the `git-completion.bash` script (view it [here](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)) and put it in your home directory:
 
-```
+``` bash
 curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 ```
 
 Next, add the following lines to your `.bash_profile`.
 This tells bash to execute the git autocomplete script if it exists.
 
-```
+``` bash
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
@@ -34,7 +34,7 @@ You should find that [TAB] now autocompletes git commands and git branch names.
 
 For example, if you type `git` then add a space and hit [TAB], you'll get a readout like this, which lists all available git commands:
 
-```
+``` bash
 add                 filter-branch       reflog 
 am                  format-patch        relink 
 annotate            fsck                remote 

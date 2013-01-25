@@ -17,8 +17,14 @@ Here's how.
 
 <!-- more -->
 
-Download the `git-promt.sh` script [here](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
+Get the `git-promt.sh` script [here](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
 Put it somewhere like `~/.git-prompt.sh`.
+If you want to be all CLI about it, you could just run:
+
+``` bash
+curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+```
+
 Now modify your your bash profile (it's at `~/.bash-profile`, in case you're new to this stuff).
 Before the part of the file that declares what your prompt will look like (`PS1=[...]`), load in the script you just downloaded, like so:
 
