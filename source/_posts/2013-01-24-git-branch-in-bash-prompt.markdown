@@ -39,11 +39,13 @@ If you want to get all fancy, you can make it a pretty color.
 My declaration looks like this:
 
 ``` bash
-PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]\[\033[33;3m\]\w\[\033[m\]\$(__git_ps1)\$ "
+PS1="\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u\[$YELLOW\]\[$YELLOW\]\w\[\033[m\]\[$MAGENTA\]\$(__git_ps1)\[$WHITE\]\$ "
 ```
+
+(See [here](https://wiki.archlinux.org/index.php/Color_Bash_Prompt) for color definitions.)
 
 This declaration results in a prompt looks like this when I'm in the directory `~/src/food52` and on the branch `develop`:
 
-![](http://f.cl.ly/items/0V2V0N0P2I0F2O101x18/Screen%20Shot%202013-01-24%20at%2010.17.52%20PM.png)
+![](http://f.cl.ly/items/0b3e1Q2R1I3b2T2a1q03/Screen%20Shot%202013-01-25%20at%2010.31.45%20AM.png)
 
 That's it. Never git lost again!
