@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QuickTip | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/quicktip/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-10-18T23:47:26-04:00</updated>
+  <updated>2013-01-24T22:40:31-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Put Your Git Branch in Your Bash Prompt]]></title>
+    <link href="http://code-worrier.com/blog/git-branch-in-bash-prompt/"/>
+    <updated>2013-01-24T21:54:00-05:00</updated>
+    <id>http://code-worrier.com/blog/git-branch-in-bash-prompt</id>
+    <content type="html"><![CDATA[<p>Lots of folks were interested in getting <a href="http://code-worrier.com/blog/autocomplete-git/">git autocomplete</a> going in bash, so I thought I'd offer another useful git/bash tip.
+This one was suggested by <a href="http://twitter.com/S_2K">Stephan</a> in the comments of that earlier post.</p>
+
+<p>If you're using git properly and collaborating on a project, chances are you find yourself changing branches often.
+This can be quite disorienting.
+You deploy from the master branch, then get back to that bug fix you were about to work except for—whoops!—now you commited that fix to master and have to <a href="http://d22zlbw5ff7yk5.cloudfront.net/images/cm-23141-050624c7335479.gif">back away slowly</a>.
+Confusions like this one can easily be avoided by putting you branch name front-and-center: at the end of your bash prompt.
+Here's how.</p>
+
+<!-- more -->
+
+
+<p>Download the <code>git-promt.sh</code> script <a href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">here</a>.
+Put it somewhere like <code>~/.git-prompt.sh</code>.
+Now modify your your bash profile (it's at <code>~/.bash-profile</code>, in case you're new to this stuff).
+Before the part of the file that declares what your prompt will look like (<code>PS1=[...]</code>), load in the script you just downloaded, like so:</p>
+
+<p>``` bash</p>
+
+<h1>Load in the git branch prompt script.</h1>
+
+<p>source ~/.git-prompt.sh
+```</p>
+
+<p>Now add <code>\$(__git_ps1)</code> to your prompt declaration.
+You can put it wherever you like, but I think it's best suited for the very end, right before the final dollar sign (<code>\$</code>)
+If you want to get all fancy, you can make it a pretty color.
+My declaration looks like this:</p>
+
+<p><code>bash
+PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]\[\033[33;3m\]\w\[\033[m\]\$(__git_ps1)\$ "
+</code></p>
+
+<p>This declaration results in a prompt looks like this when I'm in the directory <code>~/src/food52</code> and on the branch <code>develop</code>:</p>
+
+<p><img src="http://f.cl.ly/items/0V2V0N0P2I0F2O101x18/Screen%20Shot%202013-01-24%20at%2010.17.52%20PM.png" alt="" /></p>
+
+<p>That's it. Never git lost again!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>
@@ -286,64 +332,6 @@ a.first.equal? a
 
 
 <p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick Tip: Helper methods in the Rails console?]]></title>
-    <link href="http://code-worrier.com/blog/helper-methods-in-console/"/>
-    <updated>2012-08-14T11:53:00-04:00</updated>
-    <id>http://code-worrier.com/blog/helper-methods-in-console</id>
-    <content type="html"><![CDATA[<p>So you want to mess around with a helper method in the console?
-It's super simple, as I just learned <a href="http://stackoverflow.com/questions/151030/how-do-i-call-controller-view-methods-from-the-console-in-rails">here</a> from <a href="http://caiochassot.com/">kch</a>.
-Basically, Rails gets a bit <a href="http://nextlol.com/images/37181-yo-dawg-hotdawg.jpg">yo dawg</a> and provides a helper for your helpers—called "helper".</p>
-
-<p>Here's an example. Suppose you have a helper module like the following:</p>
-
-<!-- more -->
-
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>cars_helper.rb  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">CarsHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;  def put_a_car_in(location)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="n">location</span> <span class="o">==</span> <span class="s2">&quot;your car&quot;</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;So you can drive while you drive!&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Fire up a Rails console, and to create the helper-helper, all you have to do in include the module:</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>include CarsHelper
-=> Object</p>
-
-<p>helper.put_a_car_in("your car")
-So you can drive while you drive!
-```</p></blockquote></blockquote>
-
-<p>I hope this has been helpful. (Sorry, can't help myself.)</p>
-
-<p>Ok, I'm done.</p>
 ]]></content>
   </entry>
   

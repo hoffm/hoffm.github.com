@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2012-10-18T23:47:26-04:00</updated>
+  <updated>2013-01-24T22:40:31-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Put Your Git Branch in Your Bash Prompt]]></title>
+    <link href="http://code-worrier.com/blog/git-branch-in-bash-prompt/"/>
+    <updated>2013-01-24T21:54:00-05:00</updated>
+    <id>http://code-worrier.com/blog/git-branch-in-bash-prompt</id>
+    <content type="html"><![CDATA[<p>Lots of folks were interested in getting <a href="http://code-worrier.com/blog/autocomplete-git/">git autocomplete</a> going in bash, so I thought I'd offer another useful git/bash tip.
+This one was suggested by <a href="http://twitter.com/S_2K">Stephan</a> in the comments of that earlier post.</p>
+
+<p>If you're using git properly and collaborating on a project, chances are you find yourself changing branches often.
+This can be quite disorienting.
+You deploy from the master branch, then get back to that bug fix you were about to work except for—whoops!—now you commited that fix to master and have to <a href="http://d22zlbw5ff7yk5.cloudfront.net/images/cm-23141-050624c7335479.gif">back away slowly</a>.
+Confusions like this one can easily be avoided by putting you branch name front-and-center: at the end of your bash prompt.
+Here's how.</p>
+
+<!-- more -->
+
+
+<p>Download the <code>git-promt.sh</code> script <a href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">here</a>.
+Put it somewhere like <code>~/.git-prompt.sh</code>.
+Now modify your your bash profile (it's at <code>~/.bash-profile</code>, in case you're new to this stuff).
+Before the part of the file that declares what your prompt will look like (<code>PS1=[...]</code>), load in the script you just downloaded, like so:</p>
+
+<p>``` bash</p>
+
+<h1>Load in the git branch prompt script.</h1>
+
+<p>source ~/.git-prompt.sh
+```</p>
+
+<p>Now add <code>\$(__git_ps1)</code> to your prompt declaration.
+You can put it wherever you like, but I think it's best suited for the very end, right before the final dollar sign (<code>\$</code>)
+If you want to get all fancy, you can make it a pretty color.
+My declaration looks like this:</p>
+
+<p><code>bash
+PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]\[\033[33;3m\]\w\[\033[m\]\$(__git_ps1)\$ "
+</code></p>
+
+<p>This declaration results in a prompt looks like this when I'm in the directory <code>~/src/food52</code> and on the branch <code>develop</code>:</p>
+
+<p><img src="http://f.cl.ly/items/0V2V0N0P2I0F2O101x18/Screen%20Shot%202013-01-24%20at%2010.17.52%20PM.png" alt="" /></p>
+
+<p>That's it. Never git lost again!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Autocomplete Git Commands and Branch Names in Bash]]></title>
