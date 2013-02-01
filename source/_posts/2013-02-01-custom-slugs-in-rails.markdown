@@ -19,8 +19,11 @@ As an example of the desired behavior, given that we want to use the attribute `
 
 > `"784-michael-hoffman"`
 
+(We leave the id in because we like it there!
+It makes debugging easier and it allows us to use Active Record `find` to look up objects from params.)
+
 Furthermore, we want our slugs to adapt gracefully to changing circumstances.
-So, if me loin changes, the slug should do...something smart.
+So, if my name changes, the slug should do...something smart.
 
 Getting a little more abstract, our requirements are as follows:
 
