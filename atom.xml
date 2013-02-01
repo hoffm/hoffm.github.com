@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-01T17:41:51-05:00</updated>
+  <updated>2013-02-01T17:46:34-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -209,12 +209,12 @@ So, for instance, adding this line to the User model:</p>
 The attributes from which these custom slugs are generated might change.
 Moreover, we might be installing this system in an application that already has a different slugging system.
 Both of these eventualities will lead us into to the uncomfortable situation I mentioned above: having multiple URLs that refer to the same content.
-To get around this problem, let&#8217;s treat the record&#8217;s current slug—the one we get when we call <code>#to_param</code> on it—as cannonical.
-Then, when we get a request for an out-of-date or incorrect slug, we can redirect the cannonical one.</p>
+To get around this problem, let&#8217;s treat the record&#8217;s current slug—the one we get when we call <code>#to_param</code> on it—as canonical.
+Then, when we get a request for an out-of-date or incorrect slug, we can redirect the canonical one.</p>
 
 <p>We&#8217;ll do this in basically the same way in every controller, so let&#8217;s add our new code to the application controller.
-The first method checks if the slug is connonical.
-The second redirects to the cannonical slug, as retrieved by Action Pack.</p>
+The first method checks if the slug is canonical.
+The second redirects to the canonical slug, as retrieved by Action Pack.</p>
 
 <figure class='code'><figcaption><span>app/controllers/application_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -248,7 +248,7 @@ The second redirects to the cannonical slug, as retrieved by Action Pack.</p>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">##</span>
-</span><span class='line'>  <span class="c1"># 301 redirect to cannonical slug.</span>
+</span><span class='line'>  <span class="c1"># 301 redirect to canonical slug.</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">redirect_to_good_slug</span><span class="p">(</span><span class="n">object</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">redirect_to</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">({</span>
 </span><span class='line'>                    <span class="ss">:controller</span> <span class="o">=&gt;</span> <span class="n">controller_name</span><span class="p">,</span>
@@ -261,7 +261,7 @@ The second redirects to the cannonical slug, as retrieved by Action Pack.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now we can call these methods from controller actions that we want to redirect non-cannonical slugs:</p>
+<p>Now we can call these methods from controller actions that we want to redirect non-canonical slugs:</p>
 
 <figure class='code'><figcaption><span>app/controllers/users_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
