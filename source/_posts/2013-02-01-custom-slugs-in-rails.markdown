@@ -151,12 +151,12 @@ We still have a lingering problem.
 The attributes from which these custom slugs are generated might change.
 Moreover, we might be installing this system in an application that already has a different slugging system.
 Both of these eventualities will lead us into to the uncomfortable situation I mentioned above: having multiple URLs that refer to the same content.
-To get around this problem, let's treat the record's current slug—the one we get when we call `#to_param` on it—as cannonical.
-Then, when we get a request for an out-of-date or incorrect slug, we can redirect the cannonical one.
+To get around this problem, let's treat the record's current slug—the one we get when we call `#to_param` on it—as canonical.
+Then, when we get a request for an out-of-date or incorrect slug, we can redirect the canonical one.
 
 We'll do this in basically the same way in every controller, so let's add our new code to the application controller.
-The first method checks if the slug is connonical.
-The second redirects to the cannonical slug, as retrieved by Action Pack.
+The first method checks if the slug is canonical.
+The second redirects to the canonical slug, as retrieved by Action Pack.
 
 ``` ruby app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
@@ -170,7 +170,7 @@ class ApplicationController < ActionController::Base
   end
 
   ##
-  # 301 redirect to cannonical slug.
+  # 301 redirect to canonical slug.
   def redirect_to_good_slug(object)
       redirect_to params.merge({
                     :controller => controller_name,
@@ -182,7 +182,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-Now we can call these methods from controller actions that we want to redirect non-cannonical slugs:
+Now we can call these methods from controller actions that we want to redirect non-canonical slugs:
 
 ``` ruby app/controllers/users_controller.rb
 class UsersController < ApplicationController
