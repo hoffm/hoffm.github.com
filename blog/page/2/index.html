@@ -9,9 +9,17 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="So you want to mess around with a helper method in the console?
-It&#8217;s super simple, as I just learned here from kch.
-Basically, Rails gets a bit &hellip;">
+  <meta name="description" content="They&#8217;re real! In Ruby, an array can contain itself: 1
+2
+3
+4
+5
+6
+&gt;&gt; a = []
+=&gt; []
+&gt;&gt; a &lt;&lt; a
+=&gt; [[...]]
+&gt;&gt; a.first. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +87,66 @@ Basically, Rails gets a bit &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/recursive-arrays/">Quick Tip: Recursive Arrays in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+        
+         | <a href="/blog/recursive-arrays/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>They&#8217;re real!</p>
+
+<p>In Ruby, an array can contain itself:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/recursive-arrays/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -251,6 +319,10 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
       </li>
     
@@ -264,10 +336,6 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
     
       <li class="post">
         <a href="/blog/embedded-rake-tasks/">Invoke a Rake Task from Another Task</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/autocomplete-git/">Quick Tip: Autocomplete Git Commands and Branch Names in Bash</a>
       </li>
     
   </ul>

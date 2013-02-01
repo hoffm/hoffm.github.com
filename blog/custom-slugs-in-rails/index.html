@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Custom Slugs in Rails without Gems - Code Worrier</title>
+  <meta name="author" content="Michael Hoffman">
+
+  
+  <meta name="description" content="There are some nice gems
+out there to help you create and manage human-readable slugs in Rails.
+However, our requirements at Food52 were simple &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://code-worrier.com/blog/custom-slugs-in-rails/">
+  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Code Worrier" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34049294-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Code Worrier</a></h1>
+  
+    <h2>Teaching myself to RTFM</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:code-worrier.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Custom Slugs in Rails Without Gems</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T16:48:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>There are some
+ <a href="https://github.com/norman/friendly_id" target="_blank">nice</a>
+ <a href="https://github.com/Sutto/slugged" target="_blank">gems</a>
+out there to help you create and manage human-readable slugs in Rails.
+However, our requirements at Food52 were simple enough—and different enough from the standard case—that I thought I&#8217;d have a go at building a slugging system from scratch.</p>
+
+<h2>The Problem</h2>
+
+<p>As an example of the desired behavior, given that we want to use the attribute <code>name</code> to generate slugs for users, and given that my user id is 784 and my name is &#8220;Michael Hoffman&#8221;, the slug for my user page should be:</p>
+
+<blockquote><p><code>"784-michael-hoffman"</code></p></blockquote>
+
+<p>Furthermore, we want our slugs to adapt gracefully to changing circumstances.
+So, if me loin changes, the slug should do&#8230;something smart.</p>
+
+<p>Getting a little more abstract, our requirements are as follows:</p>
+
+<!-- more -->
+
+
+<ol>
+<li>It should be possible to opt models in to custom slugging.</li>
+<li>Custom slugs should have the form: <code>[:id]-[parameterized-string]</code>.</li>
+<li>The string to be parameterized should be configurable per model.</li>
+<li>Relevant changes in records&#8217; attributes should be reflected in the slug.</li>
+<li>Records should have only one slug apiece, even as attribute values change.</li>
+</ol>
+
+
+<p>That&#8217;s the problem.
+In this post, I explain my solution.
+Even if your custom slug needs are slightly different, I hope the general strategy might be useful.</p>
+
+<h2>A Naive Attempt</h2>
+
+<p>Before we begin, we need some background on how Rails handles slugs by default.
+Active Record has an instance method <code>#to_param</code>, which Action Pack uses to create URLs.
+Be default, <code>#to_param</code> returns the id of the object, converted to a string.
+Thus, the default path to my user page (given standard resourceful routing) would be <code>"/users/784"</code>.
+However, it is possible to customize slugs by overriding this method on a model-by-model basis.</p>
+
+<p>So, the naive way to get the result we want would be to add a method like this one to the User model:</p>
+
+<figure class='code'><figcaption><span>app/model/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># [...]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_param</span>
+</span><span class='line'>    <span class="o">[</span><span class="nb">id</span><span class="p">,</span> <span class="nb">name</span><span class="o">.</span><span class="n">parameterize</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This approach meets the first four requirements, but there are two problems with it.
+First, we&#8217;re going to have to repeat this method (modulo the string to be parameterized) in all the models for which we want human-readable slugs.</p>
+
+<p>Second, it fails to meet the fifth requirement.
+Specifically, as users&#8217; names change, we will end up with many different addresses that point to the same content.
+For instance, if I change my name to, say, &#8220;Michael Danger Hoffman&#8221;, then Action-Pack-generated links to my profile will use <code>784-michael-danger-hoffman</code>, but anyone who&#8217;d previously copied the link, or bookmarked it, will be able to reach the same page by visiting the old slug.
+Not only is that confusing to humans, it&#8217;s also confusing to search bots.
+Confusing search bots makes them <a href="http://www.geekologie.com/2011/09/22/stupid-robots.gif" target="_blank">sad</a>!</p>
+
+<h2>A Better Solution</h2>
+
+<p>Let&#8217;s build on the naive solution to create a slugging system that can be applied succinctly across many models.
+(We&#8217;ll deal with the duplicate content problem in a another pass.)</p>
+
+<p>Given a model, there are only two things we need to know about it with regard to slugging:</p>
+
+<ul>
+<li>Should it use custom slugs?</li>
+<li>If so, what string should it use to create them?</li>
+</ul>
+
+
+<p>Ideally, we want a system that would allow us to opt models in to custom sluging, and simultaneously to specify how to calculate the strings those models should use to create slugs.</p>
+
+<p>We can do this by adding a class method to <code>ActiveRecord::Base</code> that redefines <code>#to_param</code>.</p>
+
+<figure class='code'><figcaption><span>lib/app_utilities.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ActiveRecordExtensions</span>
+</span><span class='line'>  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Override &#39;to_param&#39;.</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">custom_slugs_with</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">redefine_method</span><span class="p">(</span><span class="ss">:to_param</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>        <span class="o">[</span><span class="nb">id</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span><span class="o">.</span><span class="n">parameterize</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Include above methods in all models.</span>
+</span><span class='line'>  <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="no">ActiveRecordExtensions</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&#8217;re going to want to make <code>::custom_slugs_with</code> available in all models, so let&#8217;s require this file in an initializer:</p>
+
+<figure class='code'><figcaption><span>config/initializers/active_record_extensions.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;app_util&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (andmaking the module&#8217;s methods available to Active Record&#8217;s descendants).
+The <code>::custom_slugs_with</code> method takes as an argument the name of an instance method that specifies the string to be used in the slug.
+So, for instance, adding this line to the User model:</p>
+
+<figure class='code'><figcaption><span>app/model/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">custom_slugs_with</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># [...]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>will serve the same purpose as the <code>to_param</code> method in our original, naive solution.</p>
+
+<p>When we want to retrieve the object from its slug, as will often be the case in controller actions, we can use a simple Active Record find. E.g.</p>
+
+<figure class='code'><figcaption><span>app/controllers/users_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#[...]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Find is smart enough to parse strings like these and extract the correct id.</p>
+
+<p>Lastly, if we wanted to use an explicit method to generate the string (instead of relying on the attribute, <code>name</code>), we could define that method in the User model and pass its symbolized name into the <code>::custom_slugs_with</code>.</p>
+
+<h2>Keeping Slugs Consistent</h2>
+
+<p>We still have a lingering problem.
+The attributes from which these custom slugs are generated might change.
+Moreover, we might be installing this system in an application that already has a different slugging system.
+Both of these eventualities will lead us into to the uncomfortable situation I mentioned above: having multiple URLs that refer to the same content.
+To get around this problem, let&#8217;s treat the record&#8217;s current slug—the one we get when we call <code>#to_param</code> on it—as cannonical.
+Then, when we get a request for an out-of-date or incorrect slug, we can redirect the cannonical one.</p>
+
+<p>We&#8217;ll do this in basically the same way in every controller, so let&#8217;s add our new code to the application controller.
+The first method checks if the slug is connonical.
+The second redirects to the cannonical slug, as retrieved by Action Pack.</p>
+
+<figure class='code'><figcaption><span>app/controllers/application_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#[...]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">##</span>
+</span><span class='line'>  <span class="c1"># Check if the current slug is not the cannonical one.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">bad_slug?</span><span class="p">(</span><span class="n">object</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span> <span class="o">!=</span> <span class="n">object</span><span class="o">.</span><span class="n">to_param</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">##</span>
+</span><span class='line'>  <span class="c1"># 301 redirect to cannonical slug.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">redirect_to_good_slug</span><span class="p">(</span><span class="n">object</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">({</span>
+</span><span class='line'>                    <span class="ss">:controller</span> <span class="o">=&gt;</span> <span class="n">controller_name</span><span class="p">,</span>
+</span><span class='line'>                    <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                    <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="n">object</span><span class="o">.</span><span class="n">to_param</span><span class="p">,</span>
+</span><span class='line'>                    <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="ss">:moved_permanently</span>
+</span><span class='line'>                  <span class="p">})</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can call these methods from controller actions that we want to redirect non-cannonical slugs:</p>
+
+<figure class='code'><figcaption><span>app/controllers/users_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#[...]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to_good_slug</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span> <span class="ow">and</span> <span class="k">return</span> <span class="k">if</span> <span class="n">bad_slug?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gets the job done.
+Requests for <code>"/users/784-something-totally-weird"</code> will redirect to <code>"/users/784-Michael-Hoffman"</code> as desired.
+Changing my name will change the target of this redirection.</p>
+
+<p>I must admit, though, that I find this solution less than ideal.
+It requires repeating the redirect-if-bad-slug code in many actions.
+However, I have not yet found a better approach.
+If you have one, I&#8217;d love to hear it!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Hoffman</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T16:48:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/custom-slugs-in-rails/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/custom-slugs-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size=""></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/git-branch-in-bash-prompt/" title="Previous Post: Put Your Git Branch in Your Bash Prompt">&laquo; Put Your Git Branch in Your Bash Prompt</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Who writes this?</h1>
+  <ul id="recent_posts">
+      <li class="post">
+        <a href="http://michaelshoffman.com/">Michael Hoffman</a>
+        does.
+      </li>
+      <li class="post">
+        <a href="http://twitter.com/hoffm" class="twitter-follow-button" data-show-count="false">Follow @hoffm</a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/rails-intercept-emails-in-dev/">How do you prevent ActionMailer from spamming people in development?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tiny-benchmarking/">A tiny benchmarking utility</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/embedded-rake-tasks/">Invoke a Rake Task from Another Task</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Michael Hoffman -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'codeworrier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://code-worrier.com/blog/custom-slugs-in-rails/';
+        var disqus_url = 'http://code-worrier.com/blog/custom-slugs-in-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

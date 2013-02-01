@@ -53,15 +53,19 @@
         <lastmod>2013-01-25T11:19:15-05:00</lastmod>
     </url>
     <url>
+        <loc>http://code-worrier.com/blog/custom-slugs-in-rails/</loc>
+        <lastmod>2013-02-01T16:56:29-05:00</lastmod>
+    </url>
+    <url>
         <loc>http://code-worrier.com/about/</loc>
         <lastmod>2012-09-06T22:41:55-04:00</lastmod>
     </url>
     <url>
         <loc>http://code-worrier.com/blog/archives/</loc>
-        <lastmod>2013-01-25T11:19:15-05:00</lastmod>
+        <lastmod>2013-02-01T16:56:29-05:00</lastmod>
     </url>
     <url>
         <loc>http://code-worrier.com/</loc>
-        <lastmod>2013-01-25T11:19:15-05:00</lastmod>
+        <lastmod>2013-02-01T16:56:29-05:00</lastmod>
     </url>
 </urlset>

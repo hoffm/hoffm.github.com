@@ -9,8 +9,9 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Lots of folks were interested in getting git autocomplete going in bash, so I thought I&#8217;d offer another useful git/bash tip.
-This one was &hellip;">
+  <meta name="description" content="There are some nice gems
+out there to help you create and manage human-readable slugs in Rails.
+However, our requirements at Food52 were simple &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,64 @@ This one was &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails Without Gems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-01T16:48:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/custom-slugs-in-rails/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are some
+ <a href="https://github.com/norman/friendly_id" target="_blank">nice</a>
+ <a href="https://github.com/Sutto/slugged" target="_blank">gems</a>
+out there to help you create and manage human-readable slugs in Rails.
+However, our requirements at Food52 were simple enough—and different enough from the standard case—that I thought I&#8217;d have a go at building a slugging system from scratch.</p>
+
+<h2>The Problem</h2>
+
+<p>As an example of the desired behavior, given that we want to use the attribute <code>name</code> to generate slugs for users, and given that my user id is 784 and my name is &#8220;Michael Hoffman&#8221;, the slug for my user page should be:</p>
+
+<blockquote><p><code>"784-michael-hoffman"</code></p></blockquote>
+
+<p>Furthermore, we want our slugs to adapt gracefully to changing circumstances.
+So, if me loin changes, the slug should do&#8230;something smart.</p>
+
+<p>Getting a little more abstract, our requirements are as follows:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/custom-slugs-in-rails/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -637,66 +696,6 @@ Undefined instance variables, for example, evaluate to <code>nil</code>, whereas
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/recursive-arrays/">Quick Tip: Recursive Arrays in Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/recursive-arrays/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>They&#8217;re real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/recursive-arrays/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -724,6 +723,10 @@ Undefined instance variables, for example, evaluate to <code>nil</code>, whereas
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
       </li>
     
@@ -737,10 +740,6 @@ Undefined instance variables, for example, evaluate to <code>nil</code>, whereas
     
       <li class="post">
         <a href="/blog/embedded-rake-tasks/">Invoke a Rake Task from Another Task</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/autocomplete-git/">Quick Tip: Autocomplete Git Commands and Branch Names in Bash</a>
       </li>
     
   </ul>

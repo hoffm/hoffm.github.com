@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-01-25T11:26:19-05:00</updated>
+  <updated>2013-02-01T17:31:58-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,230 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Slugs in Rails without Gems]]></title>
+    <link href="http://code-worrier.com/blog/custom-slugs-in-rails/"/>
+    <updated>2013-02-01T16:48:00-05:00</updated>
+    <id>http://code-worrier.com/blog/custom-slugs-in-rails</id>
+    <content type="html"><![CDATA[<p>There are some
+ <a href="https://github.com/norman/friendly_id" target="_blank">nice</a>
+ <a href="https://github.com/Sutto/slugged" target="_blank">gems</a>
+out there to help you create and manage human-readable slugs in Rails.
+However, our requirements at Food52 were simple enough—and different enough from the standard case—that I thought I'd have a go at building a slugging system from scratch.</p>
+
+<h2>The Problem</h2>
+
+<p>As an example of the desired behavior, given that we want to use the attribute <code>name</code> to generate slugs for users, and given that my user id is 784 and my name is "Michael Hoffman", the slug for my user page should be:</p>
+
+<blockquote><p><code>"784-michael-hoffman"</code></p></blockquote>
+
+<p>Furthermore, we want our slugs to adapt gracefully to changing circumstances.
+So, if me loin changes, the slug should do...something smart.</p>
+
+<p>Getting a little more abstract, our requirements are as follows:</p>
+
+<!-- more -->
+
+
+<ol>
+<li>It should be possible to opt models in to custom slugging.</li>
+<li>Custom slugs should have the form: <code>[:id]-[parameterized-string]</code>.</li>
+<li>The string to be parameterized should be configurable per model.</li>
+<li>Relevant changes in records' attributes should be reflected in the slug.</li>
+<li>Records should have only one slug apiece, even as attribute values change.</li>
+</ol>
+
+
+<p>That's the problem.
+In this post, I explain my solution.
+Even if your custom slug needs are slightly different, I hope the general strategy might be useful.</p>
+
+<h2>A Naive Attempt</h2>
+
+<p>Before we begin, we need some background on how Rails handles slugs by default.
+Active Record has an instance method <code>#to_param</code>, which Action Pack uses to create URLs.
+Be default, <code>#to_param</code> returns the id of the object, converted to a string.
+Thus, the default path to my user page (given standard resourceful routing) would be <code>"/users/784"</code>.
+However, it is possible to customize slugs by overriding this method on a model-by-model basis.</p>
+
+<p>So, the naive way to get the result we want would be to add a method like this one to the User model:</p>
+
+<p>``` ruby app/model/user.rb
+class User &lt; ActiveRecord::Base</p>
+
+<p>  # [...]</p>
+
+<p>  def to_param</p>
+
+<pre><code>[id, name.parameterize].join("-")
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>This approach meets the first four requirements, but there are two problems with it.
+First, we're going to have to repeat this method (modulo the string to be parameterized) in all the models for which we want human-readable slugs.</p>
+
+<p>Second, it fails to meet the fifth requirement.
+Specifically, as users' names change, we will end up with many different addresses that point to the same content.
+For instance, if I change my name to, say, "Michael Danger Hoffman", then Action-Pack-generated links to my profile will use <code>784-michael-danger-hoffman</code>, but anyone who'd previously copied the link, or bookmarked it, will be able to reach the same page by visiting the old slug.
+Not only is that confusing to humans, it's also confusing to search bots.
+Confusing search bots makes them <a href="http://www.geekologie.com/2011/09/22/stupid-robots.gif" target="_blank">sad</a>!</p>
+
+<h2>A Better Solution</h2>
+
+<p>Let's build on the naive solution to create a slugging system that can be applied succinctly across many models.
+(We'll deal with the duplicate content problem in a another pass.)</p>
+
+<p>Given a model, there are only two things we need to know about it with regard to slugging:</p>
+
+<ul>
+<li>Should it use custom slugs?</li>
+<li>If so, what string should it use to create them?</li>
+</ul>
+
+
+<p>Ideally, we want a system that would allow us to opt models in to custom sluging, and simultaneously to specify how to calculate the strings those models should use to create slugs.</p>
+
+<p>We can do this by adding a class method to <code>ActiveRecord::Base</code> that redefines <code>#to_param</code>.</p>
+
+<p>``` ruby lib/app_utilities.rb
+module ActiveRecordExtensions
+  extend ActiveSupport::Concern</p>
+
+<p>  module ClassMethods</p>
+
+<pre><code># Override 'to_param'.
+def custom_slugs_with(seed)
+  self.redefine_method(:to_param) do
+    [id, self.send(seed).parameterize].join("-")
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # Include above methods in all models.
+  ActiveRecord::Base.send(:include, ActiveRecordExtensions)</p>
+
+<p>end
+```</p>
+
+<p>We're going to want to make <code>::custom_slugs_with</code> available in all models, so let's require this file in an initializer:</p>
+
+<p><code>ruby config/initializers/active_record_extensions.rb
+require "app_util"
+</code></p>
+
+<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (andmaking the module's methods available to Active Record's descendants).
+The <code>::custom_slugs_with</code> method takes as an argument the name of an instance method that specifies the string to be used in the slug.
+So, for instance, adding this line to the User model:</p>
+
+<p>``` ruby app/model/user.rb
+class User &lt; ActiveRecord::Base
+  custom_slugs_with(:name)</p>
+
+<p>  # [...]
+end
+```</p>
+
+<p>will serve the same purpose as the <code>to_param</code> method in our original, naive solution.</p>
+
+<p>When we want to retrieve the object from its slug, as will often be the case in controller actions, we can use a simple Active Record find. E.g.</p>
+
+<p>``` ruby app/controllers/users_controller.rb
+class UsersController &lt; ApplicationController</p>
+
+<p>  #[...]</p>
+
+<p>  def show</p>
+
+<pre><code>@user = User.find(params[:id])
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>Find is smart enough to parse strings like these and extract the correct id.</p>
+
+<p>Lastly, if we wanted to use an explicit method to generate the string (instead of relying on the attribute, <code>name</code>), we could define that method in the User model and pass its symbolized name into the <code>::custom_slugs_with</code>.</p>
+
+<h2>Keeping Slugs Consistent</h2>
+
+<p>We still have a lingering problem.
+The attributes from which these custom slugs are generated might change.
+Moreover, we might be installing this system in an application that already has a different slugging system.
+Both of these eventualities will lead us into to the uncomfortable situation I mentioned above: having multiple URLs that refer to the same content.
+To get around this problem, let's treat the record's current slug—the one we get when we call <code>#to_param</code> on it—as cannonical.
+Then, when we get a request for an out-of-date or incorrect slug, we can redirect the cannonical one.</p>
+
+<p>We'll do this in basically the same way in every controller, so let's add our new code to the application controller.
+The first method checks if the slug is connonical.
+The second redirects to the cannonical slug, as retrieved by Action Pack.</p>
+
+<p>``` ruby app/controllers/application_controller.rb
+class ApplicationController &lt; ActionController::Base</p>
+
+<p>  #[...]</p>
+
+<p>  ##
+  # Check if the current slug is not the cannonical one.
+  def bad_slug?(object)</p>
+
+<pre><code>params[:id] != object.to_param
+</code></pre>
+
+<p>  end</p>
+
+<p>  ##
+  # 301 redirect to cannonical slug.
+  def redirect_to_good_slug(object)</p>
+
+<pre><code>  redirect_to params.merge({
+                :controller =&gt; controller_name,
+                :action =&gt; params[:action],
+                :id =&gt; object.to_param,
+                :status =&gt; :moved_permanently
+              })
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Now we can call these methods from controller actions that we want to redirect non-cannonical slugs:</p>
+
+<p>``` ruby app/controllers/users_controller.rb
+class UsersController &lt; ApplicationController</p>
+
+<p>  #[...]</p>
+
+<p>  def show</p>
+
+<pre><code>@user = User.find(params[:id])
+redirect_to_good_slug(@user) and return if bad_slug?(@user)
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>This gets the job done.
+Requests for <code>"/users/784-something-totally-weird"</code> will redirect to <code>"/users/784-Michael-Hoffman"</code> as desired.
+Changing my name will change the target of this redirection.</p>
+
+<p>I must admit, though, that I find this solution less than ideal.
+It requires repeating the redirect-if-bad-slug code in many actions.
+However, I have not yet found a better approach.
+If you have one, I'd love to hear it!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A tiny benchmarking utility]]></title>
@@ -323,75 +547,6 @@ If you're using 1.9.3 and you want to play around with <code>Kernel#y</code>, ru
 <p>And a question: I'd like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
 
 <p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[All your undefined vars are evaluate to nil.]]></title>
-    <link href="http://code-worrier.com/blog/all-your-vars/"/>
-    <updated>2012-08-27T18:14:00-04:00</updated>
-    <id>http://code-worrier.com/blog/all-your-vars</id>
-    <content type="html"><![CDATA[<p><em>(NB: I learned much of what I discuss here from this <a href="http://stackoverflow.com/a/4023224/882025">post</a>.)</em></p>
-
-<p>What does a brand new, never-before-mentioned variable evaluate to in Ruby?
-Perhaps it seems that the correct answer is: it depends what kind of variable.
-Undefined instance variables, for example, evaluate to <code>nil</code>, whereas undefined local variables can't be evaluated at all.</p>
-
-<!-- more -->
-
-
-<p>A little experimentation in irb seems to confirm this hypothesis.
-Uninitialize local variables raise a <code>NameError</code>:</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>local_variables
-=> []
-local_var
-NameError: undefined local variable or method <code>local_var' for main:Object
-```
-whereas instance variables evaluate to</code>nil`:</p></blockquote></blockquote>
-
-<p>```</p>
-
-<blockquote><blockquote><p>instance_variables
-=> []
-@instance_var
-=> nil
-```</p></blockquote></blockquote>
-
-<p>(Global variables behave the same way in this respect as instance varables.)</p>
-
-<p>So, again, it seems as if the correct answer to our question is, "It depends."
-But that's wrong.
-In fact, the question has a single, simple correct answer:
-<em>All types of uninitialized variables evaluate to nil.</em></p>
-
-<p>Here's proof:</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>local_var = "something or other" if false
-=> nil
-local_var
-=> nil
-```</p></blockquote></blockquote>
-
-<p>The initialization of <code>local_var</code> is never evaluated, because the condition <code>false</code> is, of course, not met.
-Yet, it seems that the mere fact that the parser has parsed <code>local_var</code> suffices to avoid the <code>NameError</code> when evaluating the variable.
-Why?</p>
-
-<p>The answer is that the <code>NameError</code> was merely an error of ambiguity:
-In our first example, the parser could not decide whether <code>local_var</code> was a local variable, or the name of a method—shorthand for <code>self.local_var</code>.
-The error message we got didn't do a great job of explaining this, but it did hint at it with the phrase "variable or method".
-Once the parser has encountered <code>local_var</code> in an unambiguously variable-like context—namely, <code>local_var = "something or other"</code>— it has no problem evaluating the name as the name of a variable.
-And, as I've claimed, all uninitialized variable evaluate to <code>nil</code>.</p>
-
-<p>So, what appeared to be a difference between local varables and other types of variables is actually just a coincidence of Ruby syntax.
-Ruby gives us the flexibility to leave the receiver to which we pass a method implicit:
-if we don't explicitly identify a reciever, the message is passed to the current object.
-However, this flexibilty comes at the price of ambiguity;
-absent additional context, methods invoked on implcitly defined receivers look to the world (and, more importantly, the parser!) just like local variables.</p>
 ]]></content>
   </entry>
   
