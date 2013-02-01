@@ -122,8 +122,11 @@ However, our requirements at Food52 were simple enough—and different enough fr
 
 <blockquote><p><code>"784-michael-hoffman"</code></p></blockquote>
 
+<p>(We leave the id in because we like it there!
+It makes debugging easier and it allows us to use Active Record <code>find</code> to look up objects from params.)</p>
+
 <p>Furthermore, we want our slugs to adapt gracefully to changing circumstances.
-So, if me loin changes, the slug should do&#8230;something smart.</p>
+So, if my name changes, the slug should do&#8230;something smart.</p>
 
 <p>Getting a little more abstract, our requirements are as follows:</p>
 
