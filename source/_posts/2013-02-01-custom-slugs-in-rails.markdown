@@ -44,7 +44,10 @@ Even if your custom slug needs are slightly different, I hope the general strate
 
 Before we begin, we need some background on how Rails handles slugs by default.
 Active Record has an instance method `#to_param`, which Action Pack uses to create URLs.
-Be default, `#to_param` returns the id of the object, converted to a string.
+By default, `#to_param` returns the id of the object, converted to a string.
+(See the source,
+ <a href="http://apidock.com/rails/ActiveRecord/Integration/to_param" target="_blank">here</a>
+.)
 Thus, the default path to my user page (given standard resourceful routing) would be `"/users/784"`.
 However, it is possible to customize slugs by overriding this method on a model-by-model basis.
 
