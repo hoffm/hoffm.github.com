@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-01T17:46:34-05:00</updated>
+  <updated>2013-02-02T10:49:14-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -58,7 +58,10 @@ Even if your custom slug needs are slightly different, I hope the general strate
 
 <p>Before we begin, we need some background on how Rails handles slugs by default.
 Active Record has an instance method <code>#to_param</code>, which Action Pack uses to create URLs.
-Be default, <code>#to_param</code> returns the id of the object, converted to a string.
+By default, <code>#to_param</code> returns the id of the object, converted to a string.
+(See the source,
+ <a href="http://apidock.com/rails/ActiveRecord/Integration/to_param" target="_blank">here</a>
+.)
 Thus, the default path to my user page (given standard resourceful routing) would be <code>"/users/784"</code>.
 However, it is possible to customize slugs by overriding this method on a model-by-model basis.</p>
 
