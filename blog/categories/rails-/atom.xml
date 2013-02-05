@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails, | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/rails-/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-02T10:49:14-05:00</updated>
+  <updated>2013-02-04T21:06:19-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Try out Routes in the Rails Console]]></title>
+    <link href="http://code-worrier.com/blog/test-routes-in-rails-console/"/>
+    <updated>2013-02-04T20:23:00-05:00</updated>
+    <id>http://code-worrier.com/blog/test-routes-in-rails-console</id>
+    <content type="html"><![CDATA[<p>How do you quickly check what path a certain route helper maps to?</p>
+
+<p>One method I use a lot is to grep <code>rake routes</code>.
+So, let's say I'm looking for a route that has to do with comment approval.
+In that case, I might run <code>rake routes | grep approve</code>.
+And there's my answer:</p>
+
+<p><code>ruby
+approve_comment POST  /comments/:id/approve(.:format)  {:action=&gt;"approve", :controller=&gt;"comments"}
+</code></p>
+
+<p>There's one problem with this, though: It's
+  <a href="http://i.minus.com/iBKc6u9W2Zreb.gif" target="_blank">slooooow</a>.</p>
+
+<!-- more -->
+
+
+<p>It's slow because running <code>rake routes</code> loads up your whole Rails environment.
+If your workflow is anything like mine, though, chances are you've already have your environement loaded in another tab: the one where you have a Rails console running.
+So in cases where you have some idea what the name of the route is, testing it  out in the console can save you time.
+And, luckily, it couldn't be simpler.</p>
+
+<p>In the Rails console, the variable <code>app</code> holds a session object on which you can call path and url helpers as instance methods.
+So away we go:</p>
+
+<p>``` ruby</p>
+
+<blockquote><blockquote><p>app.approve_comment_path(Comment.last.id)
+=> "/comments/138138/approve"
+app.user_path(User.find_by_login("Michael Hoffman"))
+=> "/users/784-michael-hoffman"
+```</p></blockquote></blockquote>
+
+<p>That's all there is to it.</p>
+
+<p><em>(See <a href="code-worrier.com/blog/custom-slugs-in-rails/">this post</a> for my way of generating custom slugs like the one in that user path.)</em></p>
+
+<p><em>(Searching around a bit, I think I originally got this tip from <a href="http://37signals.com/svn/posts/3176-three-quick-rails-console-tips" target="_bank">this wonderful post</a>. Read it to learn about other useful things you can accomplish with <code>app</code>.)</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How do you prevent ActionMailer from spamming people in development?]]></title>

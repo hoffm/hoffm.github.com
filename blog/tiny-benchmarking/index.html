@@ -164,12 +164,12 @@ Usage examples:</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt; require <span class="s1">&#39;tiny_timer&#39;</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">{</span> <span class="o">(</span>0..100000<span class="o">)</span>.map<span class="o">{</span>rand<span class="o">(</span>10<span class="o">)}</span>.sort <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.0670641
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">(</span>100<span class="o">){</span> 2**1000000 <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.00841815
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">require</span> <span class="s1">&#39;tiny_timer&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">{</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span><span class="o">.</span><span class="n">sort</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">0670641</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="mi">100</span><span class="p">){</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1000000</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">00</span><span class="mi">841815</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
@@ -257,6 +257,10 @@ Usage examples:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/test-routes-in-rails-console/">Try out Routes in the Rails Console</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
       </li>
     
@@ -270,10 +274,6 @@ Usage examples:</p>
     
       <li class="post">
         <a href="/blog/tiny-benchmarking/">A tiny benchmarking utility</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/embedded-rake-tasks/">Invoke a Rake Task from Another Task</a>
       </li>
     
   </ul>

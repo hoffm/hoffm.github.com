@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-02T10:49:14-05:00</updated>
+  <updated>2013-02-04T21:06:19-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Try out Routes in the Rails Console]]></title>
+    <link href="http://code-worrier.com/blog/test-routes-in-rails-console/"/>
+    <updated>2013-02-04T20:23:00-05:00</updated>
+    <id>http://code-worrier.com/blog/test-routes-in-rails-console</id>
+    <content type="html"><![CDATA[<p>How do you quickly check what path a certain route helper maps to?</p>
+
+<p>One method I use a lot is to grep <code>rake routes</code>.
+So, let&#8217;s say I&#8217;m looking for a route that has to do with comment approval.
+In that case, I might run <code>rake routes | grep approve</code>.
+And there&#8217;s my answer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">approve_comment</span> <span class="no">POST</span>  <span class="sr">/comments/</span><span class="ss">:id</span><span class="o">/</span><span class="n">approve</span><span class="p">(</span><span class="o">.</span><span class="ss">:format</span><span class="p">)</span>  <span class="p">{</span><span class="ss">:action</span><span class="o">=&gt;</span><span class="s2">&quot;approve&quot;</span><span class="p">,</span> <span class="ss">:controller</span><span class="o">=&gt;</span><span class="s2">&quot;comments&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There&#8217;s one problem with this, though: It&#8217;s
+  <a href="http://i.minus.com/iBKc6u9W2Zreb.gif" target="_blank">slooooow</a>.</p>
+
+<!-- more -->
+
+
+<p>It&#8217;s slow because running <code>rake routes</code> loads up your whole Rails environment.
+If your workflow is anything like mine, though, chances are you&#8217;ve already have your environement loaded in another tab: the one where you have a Rails console running.
+So in cases where you have some idea what the name of the route is, testing it  out in the console can save you time.
+And, luckily, it couldn&#8217;t be simpler.</p>
+
+<p>In the Rails console, the variable <code>app</code> holds a session object on which you can call path and url helpers as instance methods.
+So away we go:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">approve_comment_path</span><span class="p">(</span><span class="no">Comment</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/comments/138138/approve&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">user_path</span><span class="p">(</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_login</span><span class="p">(</span><span class="s2">&quot;Michael Hoffman&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/users/784-michael-hoffman&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s all there is to it.</p>
+
+<p><em>(See <a href="code-worrier.com/blog/custom-slugs-in-rails/">this post</a> for my way of generating custom slugs like the one in that user path.)</em></p>
+
+<p><em>(Searching around a bit, I think I originally got this tip from <a href="http://37signals.com/svn/posts/3176-three-quick-rails-console-tips" target="_bank">this wonderful post</a>. Read it to learn about other useful things you can accomplish with <code>app</code>.)</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Custom Slugs in Rails without Gems]]></title>
@@ -535,12 +585,12 @@ Usage examples:</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;&gt; require <span class="s1">&#39;tiny_timer&#39;</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">{</span> <span class="o">(</span>0..100000<span class="o">)</span>.map<span class="o">{</span>rand<span class="o">(</span>10<span class="o">)}</span>.sort <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.0670641
-</span><span class='line'>&gt;&gt; TinyTimer.benchmark<span class="o">(</span>100<span class="o">){</span> 2**1000000 <span class="o">}</span>
-</span><span class='line'><span class="o">=</span>&gt; 0.00841815
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">require</span> <span class="s1">&#39;tiny_timer&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">{</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span><span class="o">.</span><span class="n">sort</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">0670641</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="mi">100</span><span class="p">){</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1000000</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">00</span><span class="mi">841815</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>

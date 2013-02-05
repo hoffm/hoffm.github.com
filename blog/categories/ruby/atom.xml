@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-02T10:49:14-05:00</updated>
+  <updated>2013-02-04T21:06:19-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -276,7 +276,7 @@ end
 <p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
 Usage examples:</p>
 
-<p>```bash</p>
+<p>```ruby</p>
 
 <blockquote><blockquote><p>require 'tiny_timer'
 => ["TinyTimer"]

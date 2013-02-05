@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: variables - Code Worrier</title>
+  <title>Try out Routes in the Rails Console - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Code Worrier blog posts:variables">
+  <meta name="description" content="How do you quickly check what path a certain route helper maps to? One method I use a lot is to grep rake routes.
+So, let&#8217;s say I&#8217;m &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.comblog/categories/variables/">
+  <link rel="canonical" href="http://code-worrier.com/blog/test-routes-in-rails-console/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,36 +77,138 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Variables</h1>
+    
+      <h1 class="entry-title">Try Out Routes in the Rails Console</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-04T20:23:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>How do you quickly check what path a certain route helper maps to?</p>
 
-  
-  <h2>2012</h2>
+<p>One method I use a lot is to grep <code>rake routes</code>.
+So, let&#8217;s say I&#8217;m looking for a route that has to do with comment approval.
+In that case, I might run <code>rake routes | grep approve</code>.
+And there&#8217;s my answer:</p>
 
-<article>
-  
-<h1><a href="/blog/all-your-vars/">All your undefined vars are evaluate to nil.</a></h1>
-<time datetime="2012-08-27T18:14:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/nil/'>nil</a>, <a class='category' href='/blog/categories/variables/'>variables</a></span>
-</footer>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">approve_comment</span> <span class="no">POST</span>  <span class="sr">/comments/</span><span class="ss">:id</span><span class="o">/</span><span class="n">approve</span><span class="p">(</span><span class="o">.</span><span class="ss">:format</span><span class="p">)</span>  <span class="p">{</span><span class="ss">:action</span><span class="o">=&gt;</span><span class="s2">&quot;approve&quot;</span><span class="p">,</span> <span class="ss">:controller</span><span class="o">=&gt;</span><span class="s2">&quot;comments&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>There&#8217;s one problem with this, though: It&#8217;s
+  <a href="http://i.minus.com/iBKc6u9W2Zreb.gif" target="_blank">slooooow</a>.</p>
 
+<!-- more -->
+
+
+<p>It&#8217;s slow because running <code>rake routes</code> loads up your whole Rails environment.
+If your workflow is anything like mine, though, chances are you&#8217;ve already have your environement loaded in another tab: the one where you have a Rails console running.
+So in cases where you have some idea what the name of the route is, testing it  out in the console can save you time.
+And, luckily, it couldn&#8217;t be simpler.</p>
+
+<p>In the Rails console, the variable <code>app</code> holds a session object on which you can call path and url helpers as instance methods.
+So away we go:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">approve_comment_path</span><span class="p">(</span><span class="no">Comment</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/comments/138138/approve&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">user_path</span><span class="p">(</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_login</span><span class="p">(</span><span class="s2">&quot;Michael Hoffman&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/users/784-michael-hoffman&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s all there is to it.</p>
+
+<p><em>(See <a href="code-worrier.com/blog/custom-slugs-in-rails/">this post</a> for my way of generating custom slugs like the one in that user path.)</em></p>
+
+<p><em>(Searching around a bit, I think I originally got this tip from <a href="http://37signals.com/svn/posts/3176-three-quick-rails-console-tips" target="_bank">this wonderful post</a>. Read it to learn about other useful things you can accomplish with <code>app</code>.)</em></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Hoffman</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-04T20:23:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quicktip-/'>QuickTip,</a>, <a class='category' href='/blog/categories/rails-/'>Rails,</a>, <a class='category' href='/blog/categories/ruby-/'>Ruby,</a>, <a class='category' href='/blog/categories/routing/'>routing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/test-routes-in-rails-console/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/test-routes-in-rails-console/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size=""></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/custom-slugs-in-rails/" title="Previous Post: Custom Slugs in Rails without Gems">&laquo; Custom Slugs in Rails without Gems</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -168,7 +271,10 @@
       var disqus_shortname = 'codeworrier';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://code-worrier.com/blog/test-routes-in-rails-console/';
+        var disqus_url = 'http://code-worrier.com/blog/test-routes-in-rails-console/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
