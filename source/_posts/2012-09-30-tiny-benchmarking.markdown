@@ -32,7 +32,7 @@ end
 As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
 Usage examples:
 
-```bash
+```ruby
 >> require 'tiny_timer'
 => ["TinyTimer"]
 >> TinyTimer.benchmark{ (0..100000).map{rand(10)}.sort }
