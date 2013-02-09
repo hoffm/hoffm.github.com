@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-04T21:06:19-05:00</updated>
+  <updated>2013-02-09T14:41:49-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,93 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[404 and 500 Error Pages in Rails]]></title>
+    <link href="http://code-worrier.com/blog/error-pages-in-rails/"/>
+    <updated>2013-02-09T13:43:00-05:00</updated>
+    <id>http://code-worrier.com/blog/error-pages-in-rails</id>
+    <content type="html"><![CDATA[<p>There are many approaches to responding to failed requests in Rails.
+Here I offer the way I currently favor setting things up.
+I&#8217;m hoping that this might start a conversation about best practices;
+I&#8217;m sure I could do better!</p>
+
+<p>The default way Rails handles requests to which your application does not have a contentful response is to serve up static HTML documents stored in the public directory.
+In particular, 500 (server error) and 404 (not found) responses result in the application&#8217;s rendering <code>500.html</code> and <code>404.html</code>, respectively.</p>
+
+<!-- more -->
+
+
+<p>This default approach is solid—it can be relied upon to display the correct pages in the correct conditions— but it does not allow customization of those pages.
+These error pages can&#8217;t execute ruby code, and so they can&#8217;t use your layouts, can&#8217;t interact with your data, and can&#8217;t vary based on conditions such as the time, the user, or the nature of the request.
+Such customizations can imporve user experience and reduce bounce rates when things go wrong.</p>
+
+<p>For these reasons, it&#8217;s tempting to rescue all kinds of exceptions and render full-blown erb templates in response to them.
+I think this strategy is reasonable in the case of 404 errors, and here&#8217;s how I do it:</p>
+
+<figure class='code'><figcaption><span>app/controllers/application_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># custom 404</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">consider_all_requests_local</span>
+</span><span class='line'>    <span class="n">rescue_from</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">RecordNotFound</span><span class="p">,</span>
+</span><span class='line'>                <span class="no">ActionController</span><span class="o">::</span><span class="no">RoutingError</span><span class="p">,</span>
+</span><span class='line'>                <span class="no">ActionController</span><span class="o">::</span><span class="no">UnknownController</span><span class="p">,</span>
+</span><span class='line'>                <span class="no">ActionController</span><span class="o">::</span><span class="no">UnknownAction</span><span class="p">,</span>
+</span><span class='line'>                <span class="no">ActionController</span><span class="o">::</span><span class="no">MethodNotAllowed</span> <span class="k">do</span> <span class="o">|</span><span class="n">exception</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1"># Put loggers here, if desired.</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">four_oh_four_path</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can define <code>four_oh_four_path</code> and the corresponding action and template however you&#8217;d like.
+A similar but lighter-weight approach would be to render a template in your <code>app/view/shared/</code> directory instead of redirecting to an action.
+In any case, we wrap this rescue block in the <code>consider_all_requests_local</code> condition, because we&#8217;d still like to get an informative stack trace in development mode.</p>
+
+<p>It&#8217;s tempting to treat 500s analogously, but I think that would be a mistake.
+If your application is returning a 500 response, chances are something has gone wrong, and the behavior it&#8217;s exhibiting is not what you expected.
+Given this, who&#8217;s to say whether or not your fancy custom 500 page will load?
+What if the bug is in the very code that catches and responds to errors?</p>
+
+<p>For these reasons, it is much safer to take the default approach to 500 errors.
+Don&#8217;t like your static 500 page?
+My suggestion is: make sure that people rarely get to see it.</p>
+
+<p>To get some inspiration for such pages, you could the <code>/500</code> path your favorite websites.
+<a href="https://github.com/500" target="_blank">Here</a>
+<a href="https://twitter.com/500" target="_blank">are</a>
+<a href="https://path.com/500" target="_blank">some</a>
+<a href="http://www.heroku.com/500" target="_blank">examples</a>.
+And
+<a href="http://food52.com/500" target="_blank">here is the page</a>
+I recently made for Food52.
+(Thanks to
+<a href="http://ryanahamilton.com/" target="_blank">Ryan</a>
+for finding the image and helping make the page responsive!)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Try out Routes in the Rails Console]]></title>

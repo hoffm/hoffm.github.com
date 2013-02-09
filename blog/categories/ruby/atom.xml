@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-04T21:06:19-05:00</updated>
+  <updated>2013-02-09T14:41:49-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[404 and 500 Error Pages in Rails]]></title>
+    <link href="http://code-worrier.com/blog/error-pages-in-rails/"/>
+    <updated>2013-02-09T13:43:00-05:00</updated>
+    <id>http://code-worrier.com/blog/error-pages-in-rails</id>
+    <content type="html"><![CDATA[<p>There are many approaches to responding to failed requests in Rails.
+Here I offer the way I currently favor setting things up.
+I'm hoping that this might start a conversation about best practices;
+I'm sure I could do better!</p>
+
+<p>The default way Rails handles requests to which your application does not have a contentful response is to serve up static HTML documents stored in the public directory.
+In particular, 500 (server error) and 404 (not found) responses result in the application's rendering <code>500.html</code> and <code>404.html</code>, respectively.</p>
+
+<!-- more -->
+
+
+<p>This default approach is solid—it can be relied upon to display the correct pages in the correct conditions— but it does not allow customization of those pages.
+These error pages can't execute ruby code, and so they can't use your layouts, can't interact with your data, and can't vary based on conditions such as the time, the user, or the nature of the request.
+Such customizations can imporve user experience and reduce bounce rates when things go wrong.</p>
+
+<p>For these reasons, it's tempting to rescue all kinds of exceptions and render full-blown erb templates in response to them.
+I think this strategy is reasonable in the case of 404 errors, and here's how I do it:</p>
+
+<p>``` ruby app/controllers/application_controller.rb
+class ApplicationController &lt; ActionController::Base</p>
+
+<p>  # custom 404
+  unless Rails.application.config.consider_all_requests_local</p>
+
+<pre><code>rescue_from ActiveRecord::RecordNotFound,
+            ActionController::RoutingError,
+            ActionController::UnknownController,
+            ActionController::UnknownAction,
+            ActionController::MethodNotAllowed do |exception|
+
+  # Put loggers here, if desired.
+
+  redirect_to four_oh_four_path
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>You can define <code>four_oh_four_path</code> and the corresponding action and template however you'd like.
+A similar but lighter-weight approach would be to render a template in your <code>app/view/shared/</code> directory instead of redirecting to an action.
+In any case, we wrap this rescue block in the <code>consider_all_requests_local</code> condition, because we'd still like to get an informative stack trace in development mode.</p>
+
+<p>It's tempting to treat 500s analogously, but I think that would be a mistake.
+If your application is returning a 500 response, chances are something has gone wrong, and the behavior it's exhibiting is not what you expected.
+Given this, who's to say whether or not your fancy custom 500 page will load?
+What if the bug is in the very code that catches and responds to errors?</p>
+
+<p>For these reasons, it is much safer to take the default approach to 500 errors.
+Don't like your static 500 page?
+My suggestion is: make sure that people rarely get to see it.</p>
+
+<p>To get some inspiration for such pages, you could the <code>/500</code> path your favorite websites.
+<a href="https://github.com/500" target="_blank">Here</a>
+<a href="https://twitter.com/500" target="_blank">are</a>
+<a href="https://path.com/500" target="_blank">some</a>
+<a href="http://www.heroku.com/500" target="_blank">examples</a>.
+And
+<a href="http://food52.com/500" target="_blank">here is the page</a>
+I recently made for Food52.
+(Thanks to
+<a href="http://ryanahamilton.com/" target="_blank">Ryan</a>
+for finding the image and helping make the page responsive!)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Custom Slugs in Rails without Gems]]></title>
@@ -441,118 +514,6 @@ You also need to deal with the <code>nil</code>s when you're done, like this:</p
 
 <p>Let me know in the comments if you can think of a generalizable implementation that's more elegant than either of these.
 In the meantime, may you never make the same mistake I made!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick Tip: More Legible Output with 'Kernel#y']]></title>
-    <link href="http://code-worrier.com/blog/more-legible-output-with-y/"/>
-    <updated>2012-08-30T14:24:00-04:00</updated>
-    <id>http://code-worrier.com/blog/more-legible-output-with-y</id>
-    <content type="html"><![CDATA[<p>Ever tried to get a sense of an ActiveRecord object by squinting though output like this?</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>User.find_by_login("Michael Hoffman").recipes.last
-=> #&lt;Recipe id: 18891, title: "Pasta with Lemon-Parmesan Butte
-r", created_at: "2012-08-29 00:03:55", updated_at: "2012-08-29
-16:20:58", description: "I was walking by a little pizzeria in
-the East Vill...", recipe_category_id: 36, serving_size: "4 as
-a pasta course, 2 as a main", user_id: 784, editors_pick: fals
-e, editors_comments: "", label: "pasta_with_lemonparmesan_butt
-er", flag_inappropriate: false, wine_id: nil, recipe_style: "a
-b", varietal_id: nil, rating_average: 0, makes_serves: "Serves
-", flag_inappropriate_comments: nil, sommelier_comments: nil,
-comments_count: 1, is_winner: false, interest: 1, is_finalist:
-nil, new_categories_added: nil, admin_categorization_note: nil</p></blockquote>
-
-<p>```
-Yuck.</p></blockquote>
-
-<!-- more -->
-
-
-<p>Luckily, there's a super simple way to get some nicer formatting.
-The <code>Kernel</code> module has a private instance method <code>#y</code> which will print out an active record object (or anything else) as YAML.
-Check it out:</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>y User.find_by_login("Michael Hoffman").recipes.last
---- !ruby/ActiveRecord:Recipe
-attributes:
-  sommelier_comments:
-  recipe_style: ab
-  updated_at: 2012-08-29 16:20:58
-  admin_categorization_note:
-  is_finalist:
-  is_winner: "0"
-  editors_comments: ""
-  serving_size: 4 as a pasta course, 2 as a main
-  title: Pasta with Lemon-Parmesan Butter
-  interest: "1"
-  editors_pick: "0"
-  recipe_category_id: "36"
-  rating_average: "0"
-  id: "18891"
-  new_categories_added:
-  flag_inappropriate_comments:
-  wine_id:
-  description: "I was walking by a little pizzeria in the East</p>
-
-<pre><code>Village - one I've never been to and may never go to - and
-I slowed my gait to glance at the menu. My eyes happened t
-o land on a pasta dish. I don't remember exactly what it w
-as called, but it involved lemon and parmesan, and not muc
-h else. Lemon! So obvious. Why had I never thought of that
-? The next night I made this for dinner."
-</code></pre>
-
-<p>  comments_count: "1"
-  makes_serves: Serves
-  varietal_id:
-  user_id: "784"
-  label: pasta_with_lemonparmesan_butter
-  flag_inappropriate: "0"
-  created_at: 2012-08-29 00:03:55
-=> nil
-```</p></blockquote></blockquote>
-
-<p>Notice that, in addition to producing more legible formatting, <code>#y</code> does not truncate values, so we get to see the whole description of the recipe.
-Another great use case for this method is visualizing nested hashes and arrays.</p>
-
-<p>```</p>
-
-<blockquote><blockquote><p>a = {:animals => {:mammals => [:dog, :cat, :narwhal], :fish => [:tuna, :shark] }, :fruits => [:plum, :peach, :banana]}
-=> {:fruits=>[:plum, :peach, :banana], :animals=>{:mammals=>[:dog, :cat, :narwhal], :fish=>[:tuna, :shark]}}</p>
-
-<h2>y a</h2>
-
-<p>:fruits:
-- :plum
-- :peach
-- :banana
-:animals:
-  :mammals:
-  - :dog
-  - :cat
-  - :narwhal
-  :fish:
-  - :tuna
-  - :shark
-=> nil
-```</p></blockquote></blockquote>
-
-<p>Nice, huh?</p>
-
-<p>One caveat:
-<a href="http://stackoverflow.com/questions/11571801/rails-console-y-helper-returns-nameerror-rather-than-yaml-formatting-output/11572045#11572045">Apparently</a> this method relies on the <a href="http://stackoverflow.com/a/11572045">Syck YAML parser</a>.
-For this reason, it won't immediately work out of the box with Ruby 1.9.3, which uses the <a href="https://github.com/tenderlove/psych/">Psych parser</a> by default.
-If you're using 1.9.3 and you want to play around with <code>Kernel#y</code>, run <code>YAML::ENGINE.yamler = 'syck'</code> to change parsers.</p>
-
-<p>And a question: I'd like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
-
-<p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
 ]]></content>
   </entry>
   

@@ -9,8 +9,9 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="How do you quickly check what path a certain route helper maps to? One method I use a lot is to grep rake routes.
-So, let&#8217;s say I&#8217;m &hellip;">
+  <meta name="description" content="There are many approaches to responding to failed requests in Rails.
+Here I offer the way I currently favor setting things up.
+I&#8217;m hoping that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,55 @@ So, let&#8217;s say I&#8217;m &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-09T13:43:00-05:00" pubdate data-updated="true">Feb 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/error-pages-in-rails/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are many approaches to responding to failed requests in Rails.
+Here I offer the way I currently favor setting things up.
+I&#8217;m hoping that this might start a conversation about best practices;
+I&#8217;m sure I could do better!</p>
+
+<p>The default way Rails handles requests to which your application does not have a contentful response is to serve up static HTML documents stored in the public directory.
+In particular, 500 (server error) and 404 (not found) responses result in the application&#8217;s rendering <code>500.html</code> and <code>404.html</code>, respectively.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/error-pages-in-rails/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -656,57 +706,6 @@ Here&#8217;s how.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/why-rtfm-is-some-bullshit/">Why RTFM Is Some Bullshit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-29T10:48:00-04:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/why-rtfm-is-some-bullshit/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Learning to code is hard.</p>
-
-<p>I&#8217;m not talking about the sense in which we&#8217;re all still learning.
-I mean when you first start out, the first few months.
-During this period, every tiny bit of progress you make comes at the expense of an excruciating, time-consuming trial.</p>
-
-<p>Personally, I had the great fortune of being around patient, empathic experts who helped me through the worst of it.
-(Thanks <a href="https://twitter.com/binarycleric">Jon</a>, <a href="https://twitter.com/jackiekircher">Jackie</a>, <a href="https://twitter.com/laurenvoswinkel">Lauren</a>, et al!)
-But not everyone is so lucky, and sooner or later a new programmer is bound to encounter <a href="http://en.wikipedia.org/wiki/RTFM">RTFM</a> and its new-fangled cousins, GIYF and LMGTFY.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/why-rtfm-is-some-bullshit/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -734,6 +733,10 @@ But not everyone is so lucky, and sooner or later a new programmer is bound to e
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/test-routes-in-rails-console/">Try out Routes in the Rails Console</a>
       </li>
     
@@ -747,10 +750,6 @@ But not everyone is so lucky, and sooner or later a new programmer is bound to e
     
       <li class="post">
         <a href="/blog/rails-intercept-emails-in-dev/">How do you prevent ActionMailer from spamming people in development?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/tiny-benchmarking/">A tiny benchmarking utility</a>
       </li>
     
   </ul>
