@@ -1,0 +1,88 @@
+---
+layout: post
+title: "3 Surprises from My First Open Source Contribution"
+date: 2013-02-27 18:51
+comments: true
+categories: [open source, rails]
+---
+
+I recently submitted [my first (tiny!) patch](https://github.com/rails/rails/pull/9347) to an open source project.
+It's something I'd wanted to do for a long time, but couldn't figure out how to initiate.
+Here are some things that surprised me about the process.
+
+### 1. Most of the work is not coding.
+
+This, as I understand it, is the lifecycle of a garden-variety open source contribution:
+
+* Find a problem.
+* Muster your courage.
+* Describe the problem to the project owners in excruciating detail.
+* Convince them it's a problem worth solving.
+* Fork the app and get it up and running locally.
+* Solve the problem (write production code and tests).
+* Document the solution (docs, commit messages, changelogs).
+* Propose, explain, and defend your solution (pull request).
+* Iterate on your solution and its documentation.
+
+<!-- more -->
+
+Perhaps the most difficult part of the whole open source contribution process—and, for me, certainly the longest phase—is identifying a patch that you want to write.
+If you ask smart, experienced folks how to get started, they'll often tell you to look at the open source projects that you use the most and to find something to contribute there.
+I think there's a lot of value in this advice (and, ultimately, I acted on it), but there s quite a gulf between knowing a piece of software well and finding something you want to change about it, and that others want you to change.
+
+Moreover, the projects you use the most are likely to be high-profile software that a lot of other people use a lot, and that means the barriers to contribution may be relatively high.
+Ultimately, my way in was finding a bug in Rails, which, after all, is the piece of open source software I use more than any other.
+The only reason I ended up contributing when I did was dumb luck (or at least the law of large numbers): I found a bug.
+
+Even after you figure out what problem you want to solve, writing the code to solve that problem is still only a small fraction of the work that lies ahead.
+The process is probably a little different with features, but in the case of a bug fix, there's loads to do before you even report the bug.
+You need to make sure that the bug is reproducible on the current master branch of the application.
+Then you need to determine exactly in which contexts the bug occurs, and to check whether the issue is caused by some problem with—or a corner case intimately related to—the configuration of a particular application that makes use of the open source project.
+
+Much of the rest of the work, as the list above illustrates, is about communication.
+Basically, it's an exercise in technical writing and in empathy for your readers:
+What will the owners of the project want to know about the change I propose?
+What will future developers need to know about the change I made?
+
+The importance of communication is, of course, not limited to open source projects.
+It's a commonplace (but for good reason) that precise, empathic writing is a among the developer's most essential skills.
+This is never more true than in the context of an open source project with a large number of contributors.
+Yes, you will need to actually fix your bug (or build your feature), but chances are, by the time you submit your proposal, you'll have done enough investigating and writing that you'll already have a good idea how to do it.
+Examples used in writing turn into test assertions, which in turn guide production code.
+Actually writing the code can feel like an afterthought, especially in the case of a small bug fix like the one I submitted.
+
+In addition to preparatory investigation, communication, and writing the patch, the final piece of the puzzle is getting your code where it needs to be so that others can review it: source control.
+I was surprised to find that, for me, source control was one of the most daunting aspects of the whole process.
+
+
+### 2. Source control might be the scariest part.
+
+I'm quite comfortable using git, but I'd never issued a pull request from a forked repo before, so I had some things to learn.
+I followed the [Rails contributions instructions](http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-code) closely in submitting my original request, and everything went fine.
+([Steve Klabnik](http://steveklabnik.com/) has a good project-agnostic guide [here](http://thechangelog.com/you-yes-you-should-contribute-to-open-source/).)
+However, when I had to iterate on my work, I was less careful and I ran into trouble.
+Somewhere in the process of pulling in changes that others had made in the interim, resolving conflicts, rebasing and pushing to my feature brach, I ended up [garbling](https://github.com/rails/rails/pull/9311) my original pull request.
+I panicked a bit as I imagined the reactions of all of the Rails core members whom I'd just spammed.
+I closed the sullied request and opened a fresh one.
+
+In retrospect, and as a kind soul pointed out to me, I could simply have fixed the existing request.
+But the point is that source control on a large open source project is a high stakes game (or feels that way at any rate), and if this is your first rodeo, you should learn from my mistake and be methodical.
+If things go awry, there's always `git push -f`.
+
+The good news is that, having done this once, I'll have an easier time with my next patch.
+I imagine that the workflow is pretty similar across most projects, so hopefully I won't find myself up git's creek again any time soon.
+
+
+### 3. It feels like awesome.
+
+There were lots of reasons I wanted to contribute to open source: to give something back to people from whose work I've benefitted greatly, for the pure challenge of it, and, frankly, to build my resume.
+What I did not anticipate was that getting a patch accepted makes you feel like a million bucks.
+The Rails community was super supportive of me the entire way, overseeing my fix when they could have written their own patch with less effort.
+I truly felt that I was being accepted into a community.
+
+The thought of having even the tiniest effect on a ubiquitous piece of software is thrilling.
+Your code will run on so many servers, your name emblazoned on so many replications of the changelog.
+This thrill may be a narcissistic one, but I feel it's alright to revel in it.
+What's wrong with feeling satisfied that you've applied your skills to improve a product that hundreds (or thousands, or millions) of people use to build cool stuff?
+
+Contributing to open source is a great high; I can't wait to get my next fix.
