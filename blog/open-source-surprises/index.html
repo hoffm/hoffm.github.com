@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>3 Surprises from My First Open Source Contribution - Code Worrier</title>
+  <meta name="author" content="Michael Hoffman">
+
+  
+  <meta name="description" content="I recently submitted my first (tiny!) patch to an open source project.
+It&#8217;s something I&#8217;d wanted to do for a long time, but couldn&#8217; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://code-worrier.com/blog/open-source-surprises/">
+  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Code Worrier" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34049294-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Code Worrier</a></h1>
+  
+    <h2>Teaching myself to RTFM</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:code-worrier.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">3 Surprises From My First Open Source Contribution</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T18:51:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I recently submitted <a href="https://github.com/rails/rails/pull/9347">my first (tiny!) patch</a> to an open source project.
+It&#8217;s something I&#8217;d wanted to do for a long time, but couldn&#8217;t figure out how to initiate.
+Here are some things that surprised me about the process.</p>
+
+<h3>1. Most of the work is not coding.</h3>
+
+<p>This, as I understand it, is the lifecycle of a garden-variety open source contribution:</p>
+
+<ul>
+<li>Find a problem.</li>
+<li>Muster your courage.</li>
+<li>Describe the problem to the project owners in excruciating detail.</li>
+<li>Convince them it&#8217;s a problem worth solving.</li>
+<li>Fork the app and get it up and running locally.</li>
+<li>Solve the problem (write production code and tests).</li>
+<li>Document the solution (docs, commit messages, changelogs).</li>
+<li>Propose, explain, and defend your solution (pull request).</li>
+<li>Iterate on your solution and its documentation.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>Perhaps the most difficult part of the whole open source contribution process—and, for me, certainly the longest phase—is identifying a patch that you want to write.
+If you ask smart, experienced folks how to get started, they&#8217;ll often tell you to look at the open source projects that you use the most and to find something to contribute there.
+I think there&#8217;s a lot of value in this advice (and, ultimately, I acted on it), but there s quite a gulf between knowing a piece of software well and finding something you want to change about it, and that others want you to change.</p>
+
+<p>Moreover, the projects you use the most are likely to be high-profile software that a lot of other people use a lot, and that means the barriers to contribution may be relatively high.
+Ultimately, my way in was finding a bug in Rails, which, after all, is the piece of open source software I use more than any other.
+The only reason I ended up contributing when I did was dumb luck (or at least the law of large numbers): I found a bug.</p>
+
+<p>Even after you figure out what problem you want to solve, writing the code to solve that problem is still only a small fraction of the work that lies ahead.
+The process is probably a little different with features, but in the case of a bug fix, there&#8217;s loads to do before you even report the bug.
+You need to make sure that the bug is reproducible on the current master branch of the application.
+Then you need to determine exactly in which contexts the bug occurs, and to check whether the issue is caused by some problem with—or a corner case intimately related to—the configuration of a particular application that makes use of the open source project.</p>
+
+<p>Much of the rest of the work, as the list above illustrates, is about communication.
+Basically, it&#8217;s an exercise in technical writing and in empathy for your readers:
+What will the owners of the project want to know about the change I propose?
+What will future developers need to know about the change I made?</p>
+
+<p>The importance of communication is, of course, not limited to open source projects.
+It&#8217;s a commonplace (but for good reason) that precise, empathic writing is a among the developer&#8217;s most essential skills.
+This is never more true than in the context of an open source project with a large number of contributors.
+Yes, you will need to actually fix your bug (or build your feature), but chances are, by the time you submit your proposal, you&#8217;ll have done enough investigating and writing that you&#8217;ll already have a good idea how to do it.
+Examples used in writing turn into test assertions, which in turn guide production code.
+Actually writing the code can feel like an afterthought, especially in the case of a small bug fix like the one I submitted.</p>
+
+<p>In addition to preparatory investigation, communication, and writing the patch, the final piece of the puzzle is getting your code where it needs to be so that others can review it: source control.
+I was surprised to find that, for me, source control was one of the most daunting aspects of the whole process.</p>
+
+<h3>2. Source control might be the scariest part.</h3>
+
+<p>I&#8217;m quite comfortable using git, but I&#8217;d never issued a pull request from a forked repo before, so I had some things to learn.
+I followed the <a href="http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-code">Rails contributions instructions</a> closely in submitting my original request, and everything went fine.
+(<a href="http://steveklabnik.com/">Steve Klabnik</a> has a good project-agnostic guide <a href="http://thechangelog.com/you-yes-you-should-contribute-to-open-source/">here</a>.)
+However, when I had to iterate on my work, I was less careful and I ran into trouble.
+Somewhere in the process of pulling in changes that others had made in the interim, resolving conflicts, rebasing and pushing to my feature brach, I ended up <a href="https://github.com/rails/rails/pull/9311">garbling</a> my original pull request.
+I panicked a bit as I imagined the reactions of all of the Rails core members whom I&#8217;d just spammed.
+I closed the sullied request and opened a fresh one.</p>
+
+<p>In retrospect, and as a kind soul pointed out to me, I could simply have fixed the existing request.
+But the point is that source control on a large open source project is a high stakes game (or feels that way at any rate), and if this is your first rodeo, you should learn from my mistake and be methodical.
+If things go awry, there&#8217;s always <code>git push -f</code>.</p>
+
+<p>The good news is that, having done this once, I&#8217;ll have an easier time with my next patch.
+I imagine that the workflow is pretty similar across most projects, so hopefully I won&#8217;t find myself up git&#8217;s creek again any time soon.</p>
+
+<h3>3. It feels like awesome.</h3>
+
+<p>There were lots of reasons I wanted to contribute to open source: to give something back to people from whose work I&#8217;ve benefitted greatly, for the pure challenge of it, and, frankly, to build my resume.
+What I did not anticipate was that getting a patch accepted makes you feel like a million bucks.
+The Rails community was super supportive of me the entire way, overseeing my fix when they could have written their own patch with less effort.
+I truly felt that I was being accepted into a community.</p>
+
+<p>The thought of having even the tiniest effect on a ubiquitous piece of software is thrilling.
+Your code will run on so many servers, your name emblazoned on so many replications of the changelog.
+This thrill may be a narcissistic one, but I feel it&#8217;s alright to revel in it.
+What&#8217;s wrong with feeling satisfied that you&#8217;ve applied your skills to improve a product that hundreds (or thousands, or millions) of people use to build cool stuff?</p>
+
+<p>Contributing to open source is a great high; I can&#8217;t wait to get my next fix.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Michael Hoffman</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T18:51:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/open-source/'>open source</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/open-source-surprises/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/open-source-surprises/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size=""></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/error-pages-in-rails/" title="Previous Post: 404 and 500 Error Pages in Rails">&laquo; 404 and 500 Error Pages in Rails</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Who writes this?</h1>
+  <ul id="recent_posts">
+      <li class="post">
+        <a href="http://michaelshoffman.com/">Michael Hoffman</a>
+        does.
+      </li>
+      <li class="post">
+        <a href="http://twitter.com/hoffm" class="twitter-follow-button" data-show-count="false">Follow @hoffm</a>
+      </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/test-routes-in-rails-console/">Try out Routes in the Rails Console</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Michael Hoffman -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'codeworrier';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://code-worrier.com/blog/open-source-surprises/';
+        var disqus_url = 'http://code-worrier.com/blog/open-source-surprises/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

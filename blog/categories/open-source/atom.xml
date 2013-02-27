@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | Code Worrier]]></title>
-  <link href="http://code-worrier.com/blog/categories/rails/atom.xml" rel="self"/>
+  <title><![CDATA[Category: open source | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
   <updated>2013-02-27T18:52:47-05:00</updated>
   <id>http://code-worrier.com/</id>

@@ -9,8 +9,20 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Learning to code is hard. I&#8217;m not talking about the sense in which we&#8217;re all still learning.
-I mean when you first start out, the first &hellip;">
+  <meta name="description" content="Ever tried to get a sense of an ActiveRecord object by squinting though output like this? 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&gt;&gt; User.find_by_login(" &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +90,79 @@ I mean when you first start out, the first &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/more-legible-output-with-y/">Quick Tip: More Legible Output With &#8216;Kernel#y&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T14:24:00-04:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/more-legible-output-with-y/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ever tried to get a sense of an ActiveRecord object by squinting though output like this?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt; User.find_by_login("Michael Hoffman").recipes.last
+</span><span class='line'>=&gt; #&lt;Recipe id: 18891, title: "Pasta with Lemon-Parmesan Butte
+</span><span class='line'>r", created_at: "2012-08-29 00:03:55", updated_at: "2012-08-29
+</span><span class='line'>16:20:58", description: "I was walking by a little pizzeria in
+</span><span class='line'>the East Vill...", recipe_category_id: 36, serving_size: "4 as
+</span><span class='line'>a pasta course, 2 as a main", user_id: 784, editors_pick: fals
+</span><span class='line'>e, editors_comments: "", label: "pasta_with_lemonparmesan_butt
+</span><span class='line'>er", flag_inappropriate: false, wine_id: nil, recipe_style: "a
+</span><span class='line'>b", varietal_id: nil, rating_average: 0, makes_serves: "Serves
+</span><span class='line'>", flag_inappropriate_comments: nil, sommelier_comments: nil, 
+</span><span class='line'>comments_count: 1, is_winner: false, interest: 1, is_finalist:
+</span><span class='line'>nil, new_categories_added: nil, admin_categorization_note: nil
+</span><span class='line'>&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yuck.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/more-legible-output-with-y/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -408,6 +493,10 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
       </li>
     
@@ -421,10 +510,6 @@ Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="htt
     
       <li class="post">
         <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/rails-intercept-emails-in-dev/">How do you prevent ActionMailer from spamming people in development?</a>
       </li>
     
   </ul>
