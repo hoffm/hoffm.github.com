@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-27T18:52:47-05:00</updated>
+  <updated>2013-03-07T11:19:27-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to checkout the last git branch you were on]]></title>
+    <link href="http://code-worrier.com/blog/git-checkout-dash/"/>
+    <updated>2013-03-07T11:10:00-05:00</updated>
+    <id>http://code-worrier.com/blog/git-checkout-dash</id>
+    <content type="html"><![CDATA[<p>Checking out the last branch you were on is as simple as <code>git checkout -</code>.</p>
+
+<p><code>bash
+11:13:14-hoffm~/src/food52 (develop)$ git checkout master
+Switched to branch 'master'
+11:13:21-hoffm~/src/food52 (master)$ git checkout -
+Switched to branch 'develop'
+11:13:23-hoffm~/src/food52 (develop)$ git checkout -
+Switched to branch 'master'
+</code></p>
+
+<p><a href="http://i.imgur.com/yUNhh.gif">Boom</a>!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Put Your Git Branch in Your Bash Prompt]]></title>

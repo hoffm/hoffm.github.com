@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-27T18:52:47-05:00</updated>
+  <updated>2013-03-07T11:19:27-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to checkout the last git branch you were on]]></title>
+    <link href="http://code-worrier.com/blog/git-checkout-dash/"/>
+    <updated>2013-03-07T11:10:00-05:00</updated>
+    <id>http://code-worrier.com/blog/git-checkout-dash</id>
+    <content type="html"><![CDATA[<p>Checking out the last branch you were on is as simple as <code>git checkout -</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>11:13:14-hoffm~/src/food52 <span class="o">(</span>develop<span class="o">)</span><span class="nv">$ </span>git checkout master
+</span><span class='line'>Switched to branch <span class="s1">&#39;master&#39;</span>
+</span><span class='line'>11:13:21-hoffm~/src/food52 <span class="o">(</span>master<span class="o">)</span><span class="nv">$ </span>git checkout -
+</span><span class='line'>Switched to branch <span class="s1">&#39;develop&#39;</span>
+</span><span class='line'>11:13:23-hoffm~/src/food52 <span class="o">(</span>develop<span class="o">)</span><span class="nv">$ </span>git checkout -
+</span><span class='line'>Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://i.imgur.com/yUNhh.gif">Boom</a>!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[3 Surprises from My First Open Source Contribution]]></title>

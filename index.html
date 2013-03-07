@@ -9,8 +9,13 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="I recently submitted my first (tiny!) patch to an open source project.
-It&#8217;s something I&#8217;d wanted to do for a long time, but couldn&#8217; &hellip;">
+  <meta name="description" content="Checking out the last branch you were on is as simple as git checkout -. 1
+2
+3
+4
+5
+6
+11:13:14-hoffm~/src/food52 (develop)$ git checkout master &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +83,61 @@ It&#8217;s something I&#8217;d wanted to do for a long time, but couldn&#8217; &
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/git-checkout-dash/">How to Checkout the Last Git Branch You Were On</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T11:10:00-05:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/git-checkout-dash/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Checking out the last branch you were on is as simple as <code>git checkout -</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>11:13:14-hoffm~/src/food52 <span class="o">(</span>develop<span class="o">)</span><span class="nv">$ </span>git checkout master
+</span><span class='line'>Switched to branch <span class="s1">&#39;master&#39;</span>
+</span><span class='line'>11:13:21-hoffm~/src/food52 <span class="o">(</span>master<span class="o">)</span><span class="nv">$ </span>git checkout -
+</span><span class='line'>Switched to branch <span class="s1">&#39;develop&#39;</span>
+</span><span class='line'>11:13:23-hoffm~/src/food52 <span class="o">(</span>develop<span class="o">)</span><span class="nv">$ </span>git checkout -
+</span><span class='line'>Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://i.imgur.com/yUNhh.gif">Boom</a>!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -643,57 +703,6 @@ Here&#8217;s how.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/map-and-next/">What Does Ruby&#8217;s &#8216;next&#8217; Keyword Return?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-04T19:55:00-04:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
-        
-         | <a href="/blog/map-and-next/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Pop quiz, hotshot:
-<strong>What does the following Ruby expression return?</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="k">next</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/map-and-next/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -721,6 +730,10 @@ Here&#8217;s how.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/git-checkout-dash/">How to checkout the last git branch you were on</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
       </li>
     
@@ -734,10 +747,6 @@ Here&#8217;s how.</p>
     
       <li class="post">
         <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/git-branch-in-bash-prompt/">Put Your Git Branch in Your Bash Prompt</a>
       </li>
     
   </ul>

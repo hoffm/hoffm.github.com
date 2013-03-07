@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QuickTip | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/quicktip/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-02-27T18:52:47-05:00</updated>
+  <updated>2013-03-07T11:19:27-05:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to checkout the last git branch you were on]]></title>
+    <link href="http://code-worrier.com/blog/git-checkout-dash/"/>
+    <updated>2013-03-07T11:10:00-05:00</updated>
+    <id>http://code-worrier.com/blog/git-checkout-dash</id>
+    <content type="html"><![CDATA[<p>Checking out the last branch you were on is as simple as <code>git checkout -</code>.</p>
+
+<p><code>bash
+11:13:14-hoffm~/src/food52 (develop)$ git checkout master
+Switched to branch 'master'
+11:13:21-hoffm~/src/food52 (master)$ git checkout -
+Switched to branch 'develop'
+11:13:23-hoffm~/src/food52 (develop)$ git checkout -
+Switched to branch 'master'
+</code></p>
+
+<p><a href="http://i.imgur.com/yUNhh.gif">Boom</a>!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Put Your Git Branch in Your Bash Prompt]]></title>
@@ -314,32 +334,6 @@ If you're using 1.9.3 and you want to play around with <code>Kernel#y</code>, ru
 <p>And a question: I'd like to know how to get <code>#y</code> to print out ActiveRecord attributes in the same order as they are normally displayed.</p>
 
 <p>(By the way, I highly recommend trying out <a href="http://food52.com/recipes/18891_pasta_with_lemonparmesan_butter">the recipe</a> mentioned above.)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick Tip: Recursive Arrays in Ruby]]></title>
-    <link href="http://code-worrier.com/blog/recursive-arrays/"/>
-    <updated>2012-08-16T22:30:00-04:00</updated>
-    <id>http://code-worrier.com/blog/recursive-arrays</id>
-    <content type="html"><![CDATA[<p>They're real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
-
-<p>```ruby</p>
-
-<blockquote><blockquote><p>a = []
-=> []
-a &lt;&lt; a
-=> [[...]]
-a.first.equal? a
-=> true
-```</p></blockquote></blockquote>
-
-<!-- more -->
-
-
-<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
 ]]></content>
   </entry>
   
