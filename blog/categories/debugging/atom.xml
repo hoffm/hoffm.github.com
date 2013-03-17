@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debugging | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/debugging/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-17T12:31:12-04:00</updated>
+  <updated>2013-03-17T12:32:58-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -26,6 +26,9 @@ Usually, the change you're interested in is the introduction of a bug.
 Bisect is handy when, for instance, you discover a regression and you don't know what caused it or exactly how long it's been around.
 Bisect isolates the offending commit with logarithmic efficiency.
 It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
+
+<!-- more -->
+
 
 <p>The basic version of the process is simple.
 You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
@@ -82,7 +85,7 @@ If you're working on a Rails app, this might involve running <code>rake db:migra
 <p>```bash
 341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
 commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
-Author: hoffm <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6d;&#x40;&#x68;&#x6f;&#102;&#x2e;&#102;&#x6d;">&#109;&#64;&#104;&#111;&#x66;&#x2e;&#x66;&#109;</a>
+Author: hoffm <a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#109;&#64;&#x68;&#x6f;&#x66;&#46;&#x66;&#109;">&#x6d;&#x40;&#104;&#x6f;&#102;&#46;&#x66;&#x6d;</a>
 Date:   Thu Mar 17 11:19:10 2013 -0500</p>
 
 <pre><code>Draft of git bisect post.

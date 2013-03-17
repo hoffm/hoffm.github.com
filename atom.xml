@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-17T12:31:12-04:00</updated>
+  <updated>2013-03-17T12:32:58-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -26,6 +26,9 @@ Usually, the change you&#8217;re interested in is the introduction of a bug.
 Bisect is handy when, for instance, you discover a regression and you don&#8217;t know what caused it or exactly how long it&#8217;s been around.
 Bisect isolates the offending commit with logarithmic efficiency.
 It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
+
+<!-- more -->
+
 
 <p>The basic version of the process is simple.
 You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).

@@ -118,86 +118,12 @@ Bisect is handy when, for instance, you discover a regression and you don&#8217;
 Bisect isolates the offending commit with logarithmic efficiency.
 It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
 
-<p>The basic version of the process is simple.
-You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
-Git then asks you a series of yes-or-no questions of the form: How about this other commit here—is it good?
-Approximately log-base-2 of the number of questions in your good-bad interval later, you have your culprit.</p>
-
-<p>Here are the commands for navigating through this process:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect start
-</span><span class='line'>    <span class="c"># &quot;Let&#39;s do this thing.&quot;</span>
-</span><span class='line'><span class="nv">$ </span>git bisect bad
-</span><span class='line'>    <span class="c"># &quot;Hey, git, the current commit bad.&quot;</span>
-</span><span class='line'><span class="nv">$ </span>git bisect bad <span class="o">[</span>commit <span class="nb">hash </span>or tag name<span class="o">]</span>
-</span><span class='line'>    <span class="c"># &quot;This commit hash refers to a bad commit.&quot;</span>
-</span><span class='line'>    <span class="c"># (Only one of the previous two commands is required.)</span>
-</span><span class='line'><span class="nv">$ </span>git bisect good <span class="o">[</span>commit or <span class="nb">hash</span><span class="o">]</span>
-</span><span class='line'>    <span class="c"># &quot;Here&#39;s an earlier point at which I know things were good.&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At this point, Git will proceed to checkout commits for you.
-Your job is to give the thumbs up or thumbs down, Roman-emperor style.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect good
-</span><span class='line'>    <span class="c"># &quot;This commit is before the change; look later.&quot;</span>
-</span><span class='line'><span class="nv">$ </span>git bisect bad
-</span><span class='line'>    <span class="c"># &quot;This commit is after the change; look earlier.&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At each step you&#8217;ll need to do whatever it is you need to do to check which side of the change the commit is on.
-If you&#8217;re working on a Rails app, this might involve running <code>rake db:migrate</code> and <code>bundle install</code>, and then checking whether a particular test passes or a particular behavior of your application is present.</p>
-
-<p>When git zeroes in on its target, it will spit out a message telling you what it found, e.g.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
-</span><span class='line'>commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
-</span><span class='line'>Author: hoffm &lt;m@hof.fm&gt;
-</span><span class='line'>Date:   Thu Mar 17 11:19:10 2013 -0500
-</span><span class='line'>
-</span><span class='line'>    Draft of git bisect post.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At this point, you&#8217;ll probably want to get out of bisect mode and back onto your working branch.
-To do this, run</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect reset
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&#8217;s all you really need to know to start using git bisect.</p>
-
-<p>In researching this post, though, I came some additional commands that are worth learning.
-First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run <code>git bisect skip</code> and git will offer you a different commit to test.</p>
-
-<p>Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to <code>git bisect run</code>.
-Git will run the script at every decision point, and will take an exit code of 0 to mean good, and anything else (except 125) to mean bad (details <a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html#_bisect_run">here</a>).
-Test frameworks like RSpec <a href="https://www.relishapp.com/rspec/rspec-core/v/2-13/docs/command-line/exit-status">exit with 0</a> only when all tests pass (or none are run), so if you&#8217;re trying to identify the commit that caused a test failure, this is your tool.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/git-bisect-basics/">Read on &rarr;</a>
+    </footer>
   
 
 
