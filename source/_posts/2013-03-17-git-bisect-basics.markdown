@@ -15,6 +15,8 @@ Bisect is handy when, for instance, you discover a regression and you don't know
 Bisect isolates the offending commit with logarithmic efficiency.
 It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.
 
+<!-- more -->
+
 The basic version of the process is simple.
 You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
 Git then asks you a series of yes-or-no questions of the form: How about this other commit here—is it good?
