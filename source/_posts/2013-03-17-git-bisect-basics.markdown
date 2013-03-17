@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "git bisect: your friend in times of need"
+title: "Git Bisect: Your Friend in Times of Need"
 date: 2013-03-17 11:38
 comments: true
 categories: git, debugging
