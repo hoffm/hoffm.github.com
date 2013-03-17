@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git, | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/git-/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2013-03-17T12:31:12-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[git bisect: your friend in times of need]]></title>
+    <link href="http://code-worrier.com/blog/git-bisect-basics/"/>
+    <updated>2013-03-17T11:38:00-04:00</updated>
+    <id>http://code-worrier.com/blog/git-bisect-basics</id>
+    <content type="html"><![CDATA[<p>Git bisect is like CPR or a fire extinguisher:
+You shouldn't need it very often, but when you, it might just save a life.</p>
+
+<p>In case you are not familiar with it's splendor, git bisect is a tool for pinpointing the commit that caused a change.
+Usually, the change you're interested in is the introduction of a bug.
+Bisect is handy when, for instance, you discover a regression and you don't know what caused it or exactly how long it's been around.
+Bisect isolates the offending commit with logarithmic efficiency.
+It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
+
+<p>The basic version of the process is simple.
+You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
+Git then asks you a series of yes-or-no questions of the form: How about this other commit here—is it good?
+Approximately log-base-2 of the number of questions in your good-bad interval later, you have your culprit.</p>
+
+<p>Here are the commands for navigating through this process:</p>
+
+<p>```bash
+$ git bisect start</p>
+
+<pre><code># "Let's do this thing."
+</code></pre>
+
+<p>$ git bisect bad</p>
+
+<pre><code># "Hey, git, the current commit bad."
+</code></pre>
+
+<p>$ git bisect bad [commit hash or tag name]</p>
+
+<pre><code># "This commit hash refers to a bad commit."
+# (Only one of the previous two commands is required.)
+</code></pre>
+
+<p>$ git bisect good [commit or hash]</p>
+
+<pre><code># "Here's an earlier point at which I know things were good."
+</code></pre>
+
+<p>```</p>
+
+<p>At this point, Git will proceed to checkout commits for you.
+Your job is to give the thumbs up or thumbs down, Roman-emperor style.</p>
+
+<p>```bash
+$ git bisect good</p>
+
+<pre><code># "This commit is before the change; look later."
+</code></pre>
+
+<p>$ git bisect bad</p>
+
+<pre><code># "This commit is after the change; look earlier."
+</code></pre>
+
+<p>```</p>
+
+<p>At each step you'll need to do whatever it is you need to do to check which side of the change the commit is on.
+If you're working on a Rails app, this might involve running <code>rake db:migrate</code> and <code>bundle install</code>, and then checking whether a particular test passes or a particular behavior of your application is present.</p>
+
+<p>When git zeroes in on its target, it will spit out a message telling you what it found, e.g.</p>
+
+<p>```bash
+341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
+commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
+Author: hoffm <a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x6d;&#x40;&#x68;&#111;&#x66;&#x2e;&#x66;&#109;">&#x6d;&#64;&#x68;&#x6f;&#102;&#46;&#x66;&#x6d;</a>
+Date:   Thu Mar 17 11:19:10 2013 -0500</p>
+
+<pre><code>Draft of git bisect post.
+</code></pre>
+
+<p>```</p>
+
+<p>At this point, you'll probably want to get out of bisect mode and back onto your working branch.
+To do this, run</p>
+
+<p><code>bash
+$ git bisect reset
+</code></p>
+
+<p>That's all you really need to know to start using git bisect.</p>
+
+<p>In researching this post, though, I came some additional commands that are worth learning.
+First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run <code>git bisect skip</code> and git will offer you a different commit to test.</p>
+
+<p>Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to <code>git bisect run</code>.
+Git will run the script at every decision point, and will take an exit code of 0 to mean good, and anything else (except 125) to mean bad (details <a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html#_bisect_run">here</a>).
+Test frameworks like RSpec <a href="https://www.relishapp.com/rspec/rspec-core/v/2-13/docs/command-line/exit-status">exit with 0</a> only when all tests pass (or none are run), so if you're trying to identify the commit that caused a test failure, this is your tool.</p>
+]]></content>
+  </entry>
+  
+</feed>

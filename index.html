@@ -9,13 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Checking out the last branch you were on is as simple as git checkout -. 1
-2
-3
-4
-5
-6
-11:13:14-hoffm~/src/food52 (develop)$ git checkout master &hellip;">
+  <meta name="description" content="Git bisect is like CPR or a fire extinguisher:
+You shouldn&#8217;t need it very often, but when you, it might just save a life. In case you are not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +78,130 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/git-bisect-basics/">Git Bisect: Your Friend in Times of Need</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-17T11:38:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/git-bisect-basics/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Git bisect is like CPR or a fire extinguisher:
+You shouldn&#8217;t need it very often, but when you, it might just save a life.</p>
+
+<p>In case you are not familiar with it&#8217;s splendor, git bisect is a tool for pinpointing the commit that caused a change.
+Usually, the change you&#8217;re interested in is the introduction of a bug.
+Bisect is handy when, for instance, you discover a regression and you don&#8217;t know what caused it or exactly how long it&#8217;s been around.
+Bisect isolates the offending commit with logarithmic efficiency.
+It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
+
+<p>The basic version of the process is simple.
+You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
+Git then asks you a series of yes-or-no questions of the form: How about this other commit here—is it good?
+Approximately log-base-2 of the number of questions in your good-bad interval later, you have your culprit.</p>
+
+<p>Here are the commands for navigating through this process:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect start
+</span><span class='line'>    <span class="c"># &quot;Let&#39;s do this thing.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad
+</span><span class='line'>    <span class="c"># &quot;Hey, git, the current commit bad.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad <span class="o">[</span>commit <span class="nb">hash </span>or tag name<span class="o">]</span>
+</span><span class='line'>    <span class="c"># &quot;This commit hash refers to a bad commit.&quot;</span>
+</span><span class='line'>    <span class="c"># (Only one of the previous two commands is required.)</span>
+</span><span class='line'><span class="nv">$ </span>git bisect good <span class="o">[</span>commit or <span class="nb">hash</span><span class="o">]</span>
+</span><span class='line'>    <span class="c"># &quot;Here&#39;s an earlier point at which I know things were good.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point, Git will proceed to checkout commits for you.
+Your job is to give the thumbs up or thumbs down, Roman-emperor style.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect good
+</span><span class='line'>    <span class="c"># &quot;This commit is before the change; look later.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad
+</span><span class='line'>    <span class="c"># &quot;This commit is after the change; look earlier.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At each step you&#8217;ll need to do whatever it is you need to do to check which side of the change the commit is on.
+If you&#8217;re working on a Rails app, this might involve running <code>rake db:migrate</code> and <code>bundle install</code>, and then checking whether a particular test passes or a particular behavior of your application is present.</p>
+
+<p>When git zeroes in on its target, it will spit out a message telling you what it found, e.g.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
+</span><span class='line'>commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
+</span><span class='line'>Author: hoffm &lt;m@hof.fm&gt;
+</span><span class='line'>Date:   Thu Mar 17 11:19:10 2013 -0500
+</span><span class='line'>
+</span><span class='line'>    Draft of git bisect post.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point, you&#8217;ll probably want to get out of bisect mode and back onto your working branch.
+To do this, run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect reset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s all you really need to know to start using git bisect.</p>
+
+<p>In researching this post, though, I came some additional commands that are worth learning.
+First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run <code>git bisect skip</code> and git will offer you a different commit to test.</p>
+
+<p>Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to <code>git bisect run</code>.
+Git will run the script at every decision point, and will take an exit code of 0 to mean good, and anything else (except 125) to mean bad (details <a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html#_bisect_run">here</a>).
+Test frameworks like RSpec <a href="https://www.relishapp.com/rspec/rspec-core/v/2-13/docs/command-line/exit-status">exit with 0</a> only when all tests pass (or none are run), so if you&#8217;re trying to identify the commit that caused a test failure, this is your tool.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -656,53 +775,6 @@ Here&#8217;s how:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/autocomplete-git/">Quick Tip: Autocomplete Git Commands and Branch Names in Bash</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-09T21:44:00-04:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/autocomplete-git/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In bash in Mac OS X, you can use [TAB] to autocomplete file paths.
-Wouldn&#8217;t if be nice if you could do the same with git commands and branch names?</p>
-
-<p>You can.
-Here&#8217;s how.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/autocomplete-git/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -730,6 +802,10 @@ Here&#8217;s how.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/git-bisect-basics/">git bisect: your friend in times of need</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/git-checkout-dash/">How to checkout the last git branch you were on</a>
       </li>
     
@@ -743,10 +819,6 @@ Here&#8217;s how.</p>
     
       <li class="post">
         <a href="/blog/test-routes-in-rails-console/">Try out Routes in the Rails Console</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/custom-slugs-in-rails/">Custom Slugs in Rails without Gems</a>
       </li>
     
   </ul>

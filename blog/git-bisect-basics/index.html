@@ -5,20 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A tiny benchmarking utility - Code Worrier</title>
+  <title>git bisect: your friend in times of need - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is: tiny_timer.rb1
-2
-3
-4
-5
-6
-7
-8
-9 &hellip;">
+  <meta name="description" content="Git bisect is like CPR or a fire extinguisher:
+You shouldn&#8217;t need it very often, but when you, it might just save a life. In case you are not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +19,7 @@ Here it is: tiny_timer.rb1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/tiny-benchmarking/">
+  <link rel="canonical" href="http://code-worrier.com/blog/git-bisect-basics/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -89,7 +81,7 @@ Here it is: tiny_timer.rb1
   
   <header>
     
-      <h1 class="entry-title">A Tiny Benchmarking Utility</h1>
+      <h1 class="entry-title">Git Bisect: Your Friend in Times of Need</h1>
     
     
       <p class="meta">
@@ -105,7 +97,7 @@ Here it is: tiny_timer.rb1
   
 
 
-<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2013-03-17T11:38:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -114,10 +106,23 @@ Here it is: tiny_timer.rb1
   </header>
 
 
-<div class="entry-content"><p>While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is:</p>
+<div class="entry-content"><p>Git bisect is like CPR or a fire extinguisher:
+You shouldn&#8217;t need it very often, but when you, it might just save a life.</p>
 
-<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>In case you are not familiar with it&#8217;s splendor, git bisect is a tool for pinpointing the commit that caused a change.
+Usually, the change you&#8217;re interested in is the introduction of a bug.
+Bisect is handy when, for instance, you discover a regression and you don&#8217;t know what caused it or exactly how long it&#8217;s been around.
+Bisect isolates the offending commit with logarithmic efficiency.
+It accomplishes this by performing a binary search of the commits on your branch, dividing and conquering until only one commit remains.</p>
+
+<p>The basic version of the process is simple.
+You provide git with a good commit (one you know is after the change) and a bad commit (one you know is before the change).
+Git then asks you a series of yes-or-no questions of the form: How about this other commit here—is it good?
+Approximately log-base-2 of the number of questions in your good-bad interval later, you have your culprit.</p>
+
+<p>Here are the commands for navigating through this process:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -126,37 +131,36 @@ Here it is:</p>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>      <span class="k">yield</span>
-</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect start
+</span><span class='line'>    <span class="c"># &quot;Let&#39;s do this thing.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad
+</span><span class='line'>    <span class="c"># &quot;Hey, git, the current commit bad.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad <span class="o">[</span>commit <span class="nb">hash </span>or tag name<span class="o">]</span>
+</span><span class='line'>    <span class="c"># &quot;This commit hash refers to a bad commit.&quot;</span>
+</span><span class='line'>    <span class="c"># (Only one of the previous two commands is required.)</span>
+</span><span class='line'><span class="nv">$ </span>git bisect good <span class="o">[</span>commit or <span class="nb">hash</span><span class="o">]</span>
+</span><span class='line'>    <span class="c"># &quot;Here&#39;s an earlier point at which I know things were good.&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>At this point, Git will proceed to checkout commits for you.
+Your job is to give the thumbs up or thumbs down, Roman-emperor style.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect good
+</span><span class='line'>    <span class="c"># &quot;This commit is before the change; look later.&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git bisect bad
+</span><span class='line'>    <span class="c"># &quot;This commit is after the change; look earlier.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<!-- more -->
+<p>At each step you&#8217;ll need to do whatever it is you need to do to check which side of the change the commit is on.
+If you&#8217;re working on a Rails app, this might involve running <code>rake db:migrate</code> and <code>bundle install</code>, and then checking whether a particular test passes or a particular behavior of your application is present.</p>
 
-
-<p>As you can see, this method runs a specified number of trials of a block of code and returns the average time in seconds it took to execute the block.
-Usage examples:</p>
+<p>When git zeroes in on its target, it will spit out a message telling you what it found, e.g.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -164,14 +168,31 @@ Usage examples:</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">require</span> <span class="s1">&#39;tiny_timer&#39;</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;TinyTimer&quot;</span><span class="o">]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">{</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span><span class="o">.</span><span class="n">sort</span> <span class="p">}</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">0670641</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">TinyTimer</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="mi">100</span><span class="p">){</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1000000</span> <span class="p">}</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">00</span><span class="mi">841815</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
+</span><span class='line'>commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
+</span><span class='line'>Author: hoffm &lt;m@hof.fm&gt;
+</span><span class='line'>Date:   Thu Mar 17 11:19:10 2013 -0500
+</span><span class='line'>
+</span><span class='line'>    Draft of git bisect post.
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>At this point, you&#8217;ll probably want to get out of bisect mode and back onto your working branch.
+To do this, run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git bisect reset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s all you really need to know to start using git bisect.</p>
+
+<p>In researching this post, though, I came some additional commands that are worth learning.
+First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run <code>git bisect skip</code> and git will offer you a different commit to test.</p>
+
+<p>Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to <code>git bisect run</code>.
+Git will run the script at every decision point, and will take an exit code of 0 to mean good, and anything else (except 125) to mean bad (details <a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html#_bisect_run">here</a>).
+Test frameworks like RSpec <a href="https://www.relishapp.com/rspec/rspec-core/v/2-13/docs/command-line/exit-status">exit with 0</a> only when all tests pass (or none are run), so if you&#8217;re trying to identify the commit that caused a test failure, this is your tool.</p>
 </div>
 
 
@@ -194,12 +215,12 @@ Usage examples:</p>
   
 
 
-<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2013-03-17T11:38:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/debugging/'>debugging</a>, <a class='category' href='/blog/categories/git-/'>git,</a>
   
 </span>
 
@@ -208,7 +229,7 @@ Usage examples:</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/tiny-benchmarking/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/tiny-benchmarking/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/git-bisect-basics/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/git-bisect-basics/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -221,10 +242,8 @@ Usage examples:</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/embedded-rake-tasks/" title="Previous Post: Invoke a Rake Task from Another Task">&laquo; Invoke a Rake Task from Another Task</a>
+        <a class="basic-alignment left" href="/blog/git-checkout-dash/" title="Previous Post: How to checkout the last git branch you were on">&laquo; How to checkout the last git branch you were on</a>
       
-      
-        <a class="basic-alignment right" href="/blog/rails-intercept-emails-in-dev/" title="Next Post: How do you prevent ActionMailer from spamming people in development?">How do you prevent ActionMailer from spamming people in development? &raquo;</a>
       
     </p>
   </footer>
@@ -298,8 +317,8 @@ Usage examples:</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/tiny-benchmarking/';
-        var disqus_url = 'http://code-worrier.com/blog/tiny-benchmarking/';
+        var disqus_identifier = 'http://code-worrier.com/blog/git-bisect-basics/';
+        var disqus_url = 'http://code-worrier.com/blog/git-bisect-basics/';
         var disqus_script = 'embed.js';
       
     (function () {
