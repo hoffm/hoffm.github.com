@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-17T12:32:58-04:00</updated>
+  <updated>2013-03-17T12:34:08-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[git bisect: your friend in times of need]]></title>
+    <title type="html"><![CDATA[Git Bisect: Your Friend in Times of Need]]></title>
     <link href="http://code-worrier.com/blog/git-bisect-basics/"/>
     <updated>2013-03-17T11:38:00-04:00</updated>
     <id>http://code-worrier.com/blog/git-bisect-basics</id>
