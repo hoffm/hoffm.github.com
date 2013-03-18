@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debugging | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/debugging/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-17T12:34:08-04:00</updated>
+  <updated>2013-03-18T11:07:27-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -85,7 +85,7 @@ If you're working on a Rails app, this might involve running <code>rake db:migra
 <p>```bash
 341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
 commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
-Author: hoffm <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#109;&#64;&#x68;&#111;&#102;&#x2e;&#102;&#x6d;">&#x6d;&#x40;&#104;&#111;&#102;&#46;&#102;&#109;</a>
+Author: hoffm <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#109;&#x40;&#x68;&#111;&#x66;&#x2e;&#x66;&#x6d;">&#x6d;&#64;&#x68;&#x6f;&#x66;&#x2e;&#102;&#x6d;</a>
 Date:   Thu Mar 17 11:19:10 2013 -0500</p>
 
 <pre><code>Draft of git bisect post.
@@ -102,7 +102,7 @@ $ git bisect reset
 
 <p>That's all you really need to know to start using git bisect.</p>
 
-<p>In researching this post, though, I came some additional commands that are worth learning.
+<p>In researching this post, though, I came across some additional commands that are worth learning.
 First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run <code>git bisect skip</code> and git will offer you a different commit to test.</p>
 
 <p>Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to <code>git bisect run</code>.
