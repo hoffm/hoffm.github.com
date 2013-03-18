@@ -69,7 +69,7 @@ $ git bisect reset
 
 That's all you really need to know to start using git bisect.
 
-In researching this post, though, I came some additional commands that are worth learning.
+In researching this post, though, I came across some additional commands that are worth learning.
 First, if during the bisect process, git lands you on a particularly awkward commit—e.g. one for which the needed environment is hard to replicate from your present position—you can run `git bisect skip` and git will offer you a different commit to test.
 
 Second—and way cooler—you can automate your yes/no decisions by feeding a custom script to `git bisect run`.
