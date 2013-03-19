@@ -9,7 +9,7 @@ categories: git, debugging
 Git bisect is like CPR or a fire extinguisher:
 You shouldn't need it very often, but when you, it might just save a life.
 
-In case you are not familiar with it's splendor, git bisect is a tool for pinpointing the commit that caused a change.
+In case you are not familiar with its splendor, git bisect is a tool for pinpointing the commit that caused a change.
 Usually, the change you're interested in is the introduction of a bug.
 Bisect is handy when, for instance, you discover a regression and you don't know what caused it or exactly how long it's been around.
 Bisect isolates the offending commit with logarithmic efficiency.
