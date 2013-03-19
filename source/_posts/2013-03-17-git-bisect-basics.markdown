@@ -3,7 +3,7 @@ layout: post
 title: "Git Bisect: Your Friend in Times of Need"
 date: 2013-03-17 11:38
 comments: true
-categories: git, debugging
+categories: [git, debugging]
 ---
 
 Git bisect is like CPR or a fire extinguisher:
