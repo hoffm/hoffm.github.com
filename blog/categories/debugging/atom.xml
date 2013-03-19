@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debugging | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/debugging/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-18T11:07:27-04:00</updated>
+  <updated>2013-03-18T21:59:55-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>Git bisect is like CPR or a fire extinguisher:
 You shouldn't need it very often, but when you, it might just save a life.</p>
 
-<p>In case you are not familiar with it's splendor, git bisect is a tool for pinpointing the commit that caused a change.
+<p>In case you are not familiar with its splendor, git bisect is a tool for pinpointing the commit that caused a change.
 Usually, the change you're interested in is the introduction of a bug.
 Bisect is handy when, for instance, you discover a regression and you don't know what caused it or exactly how long it's been around.
 Bisect isolates the offending commit with logarithmic efficiency.
@@ -85,7 +85,7 @@ If you're working on a Rails app, this might involve running <code>rake db:migra
 <p>```bash
 341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
 commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
-Author: hoffm <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#109;&#x40;&#x68;&#111;&#x66;&#x2e;&#x66;&#x6d;">&#x6d;&#64;&#x68;&#x6f;&#x66;&#x2e;&#102;&#x6d;</a>
+Author: hoffm <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x6d;&#x40;&#x68;&#x6f;&#x66;&#x2e;&#x66;&#x6d;">&#109;&#x40;&#x68;&#x6f;&#x66;&#x2e;&#102;&#109;</a>
 Date:   Thu Mar 17 11:19:10 2013 -0500</p>
 
 <pre><code>Draft of git bisect post.
