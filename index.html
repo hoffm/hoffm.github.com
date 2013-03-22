@@ -9,8 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Git bisect is like CPR or a fire extinguisher:
-You shouldn&#8217;t need it very often, but when you, it might just save a life. In case you are not &hellip;">
+  <meta name="description" content="I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors: ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,50 @@ You shouldn&#8217;t need it very often, but when you, it might just save a life.
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/on-text-encoding/">On Text Encoding</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-22T15:10:00-04:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/on-text-encoding/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/on-text-encoding/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -622,85 +666,6 @@ Here it is:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/embedded-rake-tasks/">Invoke a Rake Task From Another Task</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-25T17:02:00-04:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/embedded-rake-tasks/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You can invoke a rake task from another rake task.
-Here&#8217;s how:</p>
-
-<figure class='code'><figcaption><span>examples.rake</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:examples</span> <span class="k">do</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Inner task.&quot;</span>
-</span><span class='line'>  <span class="n">task</span> <span class="ss">:inner_task</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
-</span><span class='line'>    <span class="c1"># Some code that accomplishes a task.</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Outer task.&quot;</span>
-</span><span class='line'>  <span class="n">task</span> <span class="ss">:outer_task</span> <span class="k">do</span>
-</span><span class='line'>    <span class="c1"># Some code.</span>
-</span><span class='line'>    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="o">[</span><span class="s1">&#39;examples:inner_task&#39;</span><span class="o">].</span><span class="n">execute</span> <span class="c1">#Execute innter task.</span>
-</span><span class='line'>    <span class="c1"># Some other code.</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/embedded-rake-tasks/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -728,6 +693,10 @@ Here&#8217;s how:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/on-text-encoding/">On Text Encoding</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/git-bisect-basics/">Git Bisect: Your Friend in Times of Need</a>
       </li>
     
@@ -741,10 +710,6 @@ Here&#8217;s how:</p>
     
       <li class="post">
         <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/test-routes-in-rails-console/">Try out Routes in the Rails Console</a>
       </li>
     
   </ul>

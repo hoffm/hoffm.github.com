@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-18T22:06:54-04:00</updated>
+  <updated>2013-03-22T15:16:43-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[On Text Encoding]]></title>
+    <link href="http://code-worrier.com/blog/on-text-encoding/"/>
+    <updated>2013-03-22T15:10:00-04:00</updated>
+    <id>http://code-worrier.com/blog/on-text-encoding</id>
+    <content type="html"><![CDATA[<p>I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors:</p>
+
+<!-- more -->
+
+
+
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>A programmer walks into a coffee shop.Programmer: &#8220;Do you serve cortados here?&#8221;Barista: &#8220;No—wrong cafÃ©. You want the Latin one.&#8221;</p>&mdash; Michael Hoffman (@Hoffm) <a href="https://twitter.com/Hoffm/status/315178182514974720">March 22, 2013</a></blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git Bisect: Your Friend in Times of Need]]></title>

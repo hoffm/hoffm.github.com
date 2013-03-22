@@ -5,21 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Quick Tip: Recursive Arrays in Ruby - Code Worrier</title>
+  <title>On Text Encoding - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="They&#8217;re real! In Ruby, an array can contain itself: 1
-2
-3
-4
-5
-6
-&gt;&gt; a = []
-=&gt; []
-&gt;&gt; a &lt;&lt; a
-=&gt; [[...]]
-&gt;&gt; a.first. &hellip;">
+  <meta name="description" content="I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors: A programmer walks into a coffee shop.Programmer: &#8220;Do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -28,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/recursive-arrays/">
+  <link rel="canonical" href="http://code-worrier.com/blog/on-text-encoding/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Quick Tip: Recursive Arrays in Ruby</h1>
+      <h1 class="entry-title">On Text Encoding</h1>
     
     
       <p class="meta">
@@ -106,7 +97,7 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-03-22T15:10:00-04:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,29 +106,16 @@
   </header>
 
 
-<div class="entry-content"><p>They&#8217;re real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="entry-content"><p>I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors:</p>
 
 <!-- more -->
 
 
-<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>A programmer walks into a coffee shop.Programmer: &#8220;Do you serve cortados here?&#8221;Barista: &#8220;No—wrong cafÃ©. You want the Latin one.&#8221;</p>&mdash; Michael Hoffman (@Hoffm) <a href="https://twitter.com/Hoffm/status/315178182514974720">March 22, 2013</a></blockquote>
+
 </div>
 
 
@@ -160,12 +138,12 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-03-22T15:10:00-04:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/quicktip/'>QuickTip</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/jokes/'>jokes</a>, <a class='category' href='/blog/categories/text-encoding/'>text encoding</a>
   
 </span>
 
@@ -174,7 +152,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/recursive-arrays/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/recursive-arrays/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/on-text-encoding/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/on-text-encoding/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -187,10 +165,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/helper-methods-in-console/" title="Previous Post: Quick Tip: Helper methods in the Rails console?">&laquo; Quick Tip: Helper methods in the Rails console?</a>
+        <a class="basic-alignment left" href="/blog/git-bisect-basics/" title="Previous Post: Git Bisect: Your Friend in Times of Need">&laquo; Git Bisect: Your Friend in Times of Need</a>
       
-      
-        <a class="basic-alignment right" href="/blog/all-your-vars/" title="Next Post: All your undefined vars are evaluate to nil.">All your undefined vars are evaluate to nil. &raquo;</a>
       
     </p>
   </footer>
@@ -264,8 +240,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/recursive-arrays/';
-        var disqus_url = 'http://code-worrier.com/blog/recursive-arrays/';
+        var disqus_identifier = 'http://code-worrier.com/blog/on-text-encoding/';
+        var disqus_url = 'http://code-worrier.com/blog/on-text-encoding/';
         var disqus_script = 'embed.js';
       
     (function () {
