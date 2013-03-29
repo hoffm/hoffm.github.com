@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-29T09:51:03-04:00</updated>
+  <updated>2013-03-29T16:48:54-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Set Up Google Webmaster Tools for a Flavors.me Site]]></title>
+    <link href="http://code-worrier.com/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/"/>
+    <updated>2013-03-29T10:11:00-04:00</updated>
+    <id>http://code-worrier.com/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site</id>
+    <content type="html"><![CDATA[<p>My personal site uses the falvors.me service.
+It was such a challenge to get it verified on Google Webmaster Tools, and the relevant support tickets are so unhelpful, that I thought I&#8217;d explain how to do iut here for posterity.</p>
+
+<ol>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[On Text Encoding]]></title>
@@ -1735,55 +1752,6 @@ And then: Thank you, kata.</p>
 
 <p>But, finally, in the spirit of the aphorism that &#8220;magic is code you don&#8217;t understand yet,&#8221; I thought: How do these <code>&amp;</code> blocks work, anyway?
 More on that in a later post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
-    <link href="http://code-worrier.com/blog/kata/"/>
-    <updated>2012-08-12T18:01:00-04:00</updated>
-    <id>http://code-worrier.com/blog/kata</id>
-    <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
-Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
-However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
-
-<p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
-Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
-
-<!-- more -->
-
-
-<p>I learned about the gem from a lightning talk Bailey delivered at the inaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
-(Incidentally, SCRC was my first programming conference, and it was fantastic.
-My experience there inspired this blog.)</p>
-
-<p>The kata gem reduces the friction between you and actually sitting down to do kata.
-It accomplishes this by presenting the kata requirements in bite-sized pieces on the command line.
-The process of working through a kata via the gem resembles the work flow of test-driven development.
-(To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
-This is no accident;
-Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is modeled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
-
-<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calculator</code> class, instances of which are initialized with strings of numbers:</p>
-
-<pre><code>Create a calculator that is initialized with a string expression
-- detail: The expression is of the form digits separated by commas: "1,2"
-- detail: The expression is accessed by a method named expr
-- detail: The expression can be reset for evaluation at any time without re-initializing
-- example: Calculator.new "1,2"
-
-Add Method
-  Create an add method that sums the string expression
-  - detail: The method will return the sum of the digits
-  - detail: The expression can contain 0, 1 or 2 numbers
-  - detail: Then empty string will return 0
-  - example: "" computes to 0
-  - example: "1" computes to 1
-  - example: "1,2" computes to 3
-</code></pre>
-
-<p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
-In my <a href="http://code-worrier.com/blog/passing-symbols">next post</a>, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
 ]]></content>
   </entry>
   

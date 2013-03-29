@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debugging | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/debugging/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-03-29T09:51:03-04:00</updated>
+  <updated>2013-03-29T16:48:54-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -85,7 +85,7 @@ If you're working on a Rails app, this might involve running <code>rake db:migra
 <p>```bash
 341c8a0f26e67cf8735552cf8f2b945b80ccb84b is the first bad commit
 commit 341c8a0f26e67cf8735552cf8f2b945b80ccb84b
-Author: hoffm <a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#109;&#64;&#x68;&#111;&#x66;&#x2e;&#102;&#x6d;">&#109;&#64;&#x68;&#x6f;&#102;&#46;&#102;&#x6d;</a>
+Author: hoffm <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x6d;&#64;&#x68;&#111;&#102;&#46;&#102;&#109;">&#x6d;&#64;&#x68;&#111;&#x66;&#x2e;&#102;&#109;</a>
 Date:   Thu Mar 17 11:19:10 2013 -0500</p>
 
 <pre><code>Draft of git bisect post.

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: webmaster tools | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/webmaster-tools/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2013-03-29T16:48:54-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Set Up Google Webmaster Tools for a Flavors.me Site]]></title>
+    <link href="http://code-worrier.com/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/"/>
+    <updated>2013-03-29T10:11:00-04:00</updated>
+    <id>http://code-worrier.com/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site</id>
+    <content type="html"><![CDATA[<p>My personal site uses the falvors.me service.
+It was such a challenge to get it verified on Google Webmaster Tools, and the relevant support tickets are so unhelpful, that I thought I'd explain how to do iut here for posterity.</p>
+
+<ol>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
