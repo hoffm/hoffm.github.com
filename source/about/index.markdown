@@ -6,6 +6,8 @@ sharing: false
 footer: true
 ---
 
+{% img left http://f.cl.ly/items/2g1u1A3a0v1J2E272z1f/OnionAvatarSmall.png Michael Hoffman %}
+
 Hi! I'm Michael Hoffman.
 I'm a software developer at [Food52](http://food52.com/).
 
