@@ -9,8 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="My personal site uses the falvors.me service.
-It was such a challenge to get it verified on Google Webmaster Tools, and the relevant support tickets &hellip;">
+  <meta name="description" content="I spent a long week grappling with text encoding.
+Please enjoy the fruit of my labors: ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,52 +78,6 @@ It was such a challenge to get it verified on Google Webmaster Tools, and the re
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/">How to Set Up Google Webmaster Tools for a Flavors.me Site</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T10:11:00-04:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My personal site uses the falvors.me service.
-It was such a challenge to get it verified on Google Webmaster Tools, and the relevant support tickets are so unhelpful, that I thought I&#8217;d explain how to do iut here for posterity.</p>
-
-<ol>
-<li></li>
-<li></li>
-<li></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -633,6 +587,85 @@ You have a group of people who are getting annoying emails for no reason, and yo
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/tiny-benchmarking/">A Tiny Benchmarking Utility</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+        
+         | <a href="/blog/tiny-benchmarking/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
+Here it is:</p>
+
+<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>      <span class="k">yield</span>
+</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/tiny-benchmarking/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -660,10 +693,6 @@ You have a group of people who are getting annoying emails for no reason, and yo
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/">How to Set Up Google Webmaster Tools for a Flavors.me Site</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/on-text-encoding/">On Text Encoding</a>
       </li>
     
@@ -677,6 +706,10 @@ You have a group of people who are getting annoying emails for no reason, and yo
     
       <li class="post">
         <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
       </li>
     
   </ul>

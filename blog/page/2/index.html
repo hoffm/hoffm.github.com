@@ -9,8 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is: tiny_timer.rb1
+  <meta name="description" content="You can invoke a rake task from another rake task.
+Here&#8217;s how: examples.rake1
 2
 3
 4
@@ -18,7 +18,14 @@ Here it is: tiny_timer.rb1
 6
 7
 8
-9 &hellip;">
+9
+10
+11
+12
+13
+14
+15
+namespace :examples do desc & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,85 +93,6 @@ Here it is: tiny_timer.rb1
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/tiny-benchmarking/">A Tiny Benchmarking Utility</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-30T14:54:00-04:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
-        
-         | <a href="/blog/tiny-benchmarking/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While working on a longer (forthcoming) post, I wrote a little benchmarking utility that I want to share.
-Here it is:</p>
-
-<figure class='code'><figcaption><span>tiny_timer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TinyTimer</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">benchmark</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">times</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">samples</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">start</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>      <span class="k">yield</span>
-</span><span class='line'>      <span class="n">times</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">times</span><span class="o">.</span><span class="n">sum</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">to_f</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/tiny-benchmarking/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
   
   
     <article>
@@ -670,9 +598,55 @@ Next you are asked, one by one, to create a series of instance methods—<code>#
 
     </article>
   
-  <div class="pagination">
+  
+    <article>
+      
+  <header>
     
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+      <h1 class="entry-title"><a href="/blog/kata/">Code Kata and the Kata Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T18:01:00-04:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/kata/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
+Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
+However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
+
+<p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
+Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/kata/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -699,10 +673,6 @@ Next you are asked, one by one, to create a series of instance methods—<code>#
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/how-to-set-up-google-webmaster-tools-for-a-flavors-dot-me-site/">How to Set Up Google Webmaster Tools for a Flavors.me Site</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/on-text-encoding/">On Text Encoding</a>
       </li>
     
@@ -716,6 +686,10 @@ Next you are asked, one by one, to create a series of instance methods—<code>#
     
       <li class="post">
         <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/error-pages-in-rails/">404 and 500 Error Pages in Rails</a>
       </li>
     
   </ul>
