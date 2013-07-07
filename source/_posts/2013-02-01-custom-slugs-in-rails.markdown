@@ -112,10 +112,10 @@ end
 We're going to want to make `::custom_slugs_with` available in all models, so let's require this file in an initializer:
 
 ``` ruby config/initializers/active_record_extensions.rb
-require "app_util"
+require "app_utilities"
 ```
 
-Requiring this file will execute the include call, including `ActiveRecordExtensions` in `ActiveRecord::Base` (andmaking the module's methods available to Active Record's descendants).
+Requiring this file will execute the include call, including `ActiveRecordExtensions` in `ActiveRecord::Base` (and making the module's methods available to Active Record's descendants).
 The `::custom_slugs_with` method takes as an argument the name of an instance method that specifies the string to be used in the slug.
 So, for instance, adding this line to the User model:
 
