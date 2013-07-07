@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-04-03T11:04:48-04:00</updated>
+  <updated>2013-07-07T08:21:53-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -206,10 +206,10 @@ end
 <p>We're going to want to make <code>::custom_slugs_with</code> available in all models, so let's require this file in an initializer:</p>
 
 <p><code>ruby config/initializers/active_record_extensions.rb
-require "app_util"
+require "app_utilities"
 </code></p>
 
-<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (andmaking the module's methods available to Active Record's descendants).
+<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (and making the module's methods available to Active Record's descendants).
 The <code>::custom_slugs_with</code> method takes as an argument the name of an instance method that specifies the string to be used in the slug.
 So, for instance, adding this line to the User model:</p>
 

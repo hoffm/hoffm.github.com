@@ -245,11 +245,11 @@ Confusing search bots makes them <a href="http://www.geekologie.com/2011/09/22/s
 <p>We&#8217;re going to want to make <code>::custom_slugs_with</code> available in all models, so let&#8217;s require this file in an initializer:</p>
 
 <figure class='code'><figcaption><span>config/initializers/active_record_extensions.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;app_util&quot;</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;app_utilities&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (andmaking the module&#8217;s methods available to Active Record&#8217;s descendants).
+<p>Requiring this file will execute the include call, including <code>ActiveRecordExtensions</code> in <code>ActiveRecord::Base</code> (and making the module&#8217;s methods available to Active Record&#8217;s descendants).
 The <code>::custom_slugs_with</code> method takes as an argument the name of an instance method that specifies the string to be used in the slug.
 So, for instance, adding this line to the User model:</p>
 
