@@ -5,21 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Quick Tip: Recursive Arrays in Ruby - Code Worrier</title>
+  <title>How to be Stuck: 3 Coping Techniques - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="They&#8217;re real! In Ruby, an array can contain itself: 1
-2
-3
-4
-5
-6
-&gt;&gt; a = []
-=&gt; []
-&gt;&gt; a &lt;&lt; a
-=&gt; [[...]]
-&gt;&gt; a.first. &hellip;">
+  <meta name="description" content="Last week, I had the pleasure of giving a talk at The Flatiron School loosely based on this old post.
+The talk is about the challanges of the early &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -28,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/recursive-arrays/">
+  <link rel="canonical" href="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -90,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Quick Tip: Recursive Arrays in Ruby</h1>
+      <h1 class="entry-title">How to Be Stuck: 3 Coping Techniques</h1>
     
     
       <p class="meta">
@@ -106,7 +97,7 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-10-08T11:50:00-04:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,29 +106,51 @@
   </header>
 
 
-<div class="entry-content"><p>They&#8217;re real!</p>
-
-<p>In Ruby, an array can contain itself:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[.</span><span class="n">.</span><span class="o">.]]</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">equal?</span> <span class="n">a</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<div class="entry-content"><p><img src="/images/paradoxofinquiry.png" alt="The Paradox of Inquiry" /></p>
 
 <!-- more -->
 
 
-<p>But <a href="http://stackoverflow.com/questions/10606734/what-are-recursive-arrays-good-for">why would you want to go and do that?</a>?</p>
+<p>Last week, I had the pleasure of giving a talk at <a href="http://flatironschool.com/">The Flatiron School</a> loosely based on <a href="/blog/why-rtfm-is-some-bullshit/">this old post</a>.
+The talk is about the challanges of the early days of learning to code, and in particular about the process of learning to answer coding questions on the Internet (<a href="http://code-worrier.com/how-to-be-stuck">slide deck</a>).
+This can be an excruciating process, because you need to know a lot to ask the right question and even more to understand the answer.
+When you first start out, you have lots of questions and limited ability to get them effectively answered.</p>
+
+<p>And, to make matters worse, you sometimes encounter bad attitudes when you ask &#8220;stupid&#8221; questions.</p>
+
+<p><img src="/images/rtfmabbreviations.png" alt="RTFM and Friends" /></p>
+
+<p>In the talk, I share three techniques for coping with being stuck that I&#8217;ve picked up from more experience developers over the years:</p>
+
+<ol>
+<li><strong>The 30 Minute Rule</strong>. Don&#8217;t post a question on Stack Overflow, or bother your friend or colleague, until you&#8217;ve spent some time wallowing in your misery.
+Google around. Read documentation. Write a script or dummy app to try to isolate your problem.
+Maybe you&#8217;ll find the answer yourself, which feels awesome, or maybe you won&#8217;t.
+Even if you don&#8217;t, these periods of stuckness are productive in the long run.
+This is how you build your research skills.
+(Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)</li>
+</ol>
+
+
+<p><img src="/images/halp.png" alt="Halp! I'm stuck!" /></p>
+
+<ol>
+<li><p><strong>Rubber Ducky Debugging</strong>. This is a <a href="http://www.rubberduckdebugging.com/">well-known technique</a>, of course, but it bears repeating.
+I think the reason that explaining a bug to another person helps you fix the bug is that it provokes your epistemic empathy.
+When you think through a problem in your head, you tend to skip steps because <em>you</em> know what <em>you&#8217;re</em> talking about &#8211; or so you fool yourself into thinking.
+Explaining the issue to someone else forces you to consider what someone who isn&#8217;t intimately familiar with the problem would need to know, and in doing so, you fill in the gaps.
+Often, the piece of the puzzle you were missing was hiding in one of those gaps.</p></li>
+<li><p><strong>What did you Google?</strong> I&#8217;ve sometimes had the experience of asking a more experienced colleague for help with a problem I&#8217;ve been laboring over, only to receive, less than a minute later, a link to a page that answers my question.
+When this happens, I get excited.
+My colleage didn&#8217;t jsut know something I didn&#8217;t know; she knew how to find information I didn&#8217;t know how to find &#8211; and now I can learn her secrets.
+When someone finds your answer when you couldn&#8217;t, debrief them.
+Try to disect their thought process so that next time you can do it yourself.</p></li>
+</ol>
+
+
+<p><img src="/images/answeringquestions.png" alt="Answering Coding Questions is a Skill" /></p>
+
+<p>I&#8217;d love to hear about other techniques along these lines that you&#8217;ve picked up over the years.</p>
 </div>
 
 
@@ -160,12 +173,12 @@
   
 
 
-<time datetime="2012-08-16T22:30:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2013-10-08T11:50:00-04:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/quicktip/'>QuickTip</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/learning/'>learning</a>, <a class='category' href='/blog/categories/talks/'>talks</a>
   
 </span>
 
@@ -174,7 +187,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/recursive-arrays/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/recursive-arrays/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -187,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/helper-methods-in-console/" title="Previous Post: Quick Tip: Helper methods in the Rails console?">&laquo; Quick Tip: Helper methods in the Rails console?</a>
+        <a class="basic-alignment left" href="/blog/on-text-encoding/" title="Previous Post: On Text Encoding">&laquo; On Text Encoding</a>
       
-      
-        <a class="basic-alignment right" href="/blog/all-your-vars/" title="Next Post: All your undefined vars are evaluate to nil.">All your undefined vars are evaluate to nil. &raquo;</a>
       
     </p>
   </footer>
@@ -264,8 +275,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/recursive-arrays/';
-        var disqus_url = 'http://code-worrier.com/blog/recursive-arrays/';
+        var disqus_identifier = 'http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/';
+        var disqus_url = 'http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/';
         var disqus_script = 'embed.js';
       
     (function () {

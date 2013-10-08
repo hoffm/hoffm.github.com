@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: learning | Code Worrier]]></title>
-  <link href="http://code-worrier.com/blog/categories/learning/atom.xml" rel="self"/>
+  <title><![CDATA[Category: talks | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/talks/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
   <updated>2013-10-08T12:01:06-04:00</updated>
   <id>http://code-worrier.com/</id>
@@ -63,71 +63,6 @@ Try to disect their thought process so that next time you can do it yourself.</p
 <p><img src="/images/answeringquestions.png" alt="Answering Coding Questions is a Skill" /></p>
 
 <p>I'd love to hear about other techniques along these lines that you've picked up over the years.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why RTFM is Some Bullshit]]></title>
-    <link href="http://code-worrier.com/blog/why-rtfm-is-some-bullshit/"/>
-    <updated>2012-08-29T10:48:00-04:00</updated>
-    <id>http://code-worrier.com/blog/why-rtfm-is-some-bullshit</id>
-    <content type="html"><![CDATA[<p>Learning to code is hard.</p>
-
-<p>I'm not talking about the sense in which we're all still learning.
-I mean when you first start out, the first few months.
-During this period, every tiny bit of progress you make comes at the expense of an excruciating, time-consuming trial.</p>
-
-<p>Personally, I had the great fortune of being around patient, empathic experts who helped me through the worst of it.
-(Thanks <a href="https://twitter.com/binarycleric">Jon</a>, <a href="https://twitter.com/jackiekircher">Jackie</a>, <a href="https://twitter.com/laurenvoswinkel">Lauren</a>, et al!)
-But not everyone is so lucky, and sooner or later a new programmer is bound to encounter <a href="http://en.wikipedia.org/wiki/RTFM">RTFM</a> and its new-fangled cousins, GIYF and LMGTFY.</p>
-
-<!-- more -->
-
-
-<p>Ever ask an elementary question about coding or about getting your development environment set up, and encounter one of the following responses?</p>
-
-<ol>
-<li>Contempt without assistance.</li>
-<li>A link to a page you don't understand, with no explanation.</li>
-<li>Overly brief assistance, with or without contempt.</li>
-</ol>
-
-
-<p>Whether or not they say it explicitly, the authors of these responses are expressing the RTFM sentiment.
-And RTFM is bullshit.</p>
-
-<p>I'm not the first person to say this, of course.
-But as a programmer who is still very much in touch with what it's like to know nothing, I hope I am in a position to fortify the empathy of my more seasoned colleagues.</p>
-
-<p>No one feels Meno's Paradox as viscerally as the Googling noob.</p>
-
-<blockquote><p>And how will you inquire into a thing when you are wholly ignorant of what it is?
-Even if you happen to bump right into it, how will you know it is the thing you didn't know?</p></blockquote>
-
-<p>Answering technical questions via internet searches is a <em>skill</em> that takes <em>practice</em> to hone and which requires <em>background knowledge</em>.
-Teaching yourself to code on the internet is a boostrapping process:
-The more you learn, the better you get at learning it, and before you've learned very much, learning is really hard.</p>
-
-<p>If you get stuck and you seek help on the internet, you need to know at least the following in order to have any hope of success:</p>
-
-<ul>
-<li>The nature of the problem your having.</li>
-<li>The vocabulary that is commonly used to express this problem.</li>
-<li>How to understand potential solutions to your problem.</li>
-<li>How to implement potential solutions to see if they work.</li>
-<li>What would constitute a solution's working.</li>
-</ul>
-
-
-<p>People who ask stupid technical questions might be stupid people.
-Or, more likely, they might just be missing one or more of the pieces of knowledge they need to ask a smart quetsion and understand the answer.
-It's not their fault they don't know these things.
-They are beginners.
-Learning to figure stuff our using documentation and Google is a skill they're developing along with all the others.</p>
-
-<p>So, if someone asks a stupid question, consider taking the time answer it, fully and cheerfully.
-Or don't answer at all.
-Just remember: RTFM is some lazy, rude bullshit.</p>
 ]]></content>
   </entry>
   

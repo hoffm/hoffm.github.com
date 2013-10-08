@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-08-20T10:50:02-04:00</updated>
+  <updated>2013-10-08T12:01:06-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to be Stuck: 3 Coping Techniques]]></title>
+    <link href="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/"/>
+    <updated>2013-10-08T11:50:00-04:00</updated>
+    <id>http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding</id>
+    <content type="html"><![CDATA[<p><img src="http://code-worrier.com/images/paradoxofinquiry.png" alt="The Paradox of Inquiry" /></p>
+
+<!-- more -->
+
+
+<p>Last week, I had the pleasure of giving a talk at <a href="http://flatironschool.com/">The Flatiron School</a> loosely based on <a href="http://code-worrier.com/blog/why-rtfm-is-some-bullshit/">this old post</a>.
+The talk is about the challanges of the early days of learning to code, and in particular about the process of learning to answer coding questions on the Internet (<a href="http://code-worrier.com/how-to-be-stuck">slide deck</a>).
+This can be an excruciating process, because you need to know a lot to ask the right question and even more to understand the answer.
+When you first start out, you have lots of questions and limited ability to get them effectively answered.</p>
+
+<p>And, to make matters worse, you sometimes encounter bad attitudes when you ask &#8220;stupid&#8221; questions.</p>
+
+<p><img src="http://code-worrier.com/images/rtfmabbreviations.png" alt="RTFM and Friends" /></p>
+
+<p>In the talk, I share three techniques for coping with being stuck that I&#8217;ve picked up from more experience developers over the years:</p>
+
+<ol>
+<li><strong>The 30 Minute Rule</strong>. Don&#8217;t post a question on Stack Overflow, or bother your friend or colleague, until you&#8217;ve spent some time wallowing in your misery.
+Google around. Read documentation. Write a script or dummy app to try to isolate your problem.
+Maybe you&#8217;ll find the answer yourself, which feels awesome, or maybe you won&#8217;t.
+Even if you don&#8217;t, these periods of stuckness are productive in the long run.
+This is how you build your research skills.
+(Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)</li>
+</ol>
+
+
+<p><img src="http://code-worrier.com/images/halp.png" alt="Halp! I'm stuck!" /></p>
+
+<ol>
+<li><p><strong>Rubber Ducky Debugging</strong>. This is a <a href="http://www.rubberduckdebugging.com/">well-known technique</a>, of course, but it bears repeating.
+I think the reason that explaining a bug to another person helps you fix the bug is that it provokes your epistemic empathy.
+When you think through a problem in your head, you tend to skip steps because <em>you</em> know what <em>you&#8217;re</em> talking about &#8211; or so you fool yourself into thinking.
+Explaining the issue to someone else forces you to consider what someone who isn&#8217;t intimately familiar with the problem would need to know, and in doing so, you fill in the gaps.
+Often, the piece of the puzzle you were missing was hiding in one of those gaps.</p></li>
+<li><p><strong>What did you Google?</strong> I&#8217;ve sometimes had the experience of asking a more experienced colleague for help with a problem I&#8217;ve been laboring over, only to receive, less than a minute later, a link to a page that answers my question.
+When this happens, I get excited.
+My colleage didn&#8217;t jsut know something I didn&#8217;t know; she knew how to find information I didn&#8217;t know how to find &#8211; and now I can learn her secrets.
+When someone finds your answer when you couldn&#8217;t, debrief them.
+Try to disect their thought process so that next time you can do it yourself.</p></li>
+</ol>
+
+
+<p><img src="http://code-worrier.com/images/answeringquestions.png" alt="Answering Coding Questions is a Skill" /></p>
+
+<p>I&#8217;d love to hear about other techniques along these lines that you&#8217;ve picked up over the years.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[On Text Encoding]]></title>
@@ -1735,55 +1788,6 @@ And then: Thank you, kata.</p>
 
 <p>But, finally, in the spirit of the aphorism that &#8220;magic is code you don&#8217;t understand yet,&#8221; I thought: How do these <code>&amp;</code> blocks work, anyway?
 More on that in a later post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Code Kata and the Kata Gem]]></title>
-    <link href="http://code-worrier.com/blog/kata/"/>
-    <updated>2012-08-12T18:01:00-04:00</updated>
-    <id>http://code-worrier.com/blog/kata</id>
-    <content type="html"><![CDATA[<p>A <a href="http://codekata.pragprog.com/">code kata</a> is a small programming challenge on which a developer can practice her craft.
-Kata have solutions in the sense that they set our requirements that a program can meet or fail to meet.
-However, it is the process of thinking through the kata—and perhaps implementing it multiple times in different ways—that is intended to provoke learning.</p>
-
-<p>Of course, you can&#8217;t learn anything form a kata unless you <em>do</em> the kata.
-Enter the <a href="https://github.com/wbailey/kata">kata gem</a> by <a href="http://exposinggotchas.blogspot.com/">Wes Bailey</a>.</p>
-
-<!-- more -->
-
-
-<p>I learned about the gem from a lightning talk Bailey delivered at the inaugural <a href="http://steelcityrubyconf.org/">Steel City Ruby Conference</a> in Pittsburgh.
-(Incidentally, SCRC was my first programming conference, and it was fantastic.
-My experience there inspired this blog.)</p>
-
-<p>The kata gem reduces the friction between you and actually sitting down to do kata.
-It accomplishes this by presenting the kata requirements in bite-sized pieces on the command line.
-The process of working through a kata via the gem resembles the work flow of test-driven development.
-(To be clear, working with the gem in no way precludes <em>actual</em> TDD.)
-This is no accident;
-Bailey&#8217;s <a href="https://github.com/wbailey/kata/wiki/Authoring-a-Kata">DSL</a> for authoring kata is modeled after the <a href="http://rspec.info/">Rspec</a> testing framework.</p>
-
-<p>Here are the first two steps of the calculator kata, which asks the coder to create a <code>Calculator</code> class, instances of which are initialized with strings of numbers:</p>
-
-<pre><code>Create a calculator that is initialized with a string expression
-- detail: The expression is of the form digits separated by commas: "1,2"
-- detail: The expression is accessed by a method named expr
-- detail: The expression can be reset for evaluation at any time without re-initializing
-- example: Calculator.new "1,2"
-
-Add Method
-  Create an add method that sums the string expression
-  - detail: The method will return the sum of the digits
-  - detail: The expression can contain 0, 1 or 2 numbers
-  - detail: Then empty string will return 0
-  - example: "" computes to 0
-  - example: "1" computes to 1
-  - example: "1,2" computes to 3
-</code></pre>
-
-<p>&#8230;and so on. Yes, things start off simply, but simple problems allow for focus on technique and experimentation.
-In my <a href="http://code-worrier.com/blog/passing-symbols">next post</a>, I&#8217;ll relate something I learned by experimenting with the calculator kata.</p>
 ]]></content>
   </entry>
   
