@@ -4,7 +4,7 @@
   <title><![CDATA[Category: talks | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/talks/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2013-10-08T12:01:06-04:00</updated>
+  <updated>2013-10-08T14:18:11-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -35,18 +35,13 @@ When you first start out, you have lots of questions and limited ability to get 
 <p>In the talk, I share three techniques for coping with being stuck that I've picked up from more experience developers over the years:</p>
 
 <ol>
-<li><strong>The 30 Minute Rule</strong>. Don't post a question on Stack Overflow, or bother your friend or colleague, until you've spent some time wallowing in your misery.
+<li><p><strong>The 30 Minute Rule</strong>. Don't post a question on Stack Overflow, or bother your friend or colleague, until you've spent some time wallowing in your misery.
 Google around. Read documentation. Write a script or dummy app to try to isolate your problem.
 Maybe you'll find the answer yourself, which feels awesome, or maybe you won't.
 Even if you don't, these periods of stuckness are productive in the long run.
 This is how you build your research skills.
-(Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)</li>
-</ol>
-
-
-<p><img src="/images/halp.png" alt="Halp! I'm stuck!" /></p>
-
-<ol>
+(Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)
+<img src="/images/halp.png" alt="Halp! I'm stuck!" /></p></li>
 <li><p><strong>Rubber Ducky Debugging</strong>. This is a <a href="http://www.rubberduckdebugging.com/">well-known technique</a>, of course, but it bears repeating.
 I think the reason that explaining a bug to another person helps you fix the bug is that it provokes your epistemic empathy.
 When you think through a problem in your head, you tend to skip steps because <em>you</em> know what <em>you're</em> talking about -- or so you fool yourself into thinking.
