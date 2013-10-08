@@ -27,7 +27,6 @@ Maybe you'll find the answer yourself, which feels awesome, or maybe you won't.
 Even if you don't, these periods of stuckness are productive in the long run.
 This is how you build your research skills.
 (Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)
-
 ![Halp! I'm stuck!](/images/halp.png)
 
 2. **Rubber Ducky Debugging**. This is a [well-known technique](http://www.rubberduckdebugging.com/), of course, but it bears repeating.
