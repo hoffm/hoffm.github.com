@@ -17,7 +17,7 @@ Here's how.
 First get the `git-completion.bash` script (view it [here](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)) and put it in your home directory:
 
 ``` bash
-curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 ```
 
 Next, add the following lines to your `.bash_profile`.
