@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2014-04-28T12:40:26-04:00</updated>
+  <updated>2014-04-28T15:16:24-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -743,7 +743,7 @@ If you want to be all CLI about it, you could just run:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now modify your your bash profile (it&#8217;s at <code>~/.bash-profile</code>, in case you&#8217;re new to this stuff).
+<p>Now modify your your bash profile (it&#8217;s at <code>~/.bash_profile</code>, in case you&#8217;re new to this stuff).
 Before the part of the file that declares what your prompt will look like (<code>PS1=[...]</code>), load in the script you just downloaded, like so:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
