@@ -9,7 +9,11 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content=" ">
+  <meta name="description" content="Facebook recently introduced major changes to its Graph API.
+Despite the existence of an official upgrade guide, these changes have caused
+a
+lot
+of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +81,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-28T21:25:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
+        
+         | <a href="/blog/changes-in-facebook-graph-api-2-dot-0/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/Open_Graph_protocol_logo.png" title="Open Graph Logo" >
+Facebook recently introduced major changes to its <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0">Graph API</a>.
+Despite the existence of an official <a href="https://developers.facebook.com/docs/games/migrate">upgrade guide</a>, these changes have caused
+<a href="http://stackoverflow.com/questions/23400204/get-facebook-friends-with-graph-api-v-2-0/">a</a>
+<a href="http://stackoverflow.com/questions/23435961/fetching-list-of-friends-using-facebook-2-0">lot</a>
+<a href="http://stackoverflow.com/questions/23836869/facebook-request-dialog-returning-invalid-user-ids">of</a>
+<a href="http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-use-m">confusion</a>
+for some developers, myself among them.
+In this post, I explore in detail the key differences between v1.0 and v2.0 of the API that cause the most frustration.
+In a follow-up post, I will discuss how to use v2.0 to build some common features involving finding and inviting Facebook friends.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/changes-in-facebook-graph-api-2-dot-0/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -548,87 +604,6 @@ Here&#8217;s how.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/rails-intercept-emails-in-dev/">How Do You Prevent ActionMailer From Spamming People in Development?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-18T19:09:00-04:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/rails-intercept-emails-in-dev/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve been working on a Rails app that contains lots of mailers with hard-coded recipients.
-For instance, here&#8217;s a mailer that we use to notify folks when someone asks an urgent question on our hotline:</p>
-
-<figure class='code'><figcaption><span>hotline_mailer.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HotlineMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s2">&quot;notifications@mywebapp.com&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">notify_urgent_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@question</span> <span class="o">=</span> <span class="n">question</span>
-</span><span class='line'>    <span class="nb">send</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;urgent@mywebapp.com&quot;</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Urgent: </span><span class="si">#{</span><span class="n">question</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># Other mailer methods...</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The email address &#8220;urgent@mywebapp.com&#8221; generates emails to many people.
-We handle membership in Google apps.</p>
-
-<p>Left to its own devices, this mailer will trigger an email to that list of people every time you hit the controller action that calls for it to be delivered.</p>
-
-<p>That&#8217;s bad news if you&#8217;re just testing out the action in your development environment.
-You have a group of people who are getting annoying emails for no reason, and you may not even be getting the emails yourself!</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/rails-intercept-emails-in-dev/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -656,6 +631,10 @@ You have a group of people who are getting annoying emails for no reason, and yo
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/3-ways-to-cope-with-being-stuck-coding/">How to be Stuck: 3 Coping Techniques</a>
       </li>
     
@@ -669,10 +648,6 @@ You have a group of people who are getting annoying emails for no reason, and yo
     
       <li class="post">
         <a href="/blog/git-checkout-dash/">How to checkout the last git branch you were on</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/open-source-surprises/">3 Surprises from My First Open Source Contribution</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QuickTip | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/quicktip/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2014-04-28T15:16:24-04:00</updated>
+  <updated>2014-05-29T14:58:20-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -58,7 +58,7 @@ If you want to be all CLI about it, you could just run:</p>
 curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 </code></p>
 
-<p>Now modify your your bash profile (it's at <code>~/.bash_profile</code>, in case you're new to this stuff).
+<p>Now modify your your bash profile (it's at <code>~/.bash-profile</code>, in case you're new to this stuff).
 Before the part of the file that declares what your prompt will look like (<code>PS1=[...]</code>), load in the script you just downloaded, like so:</p>
 
 <p>``` bash</p>

@@ -5,12 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to be Stuck: 3 Coping Techniques - Code Worrier</title>
+  <title>Facebook Graph API v2.0: What's Changed? - Code Worrier</title>
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Last week, I had the pleasure of giving a talk at The Flatiron School loosely based on this old post.
-The talk is about the challanges of the early &hellip;">
+  <meta name="description" content="Facebook recently introduced major changes to its Graph API.
+Despite the existence of an official upgrade guide, these changes have caused
+a
+lot
+of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +22,7 @@ The talk is about the challanges of the early &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/">
+  <link rel="canonical" href="http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/">
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQfB0B+Mp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUHwdAfjKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVB8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4yn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUHwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+PwdAfjKfUFQfB0B+Mp9QVBKfUFQSn1BUHwdAfjKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfjKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+Mp9QVBKfUFQSn1BUHwdAfj8HQH4yn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQfB0B+PwdAfj8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB8HQH4/B0B+PwdAfj8HQH4/B0B+Mp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVBKfUFQSn1BUEp9QVB//8AAP+DAAD/AQAA/ykAAP8pAAD/KQAA/zkAAME5AACAuwAAnP8AAJ//AACf/wAAnP8AAID/AADB/wAA//8AAA==" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +84,7 @@ The talk is about the challanges of the early &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How to Be Stuck: 3 Coping Techniques</h1>
+      <h1 class="entry-title">Facebook Graph API v2.0: What's Changed?</h1>
     
     
       <p class="meta">
@@ -97,7 +100,7 @@ The talk is about the challanges of the early &hellip;">
   
 
 
-<time datetime="2013-10-08T11:50:00-04:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2014-05-28T21:25:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,46 +109,73 @@ The talk is about the challanges of the early &hellip;">
   </header>
 
 
-<div class="entry-content"><p><img src="/images/paradoxofinquiry.png" alt="The Paradox of Inquiry" /></p>
+<div class="entry-content"><p><img class="left" src="/images/Open_Graph_protocol_logo.png" title="Open Graph Logo" >
+Facebook recently introduced major changes to its <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0">Graph API</a>.
+Despite the existence of an official <a href="https://developers.facebook.com/docs/games/migrate">upgrade guide</a>, these changes have caused
+<a href="http://stackoverflow.com/questions/23400204/get-facebook-friends-with-graph-api-v-2-0/">a</a>
+<a href="http://stackoverflow.com/questions/23435961/fetching-list-of-friends-using-facebook-2-0">lot</a>
+<a href="http://stackoverflow.com/questions/23836869/facebook-request-dialog-returning-invalid-user-ids">of</a>
+<a href="http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-use-m">confusion</a>
+for some developers, myself among them.
+In this post, I explore in detail the key differences between v1.0 and v2.0 of the API that cause the most frustration.
+In a follow-up post, I will discuss how to use v2.0 to build some common features involving finding and inviting Facebook friends.</p>
 
 <!-- more -->
 
 
-<p>Last week, I had the pleasure of giving a talk at <a href="http://flatironschool.com/">The Flatiron School</a> loosely based on <a href="/blog/why-rtfm-is-some-bullshit/">this old post</a>.
-The talk is about the challanges of the early days of learning to code, and in particular about the process of learning to answer coding questions on the Internet (<a href="http://code-worrier.com/how-to-be-stuck">slide deck</a>).
-This can be an excruciating process, because you need to know a lot to ask the right question and even more to understand the answer.
-When you first start out, you have lots of questions and limited ability to get them effectively answered.</p>
+<h3>Less User Data</h3>
 
-<p>And, to make matters worse, you sometimes encounter bad attitudes when you ask &#8220;stupid&#8221; questions.</p>
+<p>The updated Graph API is more restrictive in the data it makes available via the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/"><code>/user</code></a> and <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/friends/"><code>/user/friends</code></a> endpoints.
+More specifically, the new API provides data that is scoped to the client application:</p>
 
-<p><img src="/images/rtfmabbreviations.png" alt="RTFM and Friends" /></p>
-
-<p>In the talk, I share three techniques for coping with being stuck that I&#8217;ve picked up from more experience developers over the years:</p>
-
-<ol>
-<li><p><strong>The 30 Minute Rule</strong>. Don&#8217;t post a question on Stack Overflow, or bother your friend or colleague, until you&#8217;ve spent some time wallowing in your misery.
-Google around. Read documentation. Write a script or dummy app to try to isolate your problem.
-Maybe you&#8217;ll find the answer yourself, which feels awesome, or maybe you won&#8217;t.
-Even if you don&#8217;t, these periods of stuckness are productive in the long run.
-This is how you build your research skills.
-(Obviously, the 30 minute figure is arbitrary; figure out what works for you in the context.)
-<img src="/images/halp.png" alt="Halp! I'm stuck!" /></p></li>
-<li><p><strong>Rubber Ducky Debugging</strong>. This is a <a href="http://www.rubberduckdebugging.com/">well-known technique</a>, of course, but it bears repeating.
-I think the reason that explaining a bug to another person helps you fix the bug is that it provokes your epistemic empathy.
-When you think through a problem in your head, you tend to skip steps because <em>you</em> know what <em>you&#8217;re</em> talking about &#8211; or so you fool yourself into thinking.
-Explaining the issue to someone else forces you to consider what someone who isn&#8217;t intimately familiar with the problem would need to know, and in doing so, you fill in the gaps.
-Often, the piece of the puzzle you were missing was hiding in one of those gaps.</p></li>
-<li><p><strong>What did you Google?</strong> I&#8217;ve sometimes had the experience of asking a more experienced colleague for help with a problem I&#8217;ve been laboring over, only to receive, less than a minute later, a link to a page that answers my question.
-When this happens, I get excited.
-My colleage didn&#8217;t jsut know something I didn&#8217;t know; she knew how to find information I didn&#8217;t know how to find &#8211; and now I can learn her secrets.
-When someone finds your answer when you couldn&#8217;t, debrief them.
-Try to disect their thought process so that next time you can do it yourself.</p></li>
-</ol>
+<ul>
+<li>Global user ids have been replaced with application-specific ids.</li>
+<li>Friend data is restricted to friends that have connected to the client application.</li>
+</ul>
 
 
-<p><img src="/images/answeringquestions.png" alt="Answering Coding Questions is a Skill" /></p>
+<p>I&#8217;ll address each of these restrictions in turn.</p>
 
-<p>I&#8217;d love to hear about other techniques along these lines that you&#8217;ve picked up over the years.</p>
+<h3>Application-Specific IDs</h3>
+
+<p>In the simpler days of v1.0, when the Graph API reported on a user, the id value it provided was a global id number for that Facebook user.
+These values were &#8220;global&#8221; in the sense that they could be shared between client applications.
+In v2.0, all user data provided by the <code>/user</code> endpoint and its children use application-specific ids.
+These ids are a unique identifier not just of the Facebook user, but of the client-user pair.
+This mean that you can&#8217;t share user ids between applications.
+(Though Facebook does <a href="https://developers.facebook.com/docs/apps/for-business">provide an API</a> for mapping between applications that are part of single organization.)</p>
+
+<p>An important consequence of this fact is that the user ids recognized by the Facebook applications you use for development will not match the ones your production app recognizes.
+So, if you store your users&#8217; Facebook ids in your database in production, you won&#8217;t be able to match up users in that database with data returned from the API in development.
+That&#8217;s annoying!</p>
+
+<p>And there&#8217;s no way around it.
+You&#8217;ll just have to query for a few of your friends from the development app and manually overwrite their stored Facebook ids in your development database.
+This will give you a few exemplars to develop against.</p>
+
+<h3>Application-Specific Friends</h3>
+
+<p>The <code>user/friends</code> endpoint used to return exactly what you&#8217;d expect: a list of the user&#8217;s Facebook friends.
+Not so in v2.0!
+Instead, you&#8217;ll get a list of the user&#8217;s Facebook friends <em>who have connected to your client application at some point in the past</em>.
+This is an enormous difference.
+In v2.0 <em>there is no way to get a list of rich data about each of a user&#8217;s friends</em>.
+You can&#8217;t even get their ids, app-specific or otherwise.</p>
+
+<p>If you&#8217;re upgrading from v1.0 to v2.0, there&#8217;s another wrinkle:
+If a user has <em>ever</em> connected to your app using version 2.0, strict permissions govern the data you get back no matter what version you specify in the API call.
+Put another way, <em>once a user connects using the new API, all v1.0 requests are interpreted by Facebook as v2.0 requests</em>.
+This means you need to be careful when deploying an upgrade to your integration with Facebook.
+Once v2.0 login is live, there&#8217;s no going back for those users who connect with it.</p>
+
+<h3>But Don&#8217;t Despair!</h3>
+
+<p>Facebook made these adjustments to give its users more control over their data.
+Under the new regime, Facebook data can&#8217;t easily be shared between applications.
+While this can be frustrating for developers, it&#8217;s probably a good thing for users.</p>
+
+<p>More importantly for our purposes: Despite the restrictions, it&#8217;s still possible to build many common features that make use of this data.
+In an upcoming post, I&#8217;ll walk through several of them, including &#8220;finding freinds&#8221;: surfacing a user&#8217;s Facebook friends who are already users of your client application.</p>
 </div>
 
 
@@ -168,12 +198,12 @@ Try to disect their thought process so that next time you can do it yourself.</p
   
 
 
-<time datetime="2013-10-08T11:50:00-04:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2014-05-28T21:25:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/learning/'>learning</a>, <a class='category' href='/blog/categories/talks/'>talks</a>
+    <a class='category' href='/blog/categories/api/'>api</a>, <a class='category' href='/blog/categories/facebook/'>facebook</a>, <a class='category' href='/blog/categories/graph/'>graph</a>
   
 </span>
 
@@ -182,7 +212,7 @@ Try to disect their thought process so that next time you can do it yourself.</p
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/" data-via="hoffm" data-counturl="http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/" >Tweet</a>
   
   
   <div class="g-plusone" data-size=""></div>
@@ -195,10 +225,8 @@ Try to disect their thought process so that next time you can do it yourself.</p
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/on-text-encoding/" title="Previous Post: On Text Encoding">&laquo; On Text Encoding</a>
+        <a class="basic-alignment left" href="/blog/3-ways-to-cope-with-being-stuck-coding/" title="Previous Post: How to be Stuck: 3 Coping Techniques">&laquo; How to be Stuck: 3 Coping Techniques</a>
       
-      
-        <a class="basic-alignment right" href="/blog/changes-in-facebook-graph-api-2-dot-0/" title="Next Post: Facebook Graph API v2.0: What's Changed?">Facebook Graph API v2.0: What's Changed? &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +300,8 @@ Try to disect their thought process so that next time you can do it yourself.</p
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/';
-        var disqus_url = 'http://code-worrier.com/blog/3-ways-to-cope-with-being-stuck-coding/';
+        var disqus_identifier = 'http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/';
+        var disqus_url = 'http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/';
         var disqus_script = 'embed.js';
       
     (function () {
