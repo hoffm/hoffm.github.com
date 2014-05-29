@@ -4,7 +4,7 @@
   <title><![CDATA[Code Worrier]]></title>
   <link href="http://code-worrier.com/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2014-05-29T15:00:20-04:00</updated>
+  <updated>2014-05-29T15:13:59-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -84,7 +84,7 @@ Under the new regime, Facebook data can&#8217;t easily be shared between applica
 While this can be frustrating for developers, it&#8217;s probably a good thing for users.</p>
 
 <p>More importantly for our purposes: Despite the restrictions, it&#8217;s still possible to build many common features that make use of this data.
-In an upcoming post, I&#8217;ll walk through several of them, including &#8220;finding freinds&#8221;: surfacing a user&#8217;s Facebook friends who are already users of your client application.</p>
+In an upcoming post, I&#8217;ll walk through several of them, including &#8220;finding friends&#8221;: surfacing a user&#8217;s Facebook friends who are already users of your client application.</p>
 ]]></content>
   </entry>
   
