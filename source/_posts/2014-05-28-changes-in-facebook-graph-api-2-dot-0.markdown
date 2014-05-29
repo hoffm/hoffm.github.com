@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Facebook Graph API v2.0: What's Changed?"
-date: 2014-05-28 21:25
+date: 2014-05-29 15:00
 comments: true
 categories: facebook graph api
 ---
