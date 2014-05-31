@@ -176,6 +176,21 @@ While this can be frustrating for developers, it&#8217;s probably a good thing f
 
 <p>More importantly for our purposes: Despite the restrictions, it&#8217;s still possible to build many common features that make use of this data.
 In an upcoming post, I&#8217;ll walk through several of them, including &#8220;finding friends&#8221;: surfacing a user&#8217;s Facebook friends who are already users of your client application.</p>
+
+<hr />
+
+<p><strong>Update, May 31, 2014</strong>: <a href="https://twitter.com/EmilHesslow">Emil Hesslow</a>, an engineer at Facebook, has pointed out to me that the &#8220;Test App&#8221; feature, which was introduced on April 30, 2014 along with the new version of the API, and which allows you to nest development applications under a production application, has a nice property that I glossed over:</p>
+
+<blockquote><p>If you create a new Test app (a feature we added in v2.0) for your production app they will share the same app scoped user ids. You can read about them <a href="https://developers.facebook.com/docs/apps/test-apps">here</a>.</p></blockquote>
+
+<p>Although I&#8217;d been using this feature, I hadn&#8217;t realized that it allowed test applications to share ids with production applications.
+My production app was still running under v1.0, so I had global ids stored in my production database.
+However, my test application was running v2.0 (as I was working on the upgrade) and received app-specific ids from the API.
+Thus I could not develop against a dump of the production database without manually altering the Facebook ids that were stored for my application&#8217;s users.</p>
+
+<p>I actually think my case is by far the most common one, for now at least.
+The vast magority of Facebook applications were created before April 30th, 2014, and are therefore governed by pre-v2.0 rules.
+However, all nested test apps were necessarily created after that date, which leads to the id mismatch.</p>
 </div>
 
 
