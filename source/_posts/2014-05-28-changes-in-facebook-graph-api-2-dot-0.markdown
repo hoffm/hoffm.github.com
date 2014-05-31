@@ -68,4 +68,19 @@ Under the new regime, Facebook data can't easily be shared between applications.
 While this can be frustrating for developers, it's probably a good thing for users. 
 
 More importantly for our purposes: Despite the restrictions, it's still possible to build many common features that make use of this data.
-In an upcoming post, I'll walk through several of them, including "finding freinds": surfacing a user's Facebook friends who are already users of your client application.
+In an upcoming post, I'll walk through several of them, including "finding friends": surfacing a user's Facebook friends who are already users of your client application.
+
+---
+
+**Update, May 31, 2014**: [Emil Hesslow](https://twitter.com/EmilHesslow), an engineer at Facebook, has pointed out to me that the "Test App" feature, which was introduced on April 30, 2014 along with the new version of the API, and which allows you to nest development applications under a production application, has a nice property that I glossed over:
+
+> If you create a new Test app (a feature we added in v2.0) for your production app they will share the same app scoped user ids. You can read about them [here](https://developers.facebook.com/docs/apps/test-apps).
+
+Although I'd been using this feature, I hadn't realized that it allowed test applications to share ids with production applications.
+My production app was still running under v1.0, so I had global ids stored in my production database.
+However, my test application was running v2.0 (as I was working on the upgrade) and received app-specific ids from the API.
+Thus I could not develop against a dump of the production database without manually altering the Facebook ids that were stored for my application's users.
+
+I actually think my case is by far the most common one, for now at least.
+The vast magority of Facebook applications were created before April 30th, 2014, and are therefore governed by pre-v2.0 rules.
+However, all nested test apps were necessarily created after that date, which leads to the id mismatch.
