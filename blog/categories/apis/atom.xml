@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: APIs | Code Worrier]]></title>
+  <link href="http://code-worrier.com/blog/categories/apis/atom.xml" rel="self"/>
+  <link href="http://code-worrier.com/"/>
+  <updated>2014-06-02T09:53:45-04:00</updated>
+  <id>http://code-worrier.com/</id>
+  <author>
+    <name><![CDATA[Michael Hoffman]]></name>
+    <email><![CDATA[m@hof.fm]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook Graph API v2.0: Building 'Find Friends' and Related Features]]></title>
+    <link href="http://code-worrier.com/blog/find-friends-with-facebook-graph-api-2-dot-0/"/>
+    <updated>2014-05-29T21:27:00-04:00</updated>
+    <id>http://code-worrier.com/blog/find-friends-with-facebook-graph-api-2-dot-0</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/graph_visualization.jpg" width="300" title="Graph Visualization" >
+In an <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">earlier post</a>, I detailed  some important differences between version 2.0 of Facebook's graph API and the old version.
+These include the replacement of global user ids with application-specific ids, and the new restriction of friend data to friends that have connected to the client application.
+If you're not familiar with these differences but would like to read on, I recommend reading <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">that post</a> first.
+In this post, I turn my attention to building features with the restricted data that v2.0 affords us.
+I will walk through three related features:</p>
+
+<ol>
+<li>Finding your users' Facebook friends who are already using your app.</li>
+<li>Notifying existing users of your app when their Facebook friends register.</li>
+<li>Allowing existing users to invite their Facebook friends to join.</li>
+</ol>
+
+
+<!-- more -->
+
+
+<h3>Find Your Friends</h3>
+
+<p>One common use case for integrating with Facebook is to allow users of your application to find friends who have already signed up.
+This kind of feature can allow new social platforms to bootstrap community by making use of the connections its users have already formed on Facebook.</p>
+
+<p>The first step is to collect the data that will enable your app to make these connections.
+When a user connects to Facebook via your application, you should store the Facebook id for that user.
+When the time comes to search for Facebook friends, make a call to <code>user/friends</code>, and cross reference the returned user ids with the ones in your database.</p>
+
+<p>Keep in mind that in the new version of the API, you'll only get back friends who have previously connected to your application.
+If a user has a Facebook friend who signed up for your service but never connected via Facebook, you will not be able to connect the two of them.
+You cannot, for instance, retrieve the email addresses of a user's freinds.</p>
+
+<p>This sounds simple enough, but there's an obvious worry here.
+When I recently built a feature like this, I had a <a href="http://media.giphy.com/media/citBl9yPwnUOs/giphy.gif" target="_blank">moment of terror</a>.
+The webiste I was working on had been storing Facebook ids for years, but had been doing so under the v1.0 scheme.
+That meant that all of the ids we'd stored were global ids.
+But now we were upgrading to v2.0, and v2.0 returns app-specific ids.
+There is no way to map app-specific ids to global ids; the whole idea of the restrictions imposed by the new API is to prevent applications from sharing information about users.
+So how would I ever be able to match up users with their friends?</p>
+
+<p>It turns out that this is a non-issue.
+However, to figure that out you need to find the following sentence, which is <a href="https://developers.facebook.com/docs/apps/upgrading/#upgrading_v2_0_user_ids" target="_blank">burried in the Facebook developer docs</a>:</p>
+
+<blockquote><p>No matter what version they originally used to sign up for your app, the ID will remain the same for people who have already logged into your app.</p></blockquote>
+
+<p>In other words, existing v1.0 users of your app get grandfathered in and are still returned from API calls with global ids.
+All of those ids stored in the database are still useful for cross-referencing.
+Phew!</p>
+
+<h3>Get Notified when Friends Sign Up</h3>
+
+<p>After a user has found their existing friends in your application, you may want to inform them when other Facebook friends sign up.
+This can also be accomplished using the <code>user/friends</code> endpoint.
+When a user connects via Facebook, retrieve their (application-scoped) friends, and match their ids up with those in your databse.
+You can notify the matched users as you see fit.</p>
+
+<h3>Invite Your Friends to Join</h3>
+
+<p>In order to attact new people to your application, you may want to allow existing users to invite their friends via Facebook messages.
+This can be accomplished via the <a href="https://developers.facebook.com/docs/sharing/reference/send-dialog" target="_blank">send dialog</a> made available through the Javascript SDK (as well as other SDKs).
+However, there are some limitations to how streamlined you can make the inviting process, because you can't really identify the friends your users want to invite.</p>
+
+<p>Let me explain.
+We cannot use the <code>user/friends</code> endpoint to find friends for a user to invite, because the only friends it will return are friends who've connected already, and there's no point in inviting  someone to a party they're already at.
+There are two endpoints of the new Graph API that will return information about <em>all</em> of a user's friends: <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/taggable_friends" target="_blank"><code>user/taggable_friends</code></a> and <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/invitable_friends" target="_blank"><code>user/inviteable_friends</code></a>.
+The latter is retricted for use by Facebook games, and so in general, <code>taggable_friends</code> is your only option for retrieving a list of all of a user's friends.</p>
+
+<p>However, <code>taggable_friends</code> only provides full names, thumbnail profile pictures, and an identifier that's only usable for tagging people in stories published on Facebook.
+There is no way to retrieve any kind of useful identifying information, such as a Facebook id (either global or app-specific), an email address, or a Facebook username.
+The send dialog requires a Facebook id or username to identify a recipient.
+Therefore, <em>it's impossible to build an 'Invite' button that brings up a Facebook message dialog with recipients pre-filled</em>.</p>
+
+<p>The best solution I've identified is to have a generic invite button that brings up a dialog with the 'To' field blank.
+Using the Javascript SDK, the code to do that looks like this:</p>
+
+<p>```javascript
+FB.ui({</p>
+
+<pre><code>method: 'send',
+link: 'http://join.mywebsite.com'
+</code></pre>
+
+<p>});
+```</p>
+
+<p>If you like, you can inspire your users to invite their friends by showing them profile pictures retrieved from <code>taggable_friends</code>.
+Here's an mock-up of a feature like that (as designed by <a href="(http://ryanmerrill.net/" target="_blank">Ryan</a> and <a href="http://ryanahamilton.com/" target="_blank">Ryan</a>):</p>
+
+<p><img src="/images/Invite%20Your%20Facebook%20Friends.png" alt="A grid of Facebook friend profile pictures" /></p>
+
+<p>This generic invite functionality is easy to build, and probably nicer for your users than providing the ability to sift through hundreds of Facebook friends.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook Graph API v2.0: What's Changed?]]></title>
+    <link href="http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0/"/>
+    <updated>2014-05-29T15:00:00-04:00</updated>
+    <id>http://code-worrier.com/blog/changes-in-facebook-graph-api-2-dot-0</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/Open_Graph_protocol_logo.png" title="Open Graph Logo" >
+Facebook recently introduced major changes to its <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0" target="_blank">Graph API</a>.
+Despite the existence of an official <a href="https://developers.facebook.com/docs/games/migrate" target="_blank">upgrade guide</a>, these changes have caused
+<a href="http://stackoverflow.com/questions/23400204/get-facebook-friends-with-graph-api-v-2-0/" target="_blank">a</a>
+<a href="http://stackoverflow.com/questions/23435961/fetching-list-of-friends-using-facebook-2-0" target="_blank">lot</a>
+<a href="http://stackoverflow.com/questions/23836869/facebook-request-dialog-returning-invalid-user-ids" target="_blank">of</a>
+<a href="http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-use-m" target="_blank">confusion</a>
+for some developers, myself among them.
+In this post, I explore in detail the key differences between v1.0 and v2.0 of the API that cause the most frustration.
+In a <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">follow-up post</a>, I discuss how to use v2.0 to build some common features involving finding and inviting Facebook friends.</p>
+
+<!-- more -->
+
+
+<h3>Less User Data</h3>
+
+<p>The updated Graph API is more restrictive in the data it makes available via the <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/" target="_blank"><code>/user</code></a> and <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0/user/friends/" target="_blank"><code>/user/friends</code></a> endpoints.
+More specifically, the new API provides data that is scoped to the client application:</p>
+
+<ul>
+<li>Global user ids have been replaced with application-specific ids.</li>
+<li>Friend data is restricted to friends that have connected to the client application.</li>
+</ul>
+
+
+<p>I'll address each of these restrictions in turn.</p>
+
+<h3>Application-Specific IDs</h3>
+
+<p>In the simpler days of v1.0, when the Graph API reported on a user, the id value it provided was a global id number for that Facebook user.
+These values were "global" in the sense that they could be shared between client applications.
+In v2.0, all user data provided by the <code>/user</code> endpoint and its children use application-specific ids.
+These ids are a unique identifier not just of the Facebook user, but of the client-user pair.
+This mean that you can't share user ids between applications.
+(Though Facebook does <a href="https://developers.facebook.com/docs/apps/for-business" target="_blank">provide an API</a> for mapping between applications that are part of single organization.)</p>
+
+<p>An important consequence of this fact is that the user ids recognized by the Facebook applications you use for development will not match the ones your production app recognizes.
+So, if you store your users' Facebook ids in your database in production, you won't be able to match up users in that database with data returned from the API in development.
+That's annoying!</p>
+
+<p>And there's no way around it.
+You'll just have to query for a few of your friends from the development app and manually overwrite their stored Facebook ids in your development database.
+This will give you a few exemplars to develop against.</p>
+
+<h3>Application-Specific Friends</h3>
+
+<p>The <code>user/friends</code> endpoint used to return exactly what you'd expect: a list of the user's Facebook friends.
+Not so in v2.0!
+Instead, you'll get a list of the user's Facebook friends <em>who have connected to your client application at some point in the past</em>.
+This is an enormous difference.
+In v2.0 <em>there is no way to get a list of rich data about each of a user's friends</em>.
+You can't even get their ids, app-specific or otherwise.</p>
+
+<p>If you're upgrading from v1.0 to v2.0, there's another wrinkle:
+If a user has <em>ever</em> connected to your app using version 2.0, strict permissions govern the data you get back no matter what version you specify in the API call.
+Put another way, <em>once a user connects using the new API, all v1.0 requests are interpreted by Facebook as v2.0 requests</em>.
+This means you need to be careful when deploying an upgrade to your integration with Facebook.
+Once v2.0 login is live, there's no going back for those users who connect with it.</p>
+
+<h3>But Don't Despair!</h3>
+
+<p>Facebook made these adjustments to give its users more control over their data.
+Under the new regime, Facebook data can't easily be shared between applications.
+While this can be frustrating for developers, it's probably a good thing for users.</p>
+
+<p>More importantly for our purposes: Despite the restrictions, it's still possible to build many common features that make use of this data.
+In <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">my next post</a>, I walk through several of them, including "finding friends": surfacing a user's Facebook friends who are already users of your client application.</p>
+
+<hr />
+
+<p><strong>Update, May 31, 2014</strong>: <a href="https://twitter.com/EmilHesslow" target="_blank">Emil Hesslow</a>, an engineer at Facebook, has pointed out to me that the "Test App" feature, which was introduced on April 30, 2014 along with the new version of the API, and which allows you to nest development applications under a production application, has a nice property that I glossed over:</p>
+
+<blockquote><p>If you create a new Test app (a feature we added in v2.0) for your production app they will share the same app scoped user ids. You can read about them <a href="https://developers.facebook.com/docs/apps/test-apps" target="_blank">here</a>.</p></blockquote>
+
+<p>Although I'd been using this feature, I hadn't realized that it allowed test applications to share ids with production applications.
+My production app was still running under v1.0, so I had global ids stored in my production database.
+However, my test application was running v2.0 (as I was working on the upgrade) and received app-specific ids from the API.
+Thus I could not develop against a dump of the production database without manually altering the Facebook ids that were stored for my application's users.</p>
+
+<p>I actually think my case is by far the most common one, for now at least.
+The vast magority of Facebook applications were created before April 30th, 2014, and are therefore governed by pre-v2.0 rules.
+However, all nested test apps were necessarily created after that date, which leads to the id mismatch.</p>
+]]></content>
+  </entry>
+  
+</feed>
