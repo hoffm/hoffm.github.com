@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript SDK | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/javascript-sdk/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2014-06-02T11:38:47-04:00</updated>
+  <updated>2014-06-02T11:41:00-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Facebook Graph API v2.0: Building 'Find Friends' and Related Features]]></title>
     <link href="http://code-worrier.com/blog/find-friends-with-facebook-graph-api-2-dot-0/"/>
-    <updated>2014-05-29T21:27:00-04:00</updated>
+    <updated>2014-06-02T10:03:00-04:00</updated>
     <id>http://code-worrier.com/blog/find-friends-with-facebook-graph-api-2-dot-0</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/graph_visualization.jpg" width="300" title="Graph Visualization" >
 In an <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">earlier post</a>, I detailed  some important differences between version 2.0 of Facebook's graph API and the old version.

@@ -9,11 +9,8 @@
   <meta name="author" content="Michael Hoffman">
 
   
-  <meta name="description" content="Facebook recently introduced major changes to its Graph API.
-Despite the existence of an official upgrade guide, these changes have caused
-a
-lot
-of &hellip;">
+  <meta name="description" content="In an earlier post, I detailed some important differences between version 2.0 of Facebook&#8217;s graph API and the old version.
+These include the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,58 +84,6 @@ of &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-02T10:00:00-04:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2014</time>
-        
-         | <a href="/blog/changes-in-facebook-graph-api-2-dot-0/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/Open_Graph_protocol_logo.png" title="Open Graph Logo" >
-Facebook recently introduced major changes to its <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0" target="_blank">Graph API</a>.
-Despite the existence of an official <a href="https://developers.facebook.com/docs/games/migrate" target="_blank">upgrade guide</a>, these changes have caused
-<a href="http://stackoverflow.com/questions/23400204/get-facebook-friends-with-graph-api-v-2-0/" target="_blank">a</a>
-<a href="http://stackoverflow.com/questions/23435961/fetching-list-of-friends-using-facebook-2-0" target="_blank">lot</a>
-<a href="http://stackoverflow.com/questions/23836869/facebook-request-dialog-returning-invalid-user-ids" target="_blank">of</a>
-<a href="http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-use-m" target="_blank">confusion</a>
-for some developers, myself among them.
-In this post, I explore in detail the key differences between v1.0 and v2.0 of the API that cause the most frustration.
-In a <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">follow-up post</a>, I discuss how to use v2.0 to build some common features involving finding and inviting Facebook friends.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/changes-in-facebook-graph-api-2-dot-0/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: Building &#8216;Find Friends&#8217; and Related Features</a></h1>
     
     
@@ -155,7 +100,7 @@ In a <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">follow-up pos
   
 
 
-<time datetime="2014-05-29T21:27:00-04:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
+<time datetime="2014-06-02T10:03:00-04:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2014</time>
         
          | <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/#disqus_thread">Comments</a>
         
@@ -183,6 +128,58 @@ I will walk through three related features:</p>
   
     <footer>
       <a rel="full-article" href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-29T13:41:00-04:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
+        
+         | <a href="/blog/changes-in-facebook-graph-api-2-dot-0/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/Open_Graph_protocol_logo.png" title="Open Graph Logo" >
+Facebook recently introduced major changes to its <a href="https://developers.facebook.com/docs/graph-api/reference/v2.0" target="_blank">Graph API</a>.
+Despite the existence of an official <a href="https://developers.facebook.com/docs/games/migrate" target="_blank">upgrade guide</a>, these changes have caused
+<a href="http://stackoverflow.com/questions/23400204/get-facebook-friends-with-graph-api-v-2-0/" target="_blank">a</a>
+<a href="http://stackoverflow.com/questions/23435961/fetching-list-of-friends-using-facebook-2-0" target="_blank">lot</a>
+<a href="http://stackoverflow.com/questions/23836869/facebook-request-dialog-returning-invalid-user-ids" target="_blank">of</a>
+<a href="http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-use-m" target="_blank">confusion</a>
+for some developers, myself among them.
+In this post, I explore in detail the key differences between v1.0 and v2.0 of the API that cause the most frustration.
+In a <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">follow-up post</a>, I discuss how to use v2.0 to build some common features involving finding and inviting Facebook friends.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/changes-in-facebook-graph-api-2-dot-0/">Read on &rarr;</a>
     </footer>
   
 
@@ -636,11 +633,11 @@ So, if my name changes, the slug should do&#8230;something smart.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a>
+        <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: Building &#8216;Find Friends&#8217; and Related Features</a>
       </li>
     
       <li class="post">
-        <a href="/blog/find-friends-with-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: Building &#8216;Find Friends&#8217; and Related Features</a>
+        <a href="/blog/changes-in-facebook-graph-api-2-dot-0/">Facebook Graph API v2.0: What&#8217;s Changed?</a>
       </li>
     
       <li class="post">
