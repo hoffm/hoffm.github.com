@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Facebook Graph API v2.0: Building 'Find Friends' and Related Features"
-date: 2014-05-29 21:27
+date: 2014-06-02 10:03
 comments: true
 categories:
 - Facebook
