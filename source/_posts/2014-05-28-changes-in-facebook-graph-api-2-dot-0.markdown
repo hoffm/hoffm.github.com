@@ -89,3 +89,7 @@ Thus I could not develop against a dump of the production database without manua
 I actually think my case is by far the most common one, for now at least.
 The vast magority of Facebook applications were created before April 30th, 2014, and are therefore governed by pre-v2.0 rules.
 However, all nested test apps were necessarily created after that date, which leads to the id mismatch.
+
+---
+
+**Update, August 6, 2014**: <a href="https://twitter.com/sicross" target="_blank">Simon Cross</a>, Platform PM at Facebook, has alerted me to an inaccuracy in the update above: He says that test applications "inherit the version availability of their parent". Presumably this means that no matter when the test app is created, if its parent app has been grandfathered into v1.0, then the test app will be too. This behavior is detailed in <a href="https://developers.facebook.com/docs/apps/test-apps" target="_blank">Facebook's documentation on test apps</a>, which is much more detailed than it was at the time I wrote the original post.
