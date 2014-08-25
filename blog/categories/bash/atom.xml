@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash | Code Worrier]]></title>
   <link href="http://code-worrier.com/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://code-worrier.com/"/>
-  <updated>2014-08-06T17:51:25-04:00</updated>
+  <updated>2014-08-24T21:42:42-04:00</updated>
   <id>http://code-worrier.com/</id>
   <author>
     <name><![CDATA[Michael Hoffman]]></name>
@@ -35,7 +35,7 @@ Put it somewhere like <code>~/.git-prompt.sh</code>.
 If you want to be all CLI about it, you could just run:</p>
 
 <p><code>bash
-curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 </code></p>
 
 <p>Now modify your your bash profile (it's at <code>~/.bash-profile</code>, in case you're new to this stuff).
