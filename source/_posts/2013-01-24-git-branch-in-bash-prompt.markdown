@@ -22,7 +22,7 @@ Put it somewhere like `~/.git-prompt.sh`.
 If you want to be all CLI about it, you could just run:
 
 ``` bash
-curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 ```
 
 Now modify your your bash profile (it's at `~/.bash-profile`, in case you're new to this stuff).
